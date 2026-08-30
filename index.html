@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Portfolio mit ausgewählten GitHub-Projekten">
+  <title>My GitHub Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top">parlue<span>.</span></a>
+    <nav>
+      <a href="#projects">Projekte</a>
+      <a href="#about">Über mich</a>
+      <button id="themeToggle" class="icon-button" aria-label="Dark Mode umschalten">☾</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Developer · Maker · Open Source</p>
+        <h1>Ich baue Dinge,<br><span>die funktionieren.</span></h1>
+        <p class="lead">
+          Open-Source-Projekte rund um elektronische Schachbretter, Bluetooth,
+          ESP32, Protokoll-Gateways und PGN-Workflows.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#projects">Projekte ansehen</a>
+          <a class="button secondary" href="https://github.com/parlue" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="terminal-bar"><span></span><span></span><span></span></div>
+        <pre><code>$ git status
+
+On branch main
+Your portfolio is ready.
+
+✓ clean design
+✓ responsive
+✓ dark mode
+✓ media support
+✓ GitHub Pages ready</code></pre>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Selected work</p>
+          <h2>Meine Projekte</h2>
+        </div>
+        <p>Ersetze Bilder, Texte und Links einfach durch deine eigenen Inhalte.</p>
+      </div>
+
+      <div class="project-grid">
+        <article class="project-card featured">
+          <div class="media">
+            <img src="assets/project-1.svg" alt="BluetoothMax Projektvorschau">
+            <span class="badge">Featured</span>
+          </div>
+          <div class="project-content">
+            <div class="project-topline">
+              <h3>BluetoothMax</h3>
+              <span>01</span>
+            </div>
+            <p>
+              Open-Source Bluetooth-LE-Gateway für Schachcomputer-Module mit
+              ChessLink/Mode-B-Schnittstelle. Ein ESP32-C3 verbindet kabelgebundene
+              Schachcomputer drahtlos mit unterstützten Bluetooth-E-Boards und
+              übersetzt deren Protokolle zur Laufzeit.
+            </p>
+            <div class="tags">
+              <span>ESP32-C3</span><span>Bluetooth LE</span><span>ChessLink</span><span>PlatformIO</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/parlue/BluetoothMax" target="_blank" rel="noreferrer">GitHub ↗</a>
+              <a href="https://parlue.github.io/BluetoothMax/" target="_blank" rel="noreferrer">Web Installer ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="media">
+            <img src="assets/project-2.svg" alt="CynusLink Projektvorschau">
+          </div>
+          <div class="project-content">
+            <div class="project-topline">
+              <h3>CynusLink</h3>
+              <span>02</span>
+            </div>
+            <p>
+              Bluetooth-LE-Gateway für den Manya Cynus Schachroboter.
+              Ein ESP32-S3 oder ESP32-C3 übersetzt zwischen dem Cynus-Protokoll
+              und ChessLink-kompatibler Schachsoftware.
+            </p>
+            <div class="tags">
+              <span>ESP32-S3</span><span>ESP32-C3</span><span>BLE</span><span>ChessLink</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/parlue/CynusLink" target="_blank" rel="noreferrer">GitHub ↗</a>
+              <a href="https://parlue.github.io/CynusLink/" target="_blank" rel="noreferrer">Web Installer ↗</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card">
+          <div class="media">
+            <img src="assets/project-3.svg" alt="Centaur PGN Projektvorschau">
+          </div>
+          <div class="project-content">
+            <div class="project-topline">
+              <h3>Centaur PGN</h3>
+              <span>03</span>
+            </div>
+            <p>
+              Projekt rund um den DGT Centaur und PGN-Partiedaten.
+              Die Projektkarte ist bereits mit dem Repository verknüpft und kann
+              später noch mit Screenshots, Video und einer ausführlicheren
+              Beschreibung ergänzt werden.
+            </p>
+            <div class="tags">
+              <span>DGT Centaur</span><span>PGN</span><span>Chess</span>
+            </div>
+            <div class="project-links">
+              <a href="https://github.com/parlue/Centaur_PGN" target="_blank" rel="noreferrer">GitHub ↗</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about" class="section about">
+      <div>
+        <p class="eyebrow">About</p>
+        <h2>Über mich</h2>
+      </div>
+      <div class="about-copy">
+        <p>
+          Open-Source-Entwicklung mit Fokus auf elektronische Schachbretter, Bluetooth-Kommunikation, ESP32-Hardware und die Verbindung verschiedener Schachcomputer-Ökosysteme.
+        </p>
+        <p>
+          Wenn dir meine Projekte gefallen, kannst du meine Arbeit unterstützen:
+        </p>
+        <a class="tea-button" href="https://www.buymeacoffee.com/parlue" target="_blank" rel="noreferrer">
+          🍵 Buy me a tea
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> parlue</span>
+    <span>Built for GitHub Pages</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
