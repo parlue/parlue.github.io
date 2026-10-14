@@ -2,9 +2,9 @@
 
 Portfolio-Seite für:
 
-- BluetoothMax
+- eChessGw
 - CynusLink
-- Centaur_PGN
+- eChessTactics
 
 ## Bilder / Videos austauschen
 
