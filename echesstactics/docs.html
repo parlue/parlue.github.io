@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="eChessTactics documentation: puzzle modes, analysis, free analysis, scanning, PGN viewer, supported boards and FAQ.">
+  <title>eChessTactics – Documentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="project.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">parlue<span>.</span></a>
+    <nav>
+      <a href="./">Overview</a>
+      <a href="docs.html">Documentation</a>
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">☾</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="doc-layout">
+      <nav class="doc-nav" aria-label="Documentation sections">
+        <a href="#start">Getting started</a>
+        <a href="#screen">The screen</a>
+        <a href="#modes">Puzzle modes</a>
+        <a href="#solving">Solving and rating</a>
+        <a href="#analysis">Analysis</a>
+        <a href="#free">Free analysis</a>
+        <a href="#scan">Scan a position</a>
+        <a href="#user">User positions</a>
+        <a href="#pgn">PGN viewer</a>
+        <a href="#boards">Connecting a board</a>
+        <a href="#menu">The menu</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+
+      <article class="doc">
+        <p class="eyebrow">Documentation</p>
+        <h1>eChessTactics</h1>
+        <p>This guide explains every part of the app. It follows the in-app help, with more detail. The app is available in English and German; the flag icon at the top right switches the language, and your choice is remembered.</p>
+
+        <h2 id="start">Getting started</h2>
+        <ol>
+          <li>Open the app. A rating puzzle is waiting; the board is shown from the side of the player to move.</li>
+          <li>Tap the <strong>puzzle-piece icon</strong> to choose what to train (see <a href="#modes">Puzzle modes</a>).</li>
+          <li>Press <strong>Play</strong> and make the moves on the screen. Or connect an electronic board (<a href="#boards">Connecting a board</a>) and play on the real pieces: the LEDs show how to set up each position.</li>
+          <li>Tap the <strong>magnifier</strong> to get a Stockfish analysis when the app allows it (<a href="#analysis">Analysis</a>).</li>
+        </ol>
+        <div class="doc-callout">Requirements: Android 9 or newer. The chess engine and the position recognition run on your phone; no internet connection and no account are needed.</div>
+
+        <h2 id="screen">The screen</h2>
+        <p>The top row is a blue toolbar with these icons, from the left:</p>
+        <table class="doc-table">
+          <tr><th>Icon</th><th>What it does</th></tr>
+          <tr><td>Three lines</td><td>The menu (see <a href="#menu">The menu</a>).</td></tr>
+          <tr><td>Puzzle piece</td><td>Choose the puzzle mode.</td></tr>
+          <tr><td>Camera</td><td>Scan a position from a photo or an image.</td></tr>
+          <tr><td>Bluetooth</td><td>Connect or disconnect a board. It is red while no board is connected and green when connected.</td></tr>
+          <tr><td>Magnifier</td><td>Switch the analysis on or off. It is greyed out while it is not available.</td></tr>
+          <tr><td>FEN</td><td>Enter a position as FEN text.</td></tr>
+          <tr><td>Two arrows</td><td>Flip the board display.</td></tr>
+          <tr><td>Flag</td><td>Switch between German and English.</td></tr>
+        </table>
+        <p>Below the toolbar is the <strong>navigation bar</strong>: <code>&lt;</code> previous, the task number (tap it, type a number and confirm to jump), <code>&gt;</code> next, and a <strong>Play</strong> key that moves on automatically. While it runs it becomes a stop square; a long press sets the seconds between steps. The next-key turns green once the task is solved. At the right end sits a red square that stops a running analysis. In the endgames there is also a restart key.</p>
+        <p>Under the board: <strong>Play</strong> (solve on screen), the player-to-move pawn, flip, <strong>Send FEN</strong> (send the position to a connected board), and the <strong>hint</strong> and <strong>solution</strong> keys. Further down: your rating and the current mode.</p>
+
+        <h2 id="modes">Puzzle modes</h2>
+        <p>The puzzle-piece icon lists the modes:</p>
+        <ul>
+          <li><strong>Puzzle (Rating training):</strong> a random puzzle that matches your rating, from a database of more than 400,000 puzzles.</li>
+          <li><strong>Mate training:</strong> 7,200 mate puzzles in a fixed order that gets harder. It starts with 200 mate-in-1 puzzles in ten levels from easy to hard, then continues with mate in 2, 3, 4 and 5. Your progress is saved.</li>
+          <li><strong>Puzzle (Themes and rating):</strong> choose tactical themes and a rating range and build your own training. It does not change your rating.</li>
+          <li><strong>Endgames Mix:</strong> nearly 1,000 verified endgame positions, mixed from easy to hard.</li>
+          <li><strong>Endgames Themes:</strong> the same positions by theme; the pawn endgames come first.</li>
+          <li><strong>Opening tactics:</strong> puzzles that grow out of individual openings.</li>
+          <li><strong>User positions:</strong> your own saved positions (shown once you have saved one).</li>
+          <li><strong>PGN Viewer:</strong> open and replay PGN games (see <a href="#pgn">PGN viewer</a>).</li>
+        </ul>
+        <p>In the endgames you play against the engine for a win or a draw, and hint and solution are always available.</p>
+
+        <h2 id="solving">Solving and rating</h2>
+        <p>In the rating training your rating changes with every puzzle: <strong>+15</strong> if you solve it on the first try, <strong>+5</strong> on the second, <strong>−5</strong> on the third and <strong>−15</strong> from the fourth try on. Using the hint costs 5 points and showing the solution 10 points.</p>
+        <p>The <strong>hint</strong> and <strong>solution</strong> keys unlock after three wrong attempts. <strong>Reset rating</strong> in the menu sets your rating back to 500.</p>
+
+        <h2 id="analysis">Analysis</h2>
+        <p>The magnifier starts a live Stockfish analysis under the board. You decide how many variations are shown with the <strong>− / +</strong> keys in front of the first line (1 to 5; the choice is remembered). Each line starts with its score in bold, always from the point of view of the <strong>side at the bottom of the board</strong>; <code>+0.7</code> means that side is slightly better, <code>#3</code> a mate in three. If a forced mate for the side to move exists, only that line is shown.</p>
+        <p><strong>Arrows on the board</strong> show the first move of each variation:</p>
+        <p><span class="legend" style="background:#146928"></span>dark green: the best move &nbsp; <span class="legend" style="background:#79c879"></span>light green: other candidates &nbsp; <span class="legend" style="background:#d72d2d"></span>red: a losing move (it gets mated or is about two pawns worse).</p>
+        <h3>When is the analysis available?</h3>
+        <ul>
+          <li>In tasks with a prescribed solution (rating training, mate training, themes, openings) only <strong>after three wrong attempts</strong>, and it closes again with every new task. Think of it as a special hint.</li>
+          <li><strong>Always</strong> in the endgames, in the PGN viewer, in the free analysis and for every imported position (FEN or photo).</li>
+        </ul>
+
+        <h2 id="free">Free analysis</h2>
+        <p>Open the menu and choose <strong>Free analysis</strong>. The entry is greyed out while no board is connected. It ends the current training; the screen then always shows the position on your board.</p>
+        <ul>
+          <li>Place, remove and move pieces as you like. About 1.5 seconds after the last change a new analysis starts.</li>
+          <li><strong>Who is to move?</strong> The colour of the piece you placed <em>last</em> decides: placed a white piece last, Black is to move, and vice versa. Only placing counts, lifting does not. The initial position always means White to move.</li>
+          <li>If a king is missing or the position is impossible, the analysis pauses and shows a hint. A position that is checkmate or stalemate is reported as such.</li>
+          <li><strong>Castling:</strong> a tick box appears only while the king and rook are still on their home squares. The default is no castling; you do not have to tap anything.</li>
+          <li>On boards with colour LEDs the candidate moves light up too (<a href="#boards">see below</a>).</li>
+          <li><strong>Close</strong> ends the free analysis and returns to your training.</li>
+        </ul>
+
+        <h2 id="scan">Scan a position</h2>
+        <ol>
+          <li>Tap the camera icon and take a photo of a diagram, or pick an image from your files.</li>
+          <li>The position is recognised on your phone. Tap any wrongly recognised piece to correct it.</li>
+          <li>Set whose move it is and the castling rights with the tick boxes.</li>
+          <li>Tap <strong>Release image</strong> (no more corrections afterwards). The engine works out the solution in about five seconds; a progress window shows that it is working. If a board is connected it shows the target position with its LEDs, otherwise press Play and solve on the screen.</li>
+        </ol>
+        <p>The buttons under the board: <strong>Share</strong> sends the position as FEN text, <strong>Save</strong> stores it in your collection of <a href="#user">user positions</a>.</p>
+
+        <h2 id="user">User positions</h2>
+        <p>Positions you save after scanning are kept in a file on your phone. A position that is already saved is not stored twice. As soon as one is saved, <strong>User positions</strong> appears in the puzzle menu. It opens in the same screen as the endgames: you play against the engine, hint and solution are always available and the analysis can be used. The positions come in the order you saved them.</p>
+        <p>The menu entry <strong>Share own database</strong> sends the whole file through Android’s share sheet (mail, messages, cloud). It is greyed out while nothing is saved.</p>
+
+        <h2 id="pgn">PGN viewer</h2>
+        <p>Choose <strong>PGN Viewer</strong> in the puzzle menu. The first time you pick a PGN file (for example from the Download folder). After that the last used file opens automatically; if it is gone, the file dialog appears again. The first game opens at once.</p>
+        <ul>
+          <li>The navigation bar has: previous, the move count in the middle, next, play/stop, a <strong>list</strong> key to choose another game and a <strong>folder</strong> key to open another file. Games are named after their tags (White – Black, or the event); unnamed games are called “Game 1”, “Game 2”, and so on.</li>
+          <li>The notation under the board is tappable. The last move is highlighted on the board.</li>
+          <li><strong>Comments</strong> appear as a card over the board and disappear with the next move. Where a position has <strong>variations</strong>, the card lets you pick one; the main line is the default. To see a different one, step back and arrive at that position again. The author’s own arrows in the file are ignored.</li>
+          <li><strong>Play</strong> plays one move every n seconds on the screen (long press sets n).</li>
+          <li>The analysis shows one variation by default and works on the position that really stands on a connected board.</li>
+        </ul>
+        <h3>With a board</h3>
+        <ul>
+          <li><strong>The board navigates:</strong> play the shown move (or the move of a variation) on the board and the game goes forward; take the move back and it goes back. Pop-ups close when you move on.</li>
+          <li>When the pieces differ from the shown position, the LEDs show the differing squares so you can set it up.</li>
+          <li><strong>Colour-LED boards (iChessOne)</strong> show the game’s next move in <span class="legend" style="background:#3b7bd8"></span>blue and the engine’s best move in <span class="legend" style="background:#2fb457"></span>green. If both are the same, it stays blue. All other boards show only the game’s next move.</li>
+          <li>A <strong>Chessnut Move</strong> is navigated with the keys in the app; its robot moves the pieces.</li>
+        </ul>
+
+        <h2 id="boards">Connecting a board</h2>
+        <p>Tap the Bluetooth icon, choose your board type and connect. Supported:</p>
+        <table class="doc-table">
+          <tr><th>Board</th><th>Notes</th></tr>
+          <tr><td>Manya Cynus</td><td>Chess robot; the app sends the position to set up.</td></tr>
+          <tr><td>Chessnut</td><td>Sensor board with LEDs. Chessnut Move is also supported.</td></tr>
+          <tr><td>Millennium T2 / ChessLink</td><td>Sensor board with LEDs.</td></tr>
+          <tr><td>Certabo</td><td>Via Bluetooth; there is also a USB entry labelled Beta.</td></tr>
+          <tr><td>iChessOne</td><td>Two LEDs per square with colours: the app uses them in the free analysis and the PGN viewer.</td></tr>
+        </table>
+        <p>On sensor boards the LEDs show which squares still differ from the target position; once it is reached you solve the task directly on the board. Wrong moves are reported and the pieces have to be put back.</p>
+        <div class="doc-callout">eChessTactics is an independent app and is not affiliated with the makers of these boards.</div>
+        <p>Colour LEDs, iChessOne, free analysis: <span class="legend" style="background:#2fb457"></span>green = best move, <span class="legend" style="background:#3b7bd8"></span>blue = other good moves, <span class="legend" style="background:#d72d2d"></span>red = a very bad move. Several moves light up at the same time.</p>
+
+        <h2 id="menu">The menu</h2>
+        <ul>
+          <li><strong>Free analysis</strong> – only with a connected board.</li>
+          <li><strong>Help</strong> – the short in-app guide.</li>
+          <li><strong>Privacy policy</strong> – opens the <a href="../echesstactics-privacy/">privacy policy</a>.</li>
+          <li><strong>Support (Discord)</strong> – opens the electricchess Discord server for questions, bugs and wishes.</li>
+          <li><strong>Reset rating</strong> – back to 500.</li>
+          <li><strong>Reset mate puzzles</strong> – the mate training starts again at puzzle 1.</li>
+          <li><strong>Chessnut Move player side</strong> – only active while a Chessnut Move is connected.</li>
+          <li><strong>Show FEN / Share FEN / Share own database.</strong></li>
+          <li><strong>Save diagnostic log to Downloads</strong> – for troubleshooting; nothing is sent automatically.</li>
+          <li><strong>Buy me a tea</strong> – an optional tip (5, 10, 20 or 50 euros) through Google Play. Nothing is unlocked by a tip.</li>
+        </ul>
+
+        <h2 id="faq">FAQ</h2>
+        <h3>Why is the magnifier greyed out?</h3>
+        <p>In tasks with a prescribed solution the analysis unlocks after three wrong attempts, so it does not give the answer away. In endgames, the PGN viewer, the free analysis and imported positions it is always available.</p>
+        <h3>“Free analysis” cannot be selected.</h3>
+        <p>It needs a connected board. Connect one with the Bluetooth icon first.</p>
+        <h3>The board does not show up.</h3>
+        <p>Switch the board on, make sure Bluetooth is on and that you picked the right board type in the connection list. Allow the “Nearby devices” permission when Android asks. If it still fails, save the diagnostic log from the menu and send it on the Discord server.</p>
+        <h3>Where are my positions and my rating stored?</h3>
+        <p>Only on your phone. Clearing the app data or uninstalling the app deletes them. Use “Share own database” to keep a copy of your positions.</p>
+        <h3>Does the app use the internet?</h3>
+        <p>No. The app makes no connections itself; the network permission comes from Google’s billing library for the optional tip. See the <a href="../echesstactics-privacy/">privacy policy</a>.</p>
+        <h3>Where do I report a problem or ask for a feature?</h3>
+        <p>On the Discord server <a href="https://discord.gg/AdZukFtBf" target="_blank" rel="noreferrer">electricchess</a>.</p>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> parlue</span>
+    <span><a href="./">← eChessTactics overview</a> · <a href="../">all projects</a></span>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

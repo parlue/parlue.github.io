@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="eChessTactics: a chess puzzle trainer for Android that works on screen or with electronic chessboards. Scan diagrams, analyse with Stockfish, follow PGN games.">
+  <title>eChessTactics – chess puzzles for screen and e-boards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="project.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">parlue<span>.</span></a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#screens">Screenshots</a>
+      <a href="docs.html">Documentation</a>
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">☾</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="pp-hero">
+      <div>
+        <p class="eyebrow">Android app · e-board friendly</p>
+        <h1 class="pp-title">eChess<span class="pp-blue">Tactics</span></h1>
+        <p class="lead">
+          Train chess tactics on your phone or on your electronic chessboard,
+          and analyse any position with Stockfish. Connect a board and solve puzzles on the
+          real pieces: its LEDs show you how to set up each position. No board? Play everything on screen.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="docs.html">Read the documentation</a>
+          <a class="button secondary" href="https://discord.gg/AdZukFtBf" target="_blank" rel="noreferrer">Support on Discord ↗</a>
+        </div>
+        <p class="pp-note">
+          Status: closed testing on Google Play. Want to join the tests or have a question?
+          Come to the Discord server <strong>electricchess</strong>.
+        </p>
+      </div>
+      <div class="pp-hero-media">
+        <img src="../assets/echesstactics/feature.png" alt="eChessTactics – chess puzzles for screen and e-boards">
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">What it does</p>
+          <h2>Features</h2>
+        </div>
+        <p>Everything runs on your phone: the engine and the position recognition work offline.</p>
+      </div>
+      <div class="pp-grid">
+        <article class="pp-card">
+          <h3>Puzzles and mate training</h3>
+          <p>Rating training with more than 400,000 puzzles that match your rating, themes and rating
+             ranges to pick from, opening tactics, and a mate training with 7,200 mate puzzles in one steady
+             climb: mate in 1 in ten levels from easy to hard, then mate in 2, 3, 4 and 5.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Endgames against the engine</h3>
+          <p>Nearly 1,000 verified endgame positions, mixed from easy to hard or by theme, with the pawn
+             endgames first. You play against the engine for a win or a draw. Hint and solution are always available.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Scan a position</h3>
+          <p>Photograph a diagram from a book or magazine. The position is recognised on your device,
+             you correct any mistakes, and the engine works out the solution. Save positions to your own
+             collection (“User positions”), play them later, or share the whole collection.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Analysis with arrows</h3>
+          <p>Live Stockfish analysis with one to five variations of your choice. The score is always
+             shown from the point of view of the side at the bottom of the board. Arrows mark the best move
+             (dark), other candidates (lighter) and losing moves (red).</p>
+        </article>
+        <article class="pp-card">
+          <h3>Free analysis on your board</h3>
+          <p>With a connected e-board, move the pieces however you like: the screen follows the board and
+             a new analysis starts a moment after the last move. The piece you placed last decides who is
+             to move. On boards with colour LEDs the candidate moves light up as well.</p>
+        </article>
+        <article class="pp-card">
+          <h3>PGN viewer</h3>
+          <p>Open any PGN file, pick a game, step through the moves, read the comments and follow the
+             variations. With a connected board you navigate the game by playing the moves on it. The analysis
+             follows the pieces that really stand on the board.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="screens" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Look and feel</p>
+          <h2>Screenshots</h2>
+        </div>
+        <p>Portrait and landscape, light on controls, built around the board.</p>
+      </div>
+      <div class="pp-shots">
+        <figure><img src="../assets/echesstactics/shot-1-puzzle.png" alt="Rating training puzzle" loading="lazy"><figcaption>Rating training</figcaption></figure>
+        <figure><img src="../assets/echesstactics/shot-2-mate.png" alt="Mate training" loading="lazy"><figcaption>Mate training: puzzle 101 of 7,200</figcaption></figure>
+        <figure><img src="../assets/echesstactics/shot-3-endgame.png" alt="Endgame with analysis" loading="lazy"><figcaption>Endgame with analysis</figcaption></figure>
+        <figure><img src="../assets/echesstactics/shot-4-analysis.png" alt="Analysis with three variations and arrows" loading="lazy"><figcaption>Analysis with arrows</figcaption></figure>
+        <figure><img src="../assets/echesstactics/shot-5-themes.png" alt="Endgame themes" loading="lazy"><figcaption>Endgame themes</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="boards" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Hardware</p>
+          <h2>Supported boards</h2>
+        </div>
+        <p>On sensor boards the LEDs show which squares still differ; once the position is reached you solve the puzzle directly on the board.</p>
+      </div>
+      <div class="tags pp-tags">
+        <span>Manya Cynus</span><span>Chessnut</span><span>Millennium T2 / ChessLink</span><span>Certabo</span><span>iChessOne</span>
+      </div>
+      <p class="pp-note">eChessTactics is an independent app. It is not affiliated with, endorsed by or sponsored by the makers of the supported boards. All product names are trademarks of their respective owners.</p>
+    </section>
+
+    <section id="more" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Good to know</p>
+          <h2>Privacy and support</h2>
+        </div>
+      </div>
+      <ul class="pp-list">
+        <li>No ads, no account, no tracking. Engine and recognition run on your device.</li>
+        <li>English and German. Portrait and landscape. Android 9 or newer.</li>
+        <li>Share any position as FEN; share your own position collection as a file.</li>
+        <li>Read the <a href="../echesstactics-privacy/">privacy policy</a>.</li>
+        <li>Questions, bugs, wishes: the Discord server <a href="https://discord.gg/AdZukFtBf" target="_blank" rel="noreferrer">electricchess ↗</a>.</li>
+        <li>Chess engine: Stockfish (GPLv3).</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> parlue</span>
+    <span><a href="../">← back to all projects</a></span>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

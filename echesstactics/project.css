@@ -1,0 +1,58 @@
+/* eChessTactics project pages (landing + documentation). Uses the site variables from ../styles.css. */
+.pp-hero {
+  display: grid; grid-template-columns: 1.05fr .95fr; gap: 56px; align-items: center;
+  padding: 70px 0 56px;
+}
+.pp-title { font-size: clamp(2.8rem, 7vw, 5.6rem); line-height: .95; }
+.pp-blue { color: #5aa9e6; }
+.pp-hero-media img { border-radius: 22px; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.pp-note { color: var(--muted); font-size: .92rem; line-height: 1.7; max-width: 640px; margin-top: 22px; }
+.pp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.pp-card {
+  border: 1px solid var(--line); background: var(--surface-solid);
+  border-radius: 20px; padding: 22px; box-shadow: var(--shadow);
+}
+.pp-card h3 { margin: 0 0 8px; font-size: 1.15rem; }
+.pp-card p { margin: 0; color: var(--muted); line-height: 1.7; font-size: .95rem; }
+.pp-shots {
+  display: flex; gap: 18px; overflow-x: auto; padding: 6px 4px 18px; scroll-snap-type: x mandatory;
+}
+.pp-shots figure { margin: 0; flex: 0 0 auto; width: 232px; scroll-snap-align: start; }
+.pp-shots img { width: 100%; border-radius: 18px; border: 1px solid var(--line); box-shadow: var(--shadow); }
+.pp-shots figcaption { color: var(--muted); font-size: .85rem; margin-top: 10px; text-align: center; }
+.pp-tags { margin: 6px 0 14px; }
+.pp-tags span { font-size: .95rem; padding: 9px 14px; }
+.pp-list { color: var(--muted); line-height: 1.9; font-size: 1.02rem; padding-left: 1.2rem; max-width: 760px; }
+.pp-list a, .pp-note a, footer a { color: var(--accent); font-weight: 600; }
+
+/* documentation */
+.doc-layout { display: grid; grid-template-columns: 240px 1fr; gap: 48px; padding: 56px 0 40px; align-items: start; }
+.doc-nav { position: sticky; top: 96px; display: flex; flex-direction: column; gap: 4px; font-size: .92rem; }
+.doc-nav a { color: var(--muted); padding: 7px 10px; border-radius: 10px; }
+.doc-nav a:hover { color: var(--text); background: var(--surface-solid); }
+.doc h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); line-height: 1; letter-spacing: -.05em; margin: 6px 0 14px; }
+.doc h2 { font-size: 1.7rem; letter-spacing: -.03em; margin: 52px 0 10px; padding-top: 14px; border-top: 1px solid var(--line); }
+.doc h3 { font-size: 1.1rem; margin: 26px 0 6px; }
+.doc p, .doc li { color: var(--muted); line-height: 1.8; }
+.doc li { margin: 4px 0; }
+.doc strong { color: var(--text); }
+.doc code { background: var(--surface-solid); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; color: var(--text); }
+.doc a { color: var(--accent); font-weight: 600; }
+.doc-callout {
+  border: 1px solid var(--line); background: var(--surface-solid); border-radius: 16px;
+  padding: 14px 18px; margin: 16px 0; color: var(--muted); line-height: 1.7;
+}
+.doc-table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: .95rem; }
+.doc-table th, .doc-table td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--muted); }
+.doc-table th { color: var(--text); }
+.legend { display: inline-block; width: 14px; height: 14px; border-radius: 4px; vertical-align: -2px; margin-right: 6px; }
+
+@media (max-width: 900px) {
+  .pp-hero { grid-template-columns: 1fr; padding-top: 50px; }
+  .pp-grid { grid-template-columns: 1fr 1fr; }
+  .doc-layout { grid-template-columns: 1fr; gap: 10px; }
+  .doc-nav { position: static; flex-direction: row; flex-wrap: wrap; gap: 6px; }
+}
+@media (max-width: 600px) {
+  .pp-grid { grid-template-columns: 1fr; }
+}
