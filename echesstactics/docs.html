@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="eChessTactics documentation: puzzle modes, analysis, free analysis, scanning, PGN viewer, supported boards and FAQ.">
+  <meta name="description" content="eChessTactics documentation: puzzle modes, endgame school, play against Tal, analysis, free analysis, scanning, PGN viewer, e-board PGN download, supported boards and FAQ.">
   <title>eChessTactics – Documentation</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,11 +28,14 @@
         <a href="#screen">The screen</a>
         <a href="#modes">Puzzle modes</a>
         <a href="#solving">Solving and rating</a>
+        <a href="#school">Endgame school</a>
+        <a href="#tal">Play against Tal</a>
         <a href="#analysis">Analysis</a>
         <a href="#free">Free analysis</a>
         <a href="#scan">Scan a position</a>
         <a href="#user">User positions</a>
         <a href="#pgn">PGN viewer</a>
+        <a href="#download">E-board PGN download</a>
         <a href="#boards">Connecting a board</a>
         <a href="#menu">The menu</a>
         <a href="#faq">FAQ</a>
@@ -56,12 +59,12 @@
         <p>The top row is a blue toolbar with these icons, from the left:</p>
         <table class="doc-table">
           <tr><th>Icon</th><th>What it does</th></tr>
-          <tr><td>Three lines</td><td>The menu (see <a href="#menu">The menu</a>).</td></tr>
+          <tr><td>Three lines</td><td>The menu (see <a href="#menu">The menu</a>), which now also holds <strong>Create FEN</strong>.</td></tr>
           <tr><td>Puzzle piece</td><td>Choose the puzzle mode.</td></tr>
           <tr><td>Camera</td><td>Scan a position from a photo or an image.</td></tr>
           <tr><td>Bluetooth</td><td>Connect or disconnect a board. It is red while no board is connected and green when connected.</td></tr>
           <tr><td>Magnifier</td><td>Switch the analysis on or off. It is greyed out while it is not available.</td></tr>
-          <tr><td>FEN</td><td>Enter a position as FEN text.</td></tr>
+          <tr><td>Eyes with a play button</td><td>Play a game against Tal (see <a href="#tal">Play against Tal</a>).</td></tr>
           <tr><td>Two arrows</td><td>Flip the board display.</td></tr>
           <tr><td>Flag</td><td>Switch between German and English.</td></tr>
         </table>
@@ -77,6 +80,7 @@
           <li><strong>Endgames Mix:</strong> nearly 1,000 verified endgame positions, mixed from easy to hard.</li>
           <li><strong>Endgames Themes:</strong> the same positions by theme; the pawn endgames come first.</li>
           <li><strong>Opening tactics:</strong> more than 320,000 positions that grow out of 19 individual openings.</li>
+          <li><strong>Endgame school:</strong> checked teaching positions with exactly one winning move (see <a href="#school">Endgame school</a>).</li>
           <li><strong>User positions:</strong> your own saved positions (shown once you have saved one).</li>
           <li><strong>PGN Viewer:</strong> open and replay PGN games (see <a href="#pgn">PGN viewer</a>).</li>
         </ul>
@@ -86,7 +90,28 @@
         <p>In the rating training your rating changes with every puzzle: <strong>+15</strong> if you solve it on the first try, <strong>+5</strong> on the second, <strong>−5</strong> on the third and <strong>−15</strong> from the fourth try on. Using the hint costs 5 points and showing the solution 10 points.</p>
         <p>The <strong>hint</strong> and <strong>solution</strong> keys unlock after three wrong attempts. <strong>Reset rating</strong> in the menu sets your rating back to 500.</p>
 
+        <h2 id="school">Endgame school</h2>
+        <p>The endgame school teaches the pawn endgame with positions that are <strong>proven with tablebases</strong>: in every position there is exactly <strong>one</strong> winning move and you have to find it. Stockfish plays the defence. A move that no longer wins is taken back with a note (“That only draws” or “That loses”); when you solve a position you see “Lesson solved!” and move on. Hint and solution are always free. There are no pop-ups and no explanation texts, the school is made of exercises.</p>
+        <p>Themes include key squares and opposition, distant opposition, diagonal opposition, the rule of the square, mutual zugzwang, triangulation, outside passed pawn, connected and protected passed pawns, pawn majority, avoiding stalemate and underpromotion. Your progress is remembered.</p>
+
+        <h2 id="tal">Play against Tal</h2>
+        <p>The <strong>eyes icon</strong> in the toolbar starts a real game against the <strong>Patricia</strong> engine, which plays very aggressively. You choose White or Black. With a connected board you set up the start position (the LEDs show what is missing) and Tal’s moves light up on the board; a Chessnut Move moves the pieces itself.</p>
+        <p>Tal <strong>adapts to you</strong>. Before every move he calculates three to five candidates with scores and chooses like this:</p>
+        <ul>
+          <li>The first moves he plays normally (opening).</li>
+          <li>If it is about even, he takes the move closest to equality.</li>
+          <li>If you are clearly worse (from about 1.5 pawns), he <strong>helps</strong>: a weaker but sensible move that brings you closer again. Only if such a move is among his candidates, with no sacrifice (never queen or rook).</li>
+          <li>If you are hopelessly worse (about 3 pawns) or a mate is near, he plays at full strength.</li>
+          <li>If you are clearly better (about 2 pawns), he keeps you roughly there; you have to convert the advantage yourself.</li>
+          <li>If his best line wins material in the next moves (a hanging piece, a combination), he plays it through before he helps again.</li>
+        </ul>
+        <p>The aim is to lead you into an endgame that you can win with technique.</p>
+        <p><strong>Mood.</strong> A smiley slides along a colour strip below the board: right = you are ahead (green), middle = balanced (light blue), left = Tal is ahead (orange to dark red). Tal gets angry when you play well and smirks, up to devilish, when he leads. On boards with colour LEDs (iChessOne, Tabutronic Spectrum) the squares that light up have the same colour.</p>
+        <p><strong>Abort</strong> ends the game at once and offers to save it. If a game ends by itself (mate, stalemate, insufficient material, threefold repetition) a window offers <em>open in PGN analysis</em>, <em>new game</em> or <em>close</em>. All Tal games are saved in one file, <code>Downloads/eChessboards/Talgames.pgn</code>.</p>
+        <p><strong>Analysing a Tal game.</strong> The switch <em>Patricia | Stockfish</em> in the heading line above the board chooses the engine of the analysis. <em>Show Tal decisions</em> in the menu (only while a Tal game is open) lists why Tal chose each move: mode, score, best move and candidates; you can share it as text or as a PGN with comments. The rules are in the file <code>tal_params.json</code>; a file of your own in the app’s files folder replaces the built-in one.</p>
+
         <h2 id="analysis">Analysis</h2>
+        <p><strong>Engine switch.</strong> While the analysis is on, a small switch <em>Patricia | Stockfish</em> sits in the heading line above the board, on the right. Stockfish is the default; your choice is remembered.</p>
         <p>The magnifier starts a live Stockfish analysis under the board. You decide how many variations are shown with the <strong>− / +</strong> keys in front of the first line (1 to 5; the choice is remembered). Each line starts with its score in bold, always from the point of view of the <strong>side at the bottom of the board</strong>; <code>+0.7</code> means that side is slightly better, <code>#3</code> a mate in three. If a forced mate for the side to move exists, only that line is shown.</p>
         <p><strong>Arrows on the board</strong> show the first move of each variation:</p>
         <p><span class="legend" style="background:#146928"></span>dark green: the best move &nbsp; <span class="legend" style="background:#79c879"></span>light green: other candidates &nbsp; <span class="legend" style="background:#d72d2d"></span>red: a losing move (it gets mated or is about two pawns worse).</p>
@@ -127,7 +152,8 @@
           <li>The notation under the board is tappable. The last move is highlighted on the board.</li>
           <li><strong>Comments</strong> appear as a card over the board and disappear with the next move. Where a position has <strong>variations</strong>, the card lets you pick one; the main line is the default. To see a different one, step back and arrive at that position again. The author’s own arrows in the file are ignored.</li>
           <li><strong>Play</strong> plays one move every n seconds on the screen (long press sets n).</li>
-          <li>The analysis shows one variation by default and works on the position that really stands on a connected board.</li>
+          <li>The <strong>share</strong> icon next to the folder sends the open PGN file on (mail, messages, cloud).</li>
+          <li>The analysis shows one variation by default, does not start by itself (switch it on with the magnifier) and works on the position that really stands on a connected board.</li>
         </ul>
         <h3>With a board</h3>
         <ul>
@@ -136,6 +162,15 @@
           <li><strong>Colour-LED boards (iChessOne)</strong> show the game’s next move in <span class="legend" style="background:#3b7bd8"></span>blue and the engine’s best move in <span class="legend" style="background:#2fb457"></span>green. If both are the same, it stays blue. All other boards show only the game’s next move.</li>
           <li>A <strong>Chessnut Move</strong> is navigated with the keys in the app; its robot moves the pieces.</li>
         </ul>
+
+        <h2 id="download">E-board PGN download</h2>
+        <p>The menu entry <strong>E-Board PGN Download</strong> fetches the games saved on your board and opens them in the PGN viewer. You choose the board:</p>
+        <ul>
+          <li><strong>Chessnut</strong> – by Bluetooth; connect the board first.</li>
+          <li><strong>Supreme T2</strong> – by USB cable with the board in PGN mode.</li>
+          <li><strong>eChessGW</strong> – the app offers a Bluetooth connection for the eChessGateway; afterwards you decide whether the games stay on the gateway or are deleted.</li>
+        </ul>
+        <p>The files are saved in the folder <code>Downloads/eChessboards</code>.</p>
 
         <h2 id="boards">Connecting a board</h2>
         <p>Tap the Bluetooth icon, choose your board type and connect. Supported:</p>
@@ -161,8 +196,10 @@
           <li><strong>Reset rating</strong> – back to 500.</li>
           <li><strong>Reset mate puzzles</strong> – the mate training starts again at puzzle 1.</li>
           <li><strong>Chessnut Move player side</strong> – only active while a Chessnut Move is connected.</li>
-          <li><strong>Show FEN / Share FEN / Share own database.</strong></li>
-          <li><strong>Save diagnostic log to Downloads</strong> – for troubleshooting; nothing is sent automatically.</li>
+          <li><strong>Create FEN / Show FEN / Share FEN / Share own database.</strong></li>
+          <li><strong>E-Board PGN Download</strong> – see <a href="#download">E-board PGN download</a>.</li>
+          <li><strong>Show Tal decisions</strong> – only in the analysis of a Tal game, see <a href="#tal">Play against Tal</a>.</li>
+          <li><strong>Share diagnostic log</strong> – for troubleshooting; the file goes through the Android share sheet and nothing is sent automatically.</li>
           <li><strong>Buy me a tea</strong> – an optional tip (5, 10, 20 or 50 euros) through Google Play. Nothing is unlocked by a tip.</li>
         </ul>
 
