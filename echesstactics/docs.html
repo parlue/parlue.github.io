@@ -91,8 +91,8 @@
         <p>The <strong>hint</strong> and <strong>solution</strong> keys unlock after three wrong attempts. <strong>Reset rating</strong> in the menu sets your rating back to 500.</p>
 
         <h2 id="school">Endgame school</h2>
-        <p>The endgame school teaches the pawn endgame with positions that are <strong>proven with tablebases</strong>: in every position there is exactly <strong>one</strong> winning move and you have to find it. Stockfish plays the defence. A move that no longer wins is taken back with a note (“That only draws” or “That loses”); when you solve a position you see “Lesson solved!” and move on. Hint and solution are always free. There are no pop-ups and no explanation texts, the school is made of exercises.</p>
-        <p>Themes include key squares and opposition, distant opposition, diagonal opposition, the rule of the square, mutual zugzwang, triangulation, outside passed pawn, connected and protected passed pawns, pawn majority, avoiding stalemate and underpromotion. Your progress is remembered.</p>
+        <p>The endgame school has <strong>326 checked tasks in two lists</strong>, each from easy to hard: <strong>Endgame school</strong> (239 tasks, you win) and <strong>Endgame school &ndash; draw</strong> (87 tasks, you hold the draw). You play against Stockfish. In positions of up to five men the <strong>tablebase</strong> proves whether your move still wins or still holds the draw; a move that does not is taken back with a note. In bigger positions a task counts as solved after eight good moves in a row (win tasks) or twelve moves of holding the draw. A task only shows its theme. Hint and solution are always free. There are no pop-ups and no explanation texts, the school is made of exercises.</p>
+        <p>Themes include opposition, zugzwang, the rule of the square, king routes, outside and protected passed pawns, queen, rook, bishop and knight against pawns, rook and pawn against rook, minor-piece and rook endings, opposite-coloured bishops, fortresses and queen endings. Your progress is remembered.</p>
 
         <h2 id="tal">Play against Tal</h2>
         <p>The <strong>eyes icon</strong> in the toolbar starts a real game against the <strong>Patricia</strong> engine, which plays very aggressively. You choose White or Black. With a connected board you set up the start position (the LEDs show what is missing) and Tal’s moves light up on the board; a Chessnut Move moves the pieces itself.</p>
@@ -107,7 +107,7 @@
         </ul>
         <p>The aim is to lead you into an endgame that you can win with technique.</p>
         <p><strong>Mood.</strong> A smiley slides along a colour strip below the board: right = you are ahead (green), middle = balanced (light blue), left = Tal is ahead (orange to dark red). Tal gets angry when you play well and smirks, up to devilish, when he leads. On boards with colour LEDs (iChessOne, Tabutronic Spectrum) the squares that light up have the same colour.</p>
-        <p><strong>Abort</strong> ends the game at once and offers to save it. If a game ends by itself (mate, stalemate, insufficient material, threefold repetition) a window offers <em>open in PGN analysis</em>, <em>new game</em> or <em>close</em>. All Tal games are saved in one file, <code>Downloads/eChessboards/Talgames.pgn</code>.</p>
+        <p><strong>Abort</strong> ends the game at once and offers to save it. With the <strong>Draw</strong> button you offer a draw on your turn; Tal accepts when the position is roughly balanced and no mate is in sight. After 100 half-moves without a pawn move or capture the game is drawn by the 50-move rule. If a game ends by itself (mate, stalemate, insufficient material, threefold repetition, 50-move rule) a window offers <em>open in PGN analysis</em>, <em>share game</em>, <em>new game</em> or <em>close</em>. All Tal games are saved in one file, <code>Downloads/eChessboards/Talgames.pgn</code>.</p>
         <p><strong>Analysing a Tal game.</strong> The switch <em>Patricia | Stockfish</em> in the heading line above the board chooses the engine of the analysis. The rules are in the file <code>tal_params.json</code>; a file of your own in the app’s files folder replaces the built-in one.</p>
 
         <h2 id="analysis">Analysis</h2>
@@ -173,15 +173,17 @@
         <p>The files are saved in the folder <code>Downloads/eChessboards</code>.</p>
 
         <h2 id="boards">Connecting a board</h2>
-        <p>Tap the Bluetooth icon, choose your board type and connect. Supported:</p>
+        <p>Tap the Bluetooth icon, choose your board type and connect. Supported, in this order:</p>
         <table class="doc-table">
           <tr><th>Board</th><th>Notes</th></tr>
-          <tr><td>Manya Cynus</td><td>Chess robot; the app sends the position to set up.</td></tr>
-          <tr><td>Chessnut</td><td>Sensor board with LEDs. Chessnut Move is also supported.</td></tr>
           <tr><td>Millennium T2 / ChessLink</td><td>Sensor board with LEDs.</td></tr>
-          <tr><td>Certabo</td><td>Via Bluetooth; there is also a USB entry labelled Beta.</td></tr>
+          <tr><td>Millennium eONE (beta)</td><td>Reports only which squares are occupied; the app knows the pieces from the task. Not yet tested on a real board.</td></tr>
+          <tr><td>Chessnut</td><td>Sensor board with LEDs. Chessnut Move is also supported.</td></tr>
+          <tr><td>Certabo</td><td>Via Bluetooth; there is also a USB entry labelled Beta. The Certabo Sentio (occupancy only, no piece teaching) is recognised automatically (beta).</td></tr>
           <tr><td>iChessOne</td><td>Two LEDs per square with colours: the app uses them in the free analysis and the PGN viewer.</td></tr>
           <tr><td>Tabutronic Spectrum (beta)</td><td>Colour LEDs at the square corners. Own entry in the board list; the LED colour of the set-up help is chosen in the menu, the free analysis and the PGN viewer use green, blue and red. Not yet tested on a real board.</td></tr>
+          <tr><td>Tabutronic Bauerino (beta)</td><td>Certabo console without piece recognition. Set the board to eBoard (protocol v1); protocol v2 and the side at the bottom are chosen in the menu. Not yet tested on a real board.</td></tr>
+          <tr><td>Manya Cynus</td><td>Chess robot; the app sends the position to set up.</td></tr>
         </table>
         <p>On sensor boards the LEDs show which squares still differ from the target position; once it is reached you solve the task directly on the board. Wrong moves are reported and the pieces have to be put back.</p>
         <div class="doc-callout">eChessTactics is an independent app and is not affiliated with the makers of these boards.</div>
