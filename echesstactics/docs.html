@@ -108,7 +108,7 @@
         <p>The aim is to lead you into an endgame that you can win with technique.</p>
         <p><strong>Mood.</strong> A smiley slides along a colour strip below the board: right = you are ahead (green), middle = balanced (light blue), left = Tal is ahead (orange to dark red). Tal gets angry when you play well and smirks, up to devilish, when he leads. On boards with colour LEDs (iChessOne, Tabutronic Spectrum) the squares that light up have the same colour.</p>
         <p><strong>Abort</strong> ends the game at once and offers to save it. With the <strong>Draw</strong> button you offer a draw on your turn; Tal accepts when the position is roughly balanced and no mate is in sight. After 100 half-moves without a pawn move or capture the game is drawn by the 50-move rule. If a game ends by itself (mate, stalemate, insufficient material, threefold repetition, 50-move rule) a window offers <em>open in PGN analysis</em>, <em>share game</em>, <em>new game</em> or <em>close</em>. All Tal games are saved in one file, <code>Downloads/eChessboards/Talgames.pgn</code>.</p>
-        <p><strong>Analysing a Tal game.</strong> The switch <em>Patricia | Stockfish</em> in the heading line above the board chooses the engine of the analysis. The rules are in the file <code>tal_params.json</code>; a file of your own in the app’s files folder replaces the built-in one.</p>
+        <p><strong>Analysing a Tal game.</strong> The switch <em>Patricia | Stockfish</em> in the heading line above the board chooses the engine of the analysis.</p>
 
         <h2 id="analysis">Analysis</h2>
         <p><strong>Engine switch.</strong> While the analysis is on, a small switch <em>Patricia | Stockfish</em> sits in the heading line above the board, on the right. Stockfish is the default; your choice is remembered.</p>
@@ -179,10 +179,10 @@
           <tr><td>Millennium T2 / ChessLink</td><td>Sensor board with LEDs.</td></tr>
           <tr><td>Millennium eONE</td><td>Reports only which squares are occupied; the app knows the pieces from the task. Confirmed on a real board.</td></tr>
           <tr><td>Chessnut</td><td>Sensor board with LEDs. Chessnut Move is also supported.</td></tr>
-          <tr><td>Certabo</td><td>Via Bluetooth; there is also a USB entry labelled Beta. The Certabo Sentio (occupancy only, no piece teaching) is recognised automatically (beta).</td></tr>
+          <tr><td>Certabo</td><td>Via Bluetooth; there is also a USB entry labelled Beta. Both ask which board you have: Certabo, Tabutronic Cerno / Spectrum or Certabo Sentio (occupancy only, no piece teaching; beta).</td></tr>
           <tr><td>iChessOne</td><td>Two LEDs per square with colours: the app uses them in the free analysis and the PGN viewer.</td></tr>
-          <tr><td>Tabutronic Spectrum (beta)</td><td>Colour LEDs at the square corners. Own entry in the board list; the LED colour of the set-up help is chosen in the menu, the free analysis and the PGN viewer use green, blue and red. Not yet tested on a real board.</td></tr>
-          <tr><td>Tabutronic Bauerino (beta)</td><td>Certabo console without piece recognition. Set the board to eBoard (protocol v1); protocol v2 and the side at the bottom are chosen in the menu. Not yet tested on a real board.</td></tr>
+          <tr><td>Tabutronic Spectrum (beta)</td><td>Colour LEDs at the square corners. Chosen in the follow-up question of the Certabo entries; the LED colour of the set-up help is chosen in the menu, the free analysis and the PGN viewer use green, blue and red. Not yet tested on a real board.</td></tr>
+          <tr><td>Tabutronic Bauerino (beta)</td><td>Certabo console without piece recognition. Set the board to eBoard; the menu entry asks for protocol v1 or v2, the side at the bottom is chosen in the menu. Not yet tested on a real board.</td></tr>
           <tr><td>Manya Cynus</td><td>Chess robot; the app sends the position to set up.</td></tr>
         </table>
         <p>On sensor boards the LEDs show which squares still differ from the target position; once it is reached you solve the task directly on the board. Wrong moves are reported and the pieces have to be put back.</p>
