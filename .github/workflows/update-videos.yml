@@ -1,0 +1,33 @@
+name: Update video list
+
+# Fetches the YouTube playlist of eChessTactics once a day (and on demand) and commits echesstactics/videos.json
+# plus the new thumbnails when something changed. The page itself only reads that file.
+on:
+  schedule:
+    - cron: "17 5 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Update the list
+        run: python .github/scripts/update_videos.py
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add echesstactics/videos.json assets/echesstactics/videos
+          if git diff --cached --quiet; then
+            echo "nothing to commit"
+          else
+            git commit -m "Update eChessTactics video list"
+            git push
+          fi

@@ -121,16 +121,13 @@
           <p class="eyebrow">Watch</p>
           <h2>Videos</h2>
         </div>
-        <p>The eChessTactics playlist on YouTube. New videos appear here as soon as they are added to it.</p>
+        <p>Short videos about the app, the boards and the documentation. A click on a picture opens the video on YouTube.</p>
       </div>
-      <div class="pp-video" id="ppVideo" data-list="PLDH3rU5dsNmA">
-        <button type="button" class="pp-video-start" id="ppVideoStart" aria-label="Load and play the video playlist">
-          <span class="pp-video-play">&#9654;</span>
-          <span class="pp-video-text">Play the eChessTactics videos</span>
-          <span class="pp-video-hint">The player loads from YouTube (youtube-nocookie.com) only after you click.</span>
-        </button>
+      <div class="pp-videos" id="ppVideos" aria-live="polite">
+        <p class="pp-note">Loading the video list &hellip;</p>
       </div>
-      <p class="pp-note"><a href="https://www.youtube.com/playlist?list=PLDH3rU5dsNmA" target="_blank" rel="noreferrer">Open the playlist on YouTube &#8599;</a></p>
+      <noscript><p class="pp-note">Please open the playlist directly: <a href="https://www.youtube.com/playlist?list=PLDH3rU5dsNmA" target="_blank" rel="noreferrer">eChessTactics on YouTube &#8599;</a></p></noscript>
+      <p class="pp-note"><a href="https://www.youtube.com/playlist?list=PLDH3rU5dsNmA" target="_blank" rel="noreferrer">All videos as a playlist on YouTube &#8599;</a></p>
     </section>
 
     <section id="screens" class="section">
@@ -190,17 +187,24 @@
   <script src="../script.js"></script>
   <script>
     (function () {
-      var box = document.getElementById('ppVideo'), btn = document.getElementById('ppVideoStart');
-      if (!box || !btn) return;
-      btn.addEventListener('click', function () {
-        var f = document.createElement('iframe');
-        f.src = 'https://www.youtube-nocookie.com/embed/videoseries?list=' + encodeURIComponent(box.getAttribute('data-list')) + '&autoplay=1';
-        f.title = 'eChessTactics videos';
-        f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-        f.setAttribute('allowfullscreen', '');
-        f.referrerPolicy = 'strict-origin-when-cross-origin';
-        box.innerHTML = '';
-        box.appendChild(f);
+      var box = document.getElementById('ppVideos');
+      if (!box) return;
+      function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+      fetch('videos.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (data) {
+        var list = data.videos || [];
+        if (!list.length) { box.innerHTML = '<p class="pp-note">The first videos are coming soon.</p>'; return; }
+        box.innerHTML = list.map(function (v) {
+          var url = 'https://www.youtube.com/watch?v=' + encodeURIComponent(v.id) + '&list=' + encodeURIComponent(data.playlist);
+          var desc = (v.description || '').split('\n')[0];
+          if (desc.length > 140) desc = desc.slice(0, 137) + '...';
+          return '<a class="pp-video-card" href="' + url + '" target="_blank" rel="noreferrer">' +
+            '<span class="pp-video-thumb"><img src="../assets/echesstactics/videos/' + encodeURIComponent(v.id) + '.jpg" alt="" loading="lazy"><span class="pp-video-playicon">&#9654;</span></span>' +
+            '<span class="pp-video-title">' + esc(v.title) + '</span>' +
+            (desc ? '<span class="pp-video-desc">' + esc(desc) + '</span>' : '') +
+            '<span class="pp-video-date">' + esc(v.published || '') + '</span></a>';
+        }).join('');
+      }).catch(function () {
+        box.innerHTML = '<p class="pp-note">The list could not be loaded. Please use the playlist link below.</p>';
       });
     })();
   </script>
