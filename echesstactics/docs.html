@@ -37,6 +37,7 @@
         <a href="#pgn">PGN viewer</a>
         <a href="#download">E-board PGN download</a>
         <a href="#boards">Connecting a board</a>
+        <a href="#pieces">Piece sets</a>
         <a href="#menu">The menu</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -151,7 +152,7 @@
         <ul>
           <li>The navigation bar has: previous, the move count in the middle, next, play/stop, a <strong>list</strong> key to choose another game and a <strong>folder</strong> key to open another file. Games are named after their tags (White – Black, or the event); unnamed games are called “Game 1”, “Game 2”, and so on.</li>
           <li>The notation under the board is tappable. The last move is highlighted on the board.</li>
-          <li><strong>Comments</strong> appear as a card over the board and disappear with the next move. Where a position has <strong>variations</strong>, the card lets you pick one; the main line is the default. To see a different one, step back and arrive at that position again. The author’s own arrows in the file are ignored.</li>
+          <li><strong>Comments</strong> appear as a card below the board, above the notation, and disappear with the next move. Where a position has <strong>variations</strong>, the card lets you pick one; the main line is the default. To see a different one, step back and arrive at that position again. The author’s own arrows in the file are ignored.</li>
           <li><strong>Play</strong> plays one move every n seconds on the screen (long press sets n).</li>
           <li>The <strong>share</strong> icon next to the folder sends the open PGN file on (mail, messages, cloud).</li>
           <li>The analysis shows one variation by default, does not start by itself (switch it on with the magnifier) and works on the position that really stands on a connected board.</li>
@@ -160,7 +161,7 @@
         <ul>
           <li><strong>The board navigates:</strong> play the shown move (or the move of a variation) on the board and the game goes forward; take the move back and it goes back. Pop-ups close when you move on.</li>
           <li>When the pieces differ from the shown position, the LEDs show the differing squares so you can set it up.</li>
-          <li><strong>Colour-LED boards (iChessOne)</strong> show the game’s next move in <span class="legend" style="background:#3b7bd8"></span>blue and the engine’s best move in <span class="legend" style="background:#2fb457"></span>green. If both are the same, it stays blue. All other boards show only the game’s next move.</li>
+          <li><strong>Colour-LED boards (Tabutronic Spectrum, iChessOne)</strong> show the game’s next move in <span class="legend" style="background:#3b7bd8"></span>blue and the engine’s best move in <span class="legend" style="background:#2fb457"></span>green. If both are the same, it stays blue. Where the game branches, the moves of the side variations light up <span class="legend" style="background:#e0b020"></span>yellow, so you can decide at the board without looking at the display. All other boards show only the game’s next move.</li>
           <li>A <strong>Chessnut Move</strong> is navigated with the keys in the app; its robot moves the pieces.</li>
         </ul>
 
@@ -190,6 +191,9 @@
         <div class="doc-callout">eChessTactics is an independent app and is not affiliated with the makers of these boards.</div>
         <p>Colour LEDs, iChessOne, free analysis: <span class="legend" style="background:#2fb457"></span>green = best move, <span class="legend" style="background:#3b7bd8"></span>blue = other good moves, <span class="legend" style="background:#d72d2d"></span>red = a very bad move. Several moves light up at the same time.</p>
 
+        <h2 id="pieces">Piece sets</h2>
+        <p>Hold the white or black <strong>pawn</strong> in the row below the board (next to <em>Stop</em> and <em>Send FEN</em>) for about 1.5 seconds. A window offers three sets: <strong>Standard</strong>, <strong>Merida</strong> and <strong>MPChess</strong>. A tap on a set switches it on at once; it stays active and is used at every start, on all boards of the app. Merida (Armando Hernandez Marroquin) and MPChess (Maxime Chupin) are free piece sets under the GPL.</p>
+
         <h2 id="menu">The menu</h2>
         <ul>
           <li><strong>Free analysis</strong> – only with a connected board.</li>
@@ -198,6 +202,7 @@
           <li><strong>Support (Discord)</strong> – opens the electricchess Discord server for questions, bugs and wishes.</li>
           <li><strong>Reset rating</strong> – back to 500.</li>
           <li><strong>Reset mate puzzles</strong> – the mate training starts again at puzzle 1.</li>
+          <li><strong>Reset bot progress</strong> – deletes all wins and green checks of Beat the Bot.</li>
           <li><strong>Chessnut Move player side</strong> – only active while a Chessnut Move is connected.</li>
           <li><strong>Create FEN / Show FEN / Share FEN / Share own database.</strong></li>
           <li><strong>E-Board PGN Download</strong> – see <a href="#download">E-board PGN download</a>.</li>
