@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="eChessGw: an open-source BLE gateway on an ESP32-C3 that connects cable-based chess computers and wireless e-boards, with a standalone mode, automatic PGN recording and a browser-based installer.">
+  <title>eChessGw – wireless gateway for electronic chessboards</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../echesstactics/project.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">parlue<span>.</span></a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#videos">Videos</a>
+      <a href="#boards">Boards</a>
+      <a href="#install">Installer</a>
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">☾</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="pp-hero">
+      <div>
+        <p class="eyebrow">Open source · ESP32-C3 · BLE</p>
+        <h1 class="pp-title">eChess<span class="pp-blue">Gw</span></h1>
+        <p class="lead">
+          A small wireless gateway for electronic chessboards. It connects a cable-based chess computer
+          (MILLENNIUM King, Mephisto Phoenix) to any of several wireless e-boards over BLE:
+          one firmware, automatic board detection at runtime.
+        </p>
+        <p class="lead">
+          With no cable computer present, the gateway can also act as a ChessLink or Chessnut board itself,
+          so wireless chess software such as BearChess, PicoChess or Chess PGN Master can connect directly.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://parlue.github.io/eChessGw/" target="_blank" rel="noreferrer">Flash it in your browser ↗</a>
+          <a class="button secondary" href="https://github.com/parlue/eChessGw" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+        <p class="pp-note">
+          eChessGw is a DIY project: all information, the source and the wiring are on GitHub.
+          Questions? Come to the Discord server <strong>electricchess</strong>.
+        </p>
+      </div>
+      <div class="pp-hero-media">
+        <img src="../assets/echessgw/module-usb-c.jpg" alt="The eChessGw module, USB-C side">
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">What it does</p>
+          <h2>Features</h2>
+        </div>
+        <p>One firmware for the ESP32-C3 SuperMini. The gateway works out at runtime what is connected.</p>
+      </div>
+      <div class="pp-grid">
+        <article class="pp-card">
+          <h3>Cable computer to wireless board</h3>
+          <p>A chess computer with a ChessLink / Mode-B cable interface talks to a wireless e-board through the gateway.
+             The gateway translates the protocols at runtime, including castling, en passant and promotion on the Manya Cynus.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Standalone mode</h3>
+          <p>No cable computer needed: the gateway advertises itself as a ChessLink or Chessnut board over BLE for
+             wireless chess software (PicoChess, BearChess, Chess PGN Master).</p>
+        </article>
+        <article class="pp-card">
+          <h3>Automatic PGN recording</h3>
+          <p>Games are recorded automatically, including checkmate detection and a manual result-signal gesture.
+             Fetch them over USB with a simple physical gesture and a small Windows tool, or over BLE with Chessnut emulation.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Engine against engine</h3>
+          <p>Two engines can play each other from a virtual board inside the gateway, for example BearChess against a Mephisto Phoenix,
+             with the moves shown and carried out on a real board.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Follow an e-book game</h3>
+          <p>The Manya Cynus protocol can be presented as a Chessnut board, so the vision technology of an app can follow a
+             game from an e-book on a real board.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Flash from the browser</h3>
+          <p>No toolchain needed: connect the ESP32-C3 SuperMini by USB, open the installer in Chrome or Edge and press
+             Connect. Source code and the PGN retrieval tool are on GitHub.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="videos" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Watch</p>
+          <h2>Videos</h2>
+        </div>
+        <p>Demos of the gateway with different boards. A click on a picture opens the video on YouTube.</p>
+      </div>
+      <div class="pp-videos" id="ppVideos" aria-live="polite">
+        <p class="pp-note">Loading the video list &hellip;</p>
+      </div>
+      <noscript><p class="pp-note">Please open the playlist directly: <a href="https://www.youtube.com/playlist?list=PLZBfpnCj3l20" target="_blank" rel="noreferrer">eChessGw on YouTube &#8599;</a></p></noscript>
+      <p class="pp-note"><a href="https://www.youtube.com/playlist?list=PLZBfpnCj3l20" target="_blank" rel="noreferrer">All videos as a playlist on YouTube &#8599;</a></p>
+    </section>
+
+    <section id="boards" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Hardware</p>
+          <h2>Supported boards</h2>
+        </div>
+        <p>Cable side: MILLENNIUM King and Mephisto Phoenix. Wireless side: the boards below.</p>
+      </div>
+      <div class="tags pp-tags">
+        <span>MILLENNIUM Supreme T2 BT</span><span>Chessnut Air / GO / Pro</span><span>Certabo</span><span>Manya Cynus</span>
+      </div>
+      <p class="pp-note">
+        Certabo pieces are read in at every start: 32 pieces in the starting position plus a spare white queen on d3 and a spare
+        black queen on d6. The four centre squares blink three times when done; then remove the two queens.
+        The gateway is an independent project. It is not affiliated with, endorsed by or sponsored by the makers of the
+        supported boards. All product names are trademarks of their respective owners.
+      </p>
+      <div class="pp-shots">
+        <figure><img src="../assets/echessgw/module-usb-c.jpg" alt="eChessGw module, USB-C side" loading="lazy"><figcaption>The module, USB-C side</figcaption></figure>
+        <figure><img src="../assets/echessgw/module-minidin.jpg" alt="eChessGw module, Mini-DIN cable side" loading="lazy"><figcaption>The module, Mini-DIN cable side</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="install" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Get started</p>
+          <h2>Installation and links</h2>
+        </div>
+      </div>
+      <ul class="pp-list">
+        <li>Target: ESP32-C3 SuperMini compatible boards. Use Google Chrome or Microsoft Edge.</li>
+        <li><a href="https://parlue.github.io/eChessGw/" target="_blank" rel="noreferrer">Web installer ↗</a>: connect the board by USB, press Connect, confirm, then reconnect the power.</li>
+        <li><a href="https://github.com/parlue/eChessGw" target="_blank" rel="noreferrer">Documentation and source on GitHub ↗</a></li>
+        <li><a href="https://github.com/parlue/eChessGw/tree/main/pgntool" target="_blank" rel="noreferrer">PGN retrieval tool ↗</a></li>
+        <li>Questions, bugs, wishes: the Discord server <a href="https://discord.gg/AdZukFtBf" target="_blank" rel="noreferrer">electricchess ↗</a>.</li>
+        <li>The companion app <a href="../echesstactics/">eChessTactics</a> can fetch the games saved on the gateway and open them in its PGN viewer.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> parlue</span>
+    <span><a href="../">← back to all projects</a></span>
+  </footer>
+
+  <script src="../script.js"></script>
+  <script>
+    (function () {
+      var box = document.getElementById('ppVideos');
+      if (!box) return;
+      function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+      fetch('../videos-echessgw.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (data) {
+        var list = data.videos || [];
+        if (!list.length) { box.innerHTML = '<p class="pp-note">The first videos are coming soon.</p>'; return; }
+        box.innerHTML = list.map(function (v) {
+          var url = 'https://www.youtube.com/watch?v=' + encodeURIComponent(v.id) + '&list=' + encodeURIComponent(data.playlist);
+          var desc = (v.description || '').split('\n')[0];
+          if (desc.length > 140) desc = desc.slice(0, 137) + '...';
+          return '<a class="pp-video-card" href="' + url + '" target="_blank" rel="noreferrer">' +
+            '<span class="pp-video-thumb"><img src="../assets/echessgw-videos/' + encodeURIComponent(v.id) + '.jpg" alt="" loading="lazy"><span class="pp-video-playicon">&#9654;</span></span>' +
+            '<span class="pp-video-title">' + esc(v.title) + '</span>' +
+            (desc ? '<span class="pp-video-desc">' + esc(desc) + '</span>' : '') +
+            '<span class="pp-video-date">' + esc(v.published || '') + '</span></a>';
+        }).join('');
+      }).catch(function () {
+        box.innerHTML = '<p class="pp-note">The list could not be loaded. Please use the playlist link below.</p>';
+      });
+    })();
+  </script>
+</body>
+</html>
