@@ -1,0 +1,36 @@
+{
+ "playlist": "PLZBfpnCj3l20",
+ "playlistUrl": "https://www.youtube.com/playlist?list=PLZBfpnCj3l20",
+ "videos": [
+  {
+   "id": "EzJGEXVtUEU",
+   "title": "certabo E-Board play The King Element via eChessGw",
+   "published": "2026-10-11",
+   "description": ""
+  },
+  {
+   "id": "lKvP5p4jb7Y",
+   "title": "eChessGW Bearchess Engine vs Mephisto Phönix + Service via Manya Cynus",
+   "published": "2026-10-01",
+   "description": "Next mode developed.. The user controls a match via E-Board"
+  },
+  {
+   "id": "bHjT68xxlZ4",
+   "title": "eChessGw Engine vs Engine | Bearchess vs Mephisto Phönix",
+   "published": "2026-09-30",
+   "description": "eChessGW enhanced feature. Mephisto Phönix play's vs Bearchess. Both with chesslink Protocol. Both are handeled from a virtual T2 chessboard in the Gateway."
+  },
+  {
+   "id": "dGKGj4GC-JY",
+   "title": "eChessGW follow a Ebook with  Manya Cynus",
+   "published": "2026-09-29",
+   "description": "Impressive Demo of eChessGW. It masks the Manya Cynus protocol to chessnut and use the vision technology from that app to follw a ebook game with forwardchess. The game is from the Schach magazin."
+  },
+  {
+   "id": "9n4LJ8xlS58",
+   "title": "eChessGw Demo",
+   "published": "2026-09-06",
+   "description": "eChessGw ist ein DIY-Projekt. Alle Informationen dazu findest du hier:\nhttps://github.com/parlue/eChessGw\n\nBei Fragen kannst du mich gerne kontaktieren.\n\n----\neChessGw is a wireless connector for electronic chessboards and cable-based chess computers such as the Millennium Phoenix.\n\nIt can also store PGN files and provides easy access to them through Chessnut emulation.\n\neChessGw is a DIY project, and all information is available here:\nhttps://github.com/parlue/eChessGw\n\nFeel free to contact me if you have any questions.\n\nBest regards,\nDirk"
+  }
+ ]
+}

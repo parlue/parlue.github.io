@@ -1,4 +1,4 @@
-"""Keeps echesstactics/videos.json up to date from the YouTube playlist feed.
+"""Keeps the video lists (eChessTactics: echesstactics/videos.json, eChessGw: videos-echessgw.json) up to date from the YouTube playlist feeds.
 
 The feed only lists the newest 15 entries of a playlist, so the script MERGES it into the existing file: videos that
 are already stored are kept (older ones never disappear), new ones are added, titles and descriptions are refreshed.
@@ -13,11 +13,12 @@ import sys
 import urllib.request
 import xml.etree.ElementTree as ET
 
-PLAYLIST = "PLDH3rU5dsNmA"
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-JSON_PATH = os.path.join(ROOT, "echesstactics", "videos.json")
-THUMB_DIR = os.path.join(ROOT, "assets", "echesstactics", "videos")
-FEED = "https://www.youtube.com/feeds/videos.xml?playlist_id=" + PLAYLIST
+# (playlist id, json file, thumbnail folder)
+LISTS = [
+    ("PLDH3rU5dsNmA", os.path.join(ROOT, "echesstactics", "videos.json"), os.path.join(ROOT, "assets", "echesstactics", "videos")),
+    ("PLZBfpnCj3l20", os.path.join(ROOT, "videos-echessgw.json"), os.path.join(ROOT, "assets", "echessgw-videos")),
+]
 NS = {"a": "http://www.w3.org/2005/Atom", "yt": "http://www.youtube.com/xml/schemas/2015", "m": "http://search.yahoo.com/mrss/"}
 
 
@@ -27,8 +28,8 @@ def fetch(url):
         return r.read()
 
 
-def main():
-    feed = ET.fromstring(fetch(FEED))
+def update(PLAYLIST, JSON_PATH, THUMB_DIR):
+    feed = ET.fromstring(fetch("https://www.youtube.com/feeds/videos.xml?playlist_id=" + PLAYLIST))
     old = {}
     if os.path.exists(JSON_PATH):
         with open(JSON_PATH, encoding="utf-8") as f:
@@ -66,6 +67,11 @@ def main():
             f.write(text)
         changed = True
     print("videos:", len(videos), "changed" if changed else "unchanged")
+
+
+def main():
+    for playlist, json_path, thumb_dir in LISTS:
+        update(playlist, json_path, thumb_dir)
 
 
 if __name__ == "__main__":

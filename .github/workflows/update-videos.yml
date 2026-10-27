@@ -1,6 +1,6 @@
 name: Update video list
 
-# Fetches the YouTube playlist of eChessTactics once a day (and on demand) and commits echesstactics/videos.json
+# Fetches the YouTube playlists of eChessTactics and eChessGw once a day (and on demand) and commits the video lists
 # plus the new thumbnails when something changed. The page itself only reads that file.
 on:
   schedule:
@@ -24,7 +24,7 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add echesstactics/videos.json assets/echesstactics/videos
+          git add echesstactics/videos.json assets/echesstactics/videos videos-echessgw.json assets/echessgw-videos
           if git diff --cached --quiet; then
             echo "nothing to commit"
           else

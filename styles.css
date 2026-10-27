@@ -188,3 +188,15 @@ footer {
   .section-heading > p { margin-top: 18px; }
   .about-copy { margin-top: 26px; }
 }
+
+/* eChessGw video strip inside the project card */
+.gw-videos { margin-top: 22px; padding-top: 18px; border-top: 1px solid var(--line); }
+.gw-videos h4 { margin: 0 0 12px; font-size: .95rem; }
+.gw-video-row { display: flex; gap: 14px; overflow-x: auto; padding-bottom: 8px; scroll-snap-type: x proximity; }
+.gw-video { flex: 0 0 190px; display: flex; flex-direction: column; gap: 6px; text-decoration: none; color: inherit; scroll-snap-align: start; }
+.gw-video-thumb { position: relative; display: block; aspect-ratio: 16 / 9; border-radius: 10px; overflow: hidden; background: #12161c; }
+.gw-video-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.gw-video-play { position: absolute; right: 8px; bottom: 8px; width: 30px; height: 30px; border-radius: 50%; background: rgba(90, 169, 230, .95); color: #fff; display: grid; place-items: center; font-size: .75rem; padding-left: 2px; }
+.gw-video-title { font-weight: 700; font-size: .85rem; line-height: 1.3; }
+.gw-video-date { color: var(--muted); font-size: .75rem; }
+.gw-video:hover .gw-video-title, .gw-video:focus-visible .gw-video-title { color: var(--accent); }

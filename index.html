@@ -113,7 +113,9 @@ Your portfolio is ready.
             <div class="project-links">
               <a href="https://github.com/parlue/eChessGw" target="_blank" rel="noreferrer">GitHub ↗</a>
               <a href="https://parlue.github.io/eChessGw/" target="_blank" rel="noreferrer">Web Installer ↗</a>
+              <a href="https://www.youtube.com/playlist?list=PLZBfpnCj3l20" target="_blank" rel="noreferrer">Videos ↗</a>
             </div>
+            <div class="gw-videos" id="gwVideos" aria-live="polite"></div>
           </div>
         </article>
 
@@ -168,5 +170,23 @@ Your portfolio is ready.
   </footer>
 
   <script src="script.js"></script>
+  <script>
+    (function () {
+      var box = document.getElementById('gwVideos');
+      if (!box) return;
+      function esc(t) { var d = document.createElement('div'); d.textContent = t; return d.innerHTML; }
+      fetch('videos-echessgw.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (data) {
+        var list = data.videos || [];
+        if (!list.length) return;
+        box.innerHTML = '<h4>Videos</h4><div class="gw-video-row">' + list.map(function (v) {
+          var url = 'https://www.youtube.com/watch?v=' + encodeURIComponent(v.id) + '&list=' + encodeURIComponent(data.playlist);
+          return '<a class="gw-video" href="' + url + '" target="_blank" rel="noreferrer">' +
+            '<span class="gw-video-thumb"><img src="assets/echessgw-videos/' + encodeURIComponent(v.id) + '.jpg" alt="" loading="lazy"><span class="gw-video-play">&#9654;</span></span>' +
+            '<span class="gw-video-title">' + esc(v.title) + '</span>' +
+            '<span class="gw-video-date">' + esc(v.published || '') + '</span></a>';
+        }).join('') + '</div>';
+      }).catch(function () {});
+    })();
+  </script>
 </body>
 </html>
