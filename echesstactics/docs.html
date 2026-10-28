@@ -75,7 +75,7 @@
         <h2 id="modes">Puzzle modes</h2>
         <p>Across all modes you can solve more than <strong>730,000</strong> different puzzles and positions. The puzzle-piece icon lists the modes:</p>
         <ul>
-          <li><strong>Beat the Bot</strong> (top of the list): play against 71 bots with a face and a name, ordered by strength (Beginners 700&ndash;900, Intermediate 1000&ndash;1400, Club players 1500&ndash;1700, Amateurs 1800&ndash;2000); the 71st, the little devil, plays at full strength. Each strength has five opponents with a different style: fearful, defensive, normal, eager to attack and aggressive. There are no helps. A green check shows that you have beaten a bot with White <em>and</em> with Black. The bots are the open-source engine <a href="https://github.com/parlue/carballo">Carballo</a> (GPLv3) with their own style settings.</li>
+          <li><strong>Beat the Bot</strong> (top of the list): play against 71 bots with a face and a name, ordered by strength (Beginners 700&ndash;900, Intermediate 1000&ndash;1400, Club players 1500&ndash;1700, Amateurs 1800&ndash;2000); the 71st, the little devil, plays at full strength. Each strength has five opponents with a different style: fearful, defensive, normal, eager to attack and aggressive. There are no hints and no move suggestions. You can take a move back (the circle with the back arrow left of Draw; on a board you play the bot’s move and put it back) and open the analysis, but a win in a game in which you used either does not count for the green check; the saved game carries a note. A green check shows that you have beaten a bot with White <em>and</em> with Black. The bots are the open-source engine <a href="https://github.com/parlue/carballo">Carballo</a> (GPLv3) with their own style settings.</li>
           <li><strong>Puzzle (Rating training):</strong> a random puzzle that matches your rating, from a database of more than 400,000 puzzles.</li>
           <li><strong>Mate training:</strong> 7,200 mate puzzles in a fixed order that gets harder. It starts with 200 mate-in-1 puzzles in ten levels from easy to hard, then continues with mate in 2, 3, 4 and 5. Your progress is saved.</li>
           <li><strong>Puzzle (Themes and rating):</strong> choose tactical themes and a rating range and build your own training. It does not change your rating.</li>
@@ -110,6 +110,7 @@
         <p>The aim is to lead you into an endgame that you can win with technique.</p>
         <p><strong>Mood.</strong> A smiley slides along a colour strip below the board: right = you are ahead (green), middle = balanced (light blue), left = Tal is ahead (orange to dark red). Tal gets angry when you play well and smirks, up to devilish, when he leads. On boards with colour LEDs (iChessOne, Tabutronic Spectrum) the squares that light up have the same colour.</p>
         <p><strong>Abort</strong> ends the game at once and offers to save it. With the <strong>Draw</strong> button you offer a draw on your turn; Tal accepts when the position is roughly balanced and no mate is in sight. After 100 half-moves without a pawn move or capture the game is drawn by the 50-move rule. If a game ends by itself (mate, stalemate, insufficient material, threefold repetition, 50-move rule) a window offers <em>open in PGN analysis</em>, <em>share game</em>, <em>new game</em> or <em>close</em>. All Tal games are saved in one file, <code>Downloads/eChessboards/Talgames.pgn</code>.</p>
+        <p><strong>Taking a move back (Elo game only).</strong> In the Elo game (a fixed level) the circle with the back arrow sits left of <em>Draw</em>: it takes back your last move and Tal’s answer, and you are to move again. On a board you first put Tal’s move back, the app notices it and does not calculate, and then the LEDs show which of your moves to put back. There is no takeback in the adaptive game. The saved PGN carries a note.</p>
         <p><strong>Analysing a Tal game.</strong> The switch <em>Patricia | Stockfish</em> in the heading line above the board chooses the engine of the analysis.</p>
 
         <h2 id="analysis">Analysis</h2>
@@ -121,6 +122,7 @@
         <ul>
           <li>In tasks with a prescribed solution (rating training, mate training, themes, openings) only <strong>after three wrong attempts</strong>, and it closes again with every new task. Think of it as a special hint.</li>
           <li><strong>Always</strong> in the endgames, in the PGN viewer, in the free analysis and for every imported position (FEN or photo).</li>
+          <li>In <strong>Beat the Bot</strong> it can be opened as well, but a win in a game where you used it does not count for the green check.</li>
         </ul>
 
         <h2 id="free">Free analysis</h2>
@@ -165,6 +167,16 @@
           <li>A <strong>Chessnut Move</strong> is navigated with the keys in the app; its robot moves the pieces.</li>
         </ul>
 
+
+        <h3>Trainer</h3>
+        <p>The icon with the head and the gear (right of the share icon) turns the chosen game into an exercise: you have to find the move of the game. A game is one concrete opening variation; its tree of sub-variations is the basis. You choose:</p>
+        <ul>
+          <li><strong>You play:</strong> White or Black.</li>
+          <li><strong>Exercises from</strong> (only for games with variations): <em>All variations</em> – at every point every move of the tree is right, and the opponent answers with a random branch, so you can end up in another branch. Or <em>My way through the tree</em> – the app asks at every fork which variation you follow (only the one move it starts with is offered, the line then runs on by itself to the next fork). Only that way counts, and the opponent plays exactly it. <em>Back</em> takes the last choice back, <em>End here</em> ends the way at that point.</li>
+          <li><strong>Run:</strong> <em>From start to end</em>, or <em>Random positions</em>: a random position from the game, you play the next two moves, then the next position comes.</li>
+        </ul>
+        <p>A right move is answered by the opponent. A wrong move goes back: on the screen the position stays, on a board the LEDs show what to put back. The <strong>question mark</strong> shows the right move for three seconds. In the trainer, comments, analysis and the coloured move squares of colour-LED boards are off because they would give the answer away. With the arrows you walk through the exercises and can repeat them. With random positions the app waits <strong>5 seconds</strong> after a solved exercise before the next one: the ring around the red square counts down, a tap on it switches the waiting off (you then continue with &gt;), and a long press sets the seconds. At the end of a line a <strong>green check</strong> appears. The <strong>restart icon</strong> returns to the choice menu, and the green trainer icon ends the trainer.</p>
+
         <h2 id="download">E-board PGN download</h2>
         <p>The menu entry <strong>E-Board PGN Download</strong> fetches the games saved on your board and opens them in the PGN viewer. You choose the board:</p>
         <ul>
@@ -181,9 +193,9 @@
           <tr><td>Millennium T2 / ChessLink</td><td>Sensor board with LEDs.</td></tr>
           <tr><td>Millennium eONE</td><td>Reports only which squares are occupied; the app knows the pieces from the task. Confirmed on a real board.</td></tr>
           <tr><td>Chessnut</td><td>Sensor board with LEDs. Chessnut Move is also supported.</td></tr>
-          <tr><td>Certabo</td><td>Via Bluetooth; there is also a USB entry labelled Beta. Both ask which board you have: Certabo / Tabutronic Cerno, Tabutronic Spectrum or Tabutronic Sentio (occupancy only, no piece teaching; beta).</td></tr>
+          <tr><td>Certabo</td><td>Via Bluetooth or by USB cable (with a USB-OTG adapter on the phone; Android asks once for the USB permission). The USB entry is still labelled Beta in the list. Tested on a real board. Both ask which board you have: Certabo / Tabutronic Cerno, Tabutronic Spectrum or Tabutronic Sentio (occupancy only, no piece teaching; beta).</td></tr>
           <tr><td>iChessOne</td><td>Two LEDs per square with colours: the app uses them in the free analysis and the PGN viewer.</td></tr>
-          <tr><td>Tabutronic Spectrum (beta)</td><td>Colour LEDs at the square corners. Chosen in the follow-up question of the Certabo entries; the LED colour of the set-up help is chosen in the menu, the free analysis and the PGN viewer use green, blue and red. Not yet tested on a real board.</td></tr>
+          <tr><td>Tabutronic Spectrum</td><td>Colour LEDs at the square corners. Chosen in the follow-up question of the Certabo entries; the LED colour of the set-up help is chosen in the menu, the free analysis and the PGN viewer use green, blue and red. Tested on a real board, with Bluetooth and with USB.</td></tr>
           <tr><td>Tabutronic Bauerino (beta)</td><td>Certabo console without piece recognition. Set the board to eBoard; the menu entry asks for protocol v1 or v2, the side at the bottom is chosen in the menu. Not yet tested on a real board.</td></tr>
           <tr><td>Manya Cynus</td><td>Chess robot; the app sends the position to set up.</td></tr>
         </table>
@@ -221,6 +233,8 @@
         <p>Only on your phone. Clearing the app data or uninstalling the app deletes them. Use “Share own database” to keep a copy of your positions.</p>
         <h3>Does the app use the internet?</h3>
         <p>No. The app makes no connections itself; the network permission comes from Google’s billing library for the optional tip. See the <a href="../echesstactics-privacy/">privacy policy</a>.</p>
+        <h3>Can I take a move back in a game against a bot or Tal?</h3>
+        <p>Yes, in Beat the Bot and in the Elo game against Tal (not in the adaptive game): the circle with the back arrow left of <em>Draw</em> takes back your last move and the answer. In Beat the Bot a win in a game with a takeback (or with the analysis opened) does not count for the green check.</p>
         <h3>Where do I report a problem or ask for a feature?</h3>
         <p>On the Discord server <a href="https://discord.gg/AdZukFtBf" target="_blank" rel="noreferrer">electricchess</a>.</p>
       </article>
