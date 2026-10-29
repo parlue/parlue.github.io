@@ -152,7 +152,7 @@
         <h2 id="pgn">PGN viewer</h2>
         <p>Choose <strong>PGN Viewer</strong> in the puzzle menu. The first time you pick a PGN file (for example from the Download folder). After that the last used file opens automatically; if it is gone, the file dialog appears again. The first game opens at once.</p>
         <ul>
-          <li>The navigation bar has: previous, the move count in the middle, next, play/stop, a <strong>list</strong> key to choose another game and a <strong>folder</strong> key to open another file. Games are named after their tags (White – Black, or the event); unnamed games are called “Game 1”, “Game 2”, and so on.</li>
+          <li>The navigation bar has: previous, the move count in the middle, next, play/stop, a <strong>list</strong> key to choose another game and a <strong>folder</strong> key that asks whether to choose a file or to paste a PGN from the clipboard. eChessTactics also appears under &ldquo;Open with&rdquo; for .pgn files (file manager, mail, messenger): the file then opens straight in the PGN viewer. Games are named after their tags (White – Black, or the event); unnamed games are called “Game 1”, “Game 2”, and so on.</li>
           <li>The notation under the board is tappable. The last move is highlighted on the board.</li>
           <li><strong>Comments</strong> appear as a card below the board, above the notation, and disappear with the next move. Where a position has <strong>variations</strong>, the card lets you pick one; the main line is the default. To see a different one, step back and arrive at that position again. The author’s own arrows in the file are ignored.</li>
           <li><strong>Play</strong> plays one move every n seconds on the screen (long press sets n).</li>
@@ -207,19 +207,17 @@
         <p>Hold the white or black <strong>pawn</strong> in the row below the board (next to <em>Stop</em> and <em>Send FEN</em>) for about 1.5 seconds. A window offers four sets: <strong>Standard</strong>, <strong>Merida</strong>, <strong>MPChess</strong> and <strong>Bryan’s Italian</strong>. A tap on a set switches it on at once; it stays active and is used at every start, on all boards of the app. Merida (Armando Hernandez Marroquin) and MPChess (Maxime Chupin) are free piece sets under the GPL; Bryan’s Italian is a gift from Bryan Withby to this app.</p>
 
         <h2 id="menu">The menu</h2>
+        <p>All windows of the app (menu, lists, confirmations) are dark sheets in the colours of the board and sit at the top of the screen. Only in the middle of a running game (Tal, bot) and in the running trainer they sit at the bottom so that the board stays visible. The <strong>&lsaquo;</strong> at the top left takes you one step back in every sub-menu.</p>
         <ul>
           <li><strong>Free analysis</strong> – only with a connected board.</li>
           <li><strong>Help</strong> – the short in-app guide.</li>
-          <li><strong>Privacy policy</strong> – opens the <a href="../echesstactics-privacy/">privacy policy</a>.</li>
+          <li><strong>Reset status</strong> – rating (back to 500), mate puzzles (the mate training starts again at puzzle 1) and bot progress (deletes all wins and green checks of Beat the Bot). Every reset asks first.</li>
+          <li><strong>FEN tools</strong> – create a position from a FEN, show the FEN of the position, share it.</li>
+          <li><strong>E-board functions</strong> – E-board PGN download (see <a href="#download">E-board PGN download</a>), player side on the Chessnut Move, LED colour for the Spectrum and for the iChessOne (red, green, blue or orange for the set-up help) and Bauerino: White at the bottom. What needs a particular board is grey while that board is not connected. The Bauerino protocol (v1 or v2) is chosen when you select the board, before it connects.</li>
+          <li><strong>Share own database</strong> and <strong>Share diagnostic log</strong> – for troubleshooting; the file goes through the Android share sheet and nothing is sent automatically.</li>
           <li><strong>Support (Discord)</strong> – opens the electricchess Discord server for questions, bugs and wishes.</li>
-          <li><strong>Reset rating</strong> – back to 500.</li>
-          <li><strong>Reset mate puzzles</strong> – the mate training starts again at puzzle 1.</li>
-          <li><strong>Reset bot progress</strong> – deletes all wins and green checks of Beat the Bot.</li>
-          <li><strong>Chessnut Move player side</strong> – only active while a Chessnut Move is connected.</li>
-          <li><strong>Create FEN / Show FEN / Share FEN / Share own database.</strong></li>
-          <li><strong>E-Board PGN Download</strong> – see <a href="#download">E-board PGN download</a>.</li>
-          <li><strong>Share diagnostic log</strong> – for troubleshooting; the file goes through the Android share sheet and nothing is sent automatically.</li>
           <li><strong>Buy me a tea</strong> – an optional tip (5, 10, 20 or 50 euros) through Google Play. Nothing is unlocked by a tip.</li>
+          <li><strong>Privacy policy</strong> (at the very bottom) – opens the <a href="../echesstactics-privacy/">privacy policy</a>.</li>
         </ul>
 
         <h2 id="faq">FAQ</h2>
