@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Virgin: an open-source UCI chess engine built for bots. 215 ready-made bots, every evaluation weight adjustable, an adaptive mode that keeps a game winnable for the human, one small file for Windows and Android.">
+  <title>Virgin – a UCI chess engine for bots</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../echesstactics/project.css">
+  <style>
+    .pp-code { margin: 14px 0 22px; padding: 18px 22px; min-height: 0; max-width: 760px; border: 1px solid var(--line); background: var(--surface-solid); border-radius: 16px; box-shadow: var(--shadow); font-size: .9rem; }
+    .pp-code code { color: var(--text); line-height: 1.7; white-space: pre; }
+    .pp-table { border-collapse: collapse; width: 100%; max-width: 860px; font-size: .95rem; }
+    .pp-table th, .pp-table td { text-align: left; vertical-align: top; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+    .pp-table th { color: var(--muted); font-weight: 600; font-size: .85rem; text-transform: uppercase; letter-spacing: .06em; }
+    .pp-table td:first-child { white-space: nowrap; font-weight: 600; }
+    .pp-table td { color: var(--muted); line-height: 1.6; }
+    .pp-table td:first-child { color: var(--text); }
+    .pp-step { margin: 34px 0 6px; font-size: 1.2rem; }
+    .pp-text { color: var(--muted); line-height: 1.75; max-width: 760px; font-size: 1.02rem; }
+    .pp-hero-media img { background: #020202; }
+    @media (max-width: 640px) { .pp-table td:first-child { white-space: normal; } .pp-code { padding: 14px 16px; overflow-x: auto; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">parlue<span>.</span></a>
+    <nav>
+      <a href="#idea">Idea</a>
+      <a href="#adaptive">Adaptive</a>
+      <a href="#bots">Bots</a>
+      <a href="#uci">UCI</a>
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">☾</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="pp-hero">
+      <div>
+        <p class="eyebrow">Open source · C++20 · UCI</p>
+        <h1 class="pp-title">Vir<span class="pp-blue" style="color:#e0301e">gin</span></h1>
+        <p class="lead">
+          A UCI chess engine built for bots. Virgin is an aggressive, independent tactician; its strategic
+          reliability still varies. Every part of its evaluation can be steered from the outside, so that
+          character can be shaped into many different opponents.
+        </p>
+        <p class="lead">
+          215 ready-made bots, your own bots from a plain text file, and an adaptive mode that keeps a game
+          winnable for the human player. One small file for Windows and Android.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://github.com/parlue/virgin" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a class="button secondary" href="#bots">How to make a bot</a>
+        </div>
+        <p class="pp-note">
+          Virgin is open source under the MIT license. Questions? Come to the Discord server
+          <strong>electricchess</strong>.
+        </p>
+      </div>
+      <div class="pp-hero-media">
+        <img src="../assets/virgin/logo.jpg" alt="The Virgin logo: a white chess queen with red flames">
+      </div>
+    </section>
+
+    <section id="idea" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">The idea</p>
+          <h2>An engine you can shape</h2>
+        </div>
+        <p>Most engines try to be as strong as possible. Virgin tries to be a good opponent.</p>
+      </div>
+      <div class="pp-grid">
+        <article class="pp-card">
+          <h3>Built for bots</h3>
+          <p>A bot is a playing strength combined with a playing style. Virgin ships a catalogue of 215 bots
+             (43 strength levels times 5 styles) and lets you define as many more as you like.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Every weight is adjustable</h3>
+          <p>About 90 evaluation weights are exposed as UCI options and in one weights file. There is no NNUE and no
+             opaque network: you can read, change and reload each value.</p>
+        </article>
+        <article class="pp-card">
+          <h3>One small file</h3>
+          <p>C++20 and no external libraries. The Windows binary is roughly 400 KB, the static Android binary stays under
+             1 MB. Windows and Android are built from the same code.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Plain UCI</h3>
+          <p>Virgin is a process that speaks UCI over stdin and stdout. It works with any UCI host, such as BearChess,
+             Arena or Cute Chess, and with your own app.</p>
+        </article>
+        <article class="pp-card">
+          <h3>An attacking character</h3>
+          <p>Virgin&rsquo;s own character is a tactician that looks for the attack. Strategic reliability still varies,
+             and that is part of what makes the bots feel different from each other.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Made for apps</h3>
+          <p>The engine, the bot catalogue and the playing styles live in one binary, so an app only needs to start one
+             process and send UCI commands.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="adaptive" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Adaptive play</p>
+          <h2>A game you can still win</h2>
+        </div>
+        <p>The adaptive game of &ldquo;Tal&rdquo; from the app <a href="../echesstactics/">eChessTactics</a>, built into the engine.</p>
+      </div>
+      <p class="pp-text">
+        In adaptive mode Virgin does not try to crush its opponent. After every move it looks at the position from the
+        human player&rsquo;s point of view, analyses five candidate moves and chooses the one that keeps the game
+        interesting and winnable. The aim is to lead the player into a position that can be won with good technique.
+      </p>
+      <div class="pp-grid" style="margin-top:22px">
+        <article class="pp-card">
+          <h3>Opening</h3>
+          <p>The first moves are the engine&rsquo;s best moves, so the game starts as a normal game.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Roughly equal</h3>
+          <p>Among the candidates it picks a move that keeps the balance, and now and then a different but equal one so
+             that games do not repeat.</p>
+        </article>
+        <article class="pp-card">
+          <h3>You are behind</h3>
+          <p>It helps: it chooses a safe move that gives part of the advantage back, and it never sacrifices a queen or
+             a rook to do it.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Far behind, or mate in sight</h3>
+          <p>Full strength. No gifts when the game is clearly lost or a forced mate is near.</p>
+        </article>
+        <article class="pp-card">
+          <h3>You are ahead</h3>
+          <p>It keeps the position where it is for the rest of the game, so the win stays within reach and does not
+             slip away.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Real tactics</h3>
+          <p>When a sound tactic wins material it plays it. If you have been playing accurately in a balanced game, it
+             may let a small advantage go, a few times per game.</p>
+        </article>
+      </div>
+      <h3 class="pp-step">Turn it on</h3>
+      <pre class="pp-code"><code>setoption name Adaptive value true</code></pre>
+      <p class="pp-text">
+        <code>Adaptive</code> is a single UCI option. While it is on, Virgin ignores all the other strength and style
+        options: it plays with full strength, five candidate moves, a fixed attacking profile and automatic threads, and
+        the adaptive logic decides which move is played. Switching it off restores your previous settings.
+        Because it analyses five candidates each
+        turn, allow a few seconds per move. The engine reports every choice in an <code>info string</code> line:
+        the mode it used, the evaluation from the player&rsquo;s side and how accurately the player has been playing.
+      </p>
+    </section>
+
+    <section id="bots" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Make your own</p>
+          <h2>Create a bot</h2>
+        </div>
+        <p>A bot is a strength and a style. Pick one, mix one, or save your own as a text file.</p>
+      </div>
+
+      <p class="pp-text">The style axis is called <strong>Boldness</strong>, from cautious to reckless:</p>
+      <table class="pp-table">
+        <thead><tr><th>Style</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td>Furchtsam</td><td>Timid: safety first, avoids sharp lines, accepts draws.</td></tr>
+          <tr><td>Vorsichtig</td><td>Cautious: solid and positional.</td></tr>
+          <tr><td>Ausgeglichen</td><td>Balanced: the reference style, all weights at their defaults.</td></tr>
+          <tr><td>Angriffslustig</td><td>Aggressive: goes for the king, avoids queen trades.</td></tr>
+          <tr><td>Stier</td><td>Bull: sacrifices, pawn storms, king hunts.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="pp-step">1. Pick one from the catalogue</h3>
+      <pre class="pp-code"><code>setoption name Bot value v1200-stier</code></pre>
+      <p class="pp-text">
+        Bot ids look like <code>v&lt;elo&gt;-&lt;style&gt;</code>, for example <code>v700-furchtsam</code>,
+        <code>v1500-angriffslustig</code> or <code>v2800-ausgeglichen</code>. The whole catalogue is in
+        <code>data/bots.json</code> for apps and in <code>data/bots.txt</code>; <code>virgin --list-bots</code>
+        prints it.
+      </p>
+
+      <h3 class="pp-step">2. Mix strength and style yourself</h3>
+      <pre class="pp-code"><code>setoption name UCI_LimitStrength value true
+setoption name UCI_Elo value 1250
+setoption name Style value Angriffslustig
+setoption name Boldness value 45</code></pre>
+      <p class="pp-text">
+        <code>Boldness</code> runs from 10 (timid) to 50 (bull) and interpolates between the styles.
+        <code>UCI_Elo</code> accepts any whole number from 700 to 3000, not only the 50-point steps of the catalogue.
+      </p>
+
+      <h3 class="pp-step">3. Tune single weights</h3>
+      <pre class="pp-code"><code>setoption name Aggression.KingAttack value 260
+setoption name Misc.MoveNoise value 40</code></pre>
+
+      <h3 class="pp-step">4. Save your bot as a weights file</h3>
+      <p class="pp-text">A bot is just a text file with <code>Name = value</code> lines:</p>
+      <pre class="pp-code"><code># my-bot.txt
+Aggression.KingAttack = 260
+Aggression.PawnStorm = 180
+Aggression.AvoidQueenTrade = 220
+Misc.Contempt = 25</code></pre>
+      <pre class="pp-code"><code>setoption name WeightsFile value C:\bots\my-bot.txt
+setoption name ReloadWeights</code></pre>
+      <p class="pp-text">
+        <code>data/weights_default.txt</code> lists every weight with its default and range.
+      </p>
+    </section>
+
+    <section id="uci" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Reference</p>
+          <h2>UCI options and commands</h2>
+        </div>
+        <p>All the standard UCI commands, plus the options and commands below.</p>
+      </div>
+
+      <h3 class="pp-step" style="margin-top:0">Options</h3>
+      <table class="pp-table">
+        <thead><tr><th>Option</th><th>Meaning</th></tr></thead>
+        <tbody>
+          <tr><td>Bot</td><td>Selects a catalogue bot such as <code>v1200-stier</code> and sets strength and style at once.</td></tr>
+          <tr><td>UCI_LimitStrength, UCI_Elo</td><td>Limit the playing strength (700 to 3000).</td></tr>
+          <tr><td>Style, Boldness</td><td>The playing style and its fine control.</td></tr>
+          <tr><td>Adaptive</td><td>Switches adaptive play on or off. While it is on, all other strength and style options are ignored.</td></tr>
+          <tr><td>WeightsFile, ReloadWeights</td><td>Load your own weights file.</td></tr>
+          <tr><td>Misc.Contempt, Misc.MoveNoise</td><td>Draw attitude and randomness in the root move choice.</td></tr>
+          <tr><td>Hash, Threads, Ponder</td><td>Hash size in MB, search threads, pondering.</td></tr>
+          <tr><td>&lt;Group&gt;.&lt;Term&gt;</td><td>Every evaluation weight is a spin option, for example <code>Aggression.KingAttack</code>.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="pp-step">Commands</h3>
+      <table class="pp-table">
+        <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+        <tbody>
+          <tr><td>uci, isready, ucinewgame</td><td>The usual UCI handshake.</td></tr>
+          <tr><td>setoption, position, go, stop, quit</td><td>Standard. <code>go</code> understands depth, nodes, movetime, wtime/btime with increments, movestogo, infinite and ponder.</td></tr>
+          <tr><td>d</td><td>Shows the board.</td></tr>
+          <tr><td>eval</td><td>Shows the evaluation with a breakdown.</td></tr>
+          <tr><td>perft &lt;n&gt;, bench &lt;n&gt;</td><td>Move generation check and a speed benchmark.</td></tr>
+          <tr><td>sanity</td><td>A consistency check of the engine.</td></tr>
+          <tr><td>weights</td><td>Lists all weights.</td></tr>
+          <tr><td>listbots</td><td>Prints the bot catalogue.</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="pp-step">From the command line</h3>
+      <pre class="pp-code"><code>virgin --selftest          # built-in test run
+virgin --perft 5           # must print 4865609
+virgin --list-bots         # the 215 bots
+virgin --gen-data          # regenerate data\ (weights, styles, bot catalogue)</code></pre>
+    </section>
+
+    <section id="links" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Get started</p>
+          <h2>Source and links</h2>
+        </div>
+      </div>
+      <ul class="pp-list">
+        <li><a href="https://github.com/parlue/virgin" target="_blank" rel="noreferrer">Source on GitHub ↗</a> (MIT license). Build with CMake 3.20 or newer and a C++20 compiler; build scripts for Windows and Android are included.</li>
+        <li>Platforms: Windows x64, and Android as arm64-v8a, armeabi-v7a and x86_64.</li>
+        <li>Questions, bugs, wishes: the Discord server <a href="https://discord.gg/AdZukFtBf" target="_blank" rel="noreferrer">electricchess ↗</a>.</li>
+        <li>The chess trainer <a href="../echesstactics/">eChessTactics</a> uses the same adaptive game for its opponent &ldquo;Tal&rdquo;.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> parlue</span>
+    <span><a href="../">← back to all projects</a></span>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
