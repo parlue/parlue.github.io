@@ -71,3 +71,5 @@
 /* BeatVirgin page */
 .pp-red { color: #e22828; }
 .pp-wide { width: 100%; max-width: 980px; border-radius: 18px; border: 1px solid var(--line); box-shadow: var(--shadow); display: block; }
+.pp-code { background: var(--surface-solid); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; overflow-x: auto; font-size: .9rem; line-height: 1.7; max-width: 760px; }
+.pp-note code { background: var(--surface-solid); border: 1px solid var(--line); border-radius: 6px; padding: 1px 6px; }

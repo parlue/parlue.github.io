@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="M5Chess: a stand-alone chess computer on the M5Stack Core2. The Virgin engine runs on the device and plays on your Bluetooth e-board, with a screen, a mood queen, board LEDs and no phone or PC needed.">
+  <title>M5Chess – a chess computer on the M5Stack Core2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../echesstactics/project.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">parlue<span>.</span></a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#screens">Screen</a>
+      <a href="#boards">Boards</a>
+      <a href="#build">Build it</a>
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">☾</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="pp-hero">
+      <div>
+        <p class="eyebrow">ESP32 · stand-alone · open source</p>
+        <h1 class="pp-title">M5<span class="pp-blue">Chess</span></h1>
+        <p class="lead">
+          A chess computer built on the <strong>M5Stack Core2</strong>. The engine runs on the little device itself,
+          in the adaptive mode, so you need <strong>no phone, no PC and no Internet</strong> to play. Your moves come
+          from an electronic chessboard over Bluetooth; the computer’s answer appears on the screen and
+          lights up the squares on your board.
+        </p>
+        <p class="lead">
+          A queen in six moods shows how the game stands, and on a Tabutronic Spectrum the move LEDs change colour
+          with the evaluation: blue when balanced, towards green when you are ahead and towards red when you are behind.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="https://github.com/parlue/M5Chess" target="_blank" rel="noreferrer">Source on GitHub ↗</a>
+          <a class="button secondary" href="#build">How to build it</a>
+        </div>
+        <p class="pp-note">
+          Status: a working prototype. It has been played with a Chessnut GO. The other boards are implemented, but a test
+          with the real board on the Core2 is still pending; see the table below.
+        </p>
+      </div>
+      <div class="pp-hero-media">
+        <img src="../assets/m5chess/core2-photo.jpg" alt="The M5Stack Core2 running M5Chess: board, evaluation, queen and the Move and Connect keys">
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">What it does</p>
+          <h2>Features</h2>
+        </div>
+        <p>Everything needed to play sits on the device.</p>
+      </div>
+      <div class="pp-grid">
+        <article class="pp-card">
+          <h3>The engine is on board</h3>
+          <p>The Virgin engine runs in the adaptive mode directly on the Core2’s ESP32: a 1 MiB transposition table in PSRAM,
+             a search of up to 20 plies and a budget of 2.5 seconds per move. No network files, no phone, no computer.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Play on a real board</h3>
+          <p>Connect your e-board by Bluetooth with one tap, play your moves on the real pieces, and carry out the computer’s reply
+             on the board. The game continues once the whole resulting position has been recognised.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Reply on screen and on the board</h3>
+          <p>The engine’s move appears on the display at once, and on boards with LEDs the squares to move are marked,
+             so you never have to look away from the board.</p>
+        </article>
+        <article class="pp-card">
+          <h3>The Move key</h3>
+          <p>Tap <strong>Move</strong> on your turn and the computer takes your side: it plays White, you play Black, and the view turns.
+             While the engine is thinking, the key ends the search early.</p>
+        </article>
+        <article class="pp-card">
+          <h3>The queen shows the mood</h3>
+          <p>The logo queen changes in six steps from radiant to lightning and fire, always from your point of view,
+             even when you play Black. A new game and a draw put her in the neutral state; a mate shows the win or the loss.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Colour LEDs that follow the game</h3>
+          <p>On a Spectrum the move and correction LEDs take the colour of the evaluation, with a blue correction, so
+             a balanced position looks blue and not almost white.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Live search information</h3>
+          <p>The screen shows the search depth, the score from White’s point of view and the first moves of the main line while
+             the engine is working.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Sharp pieces, no flicker</h3>
+          <p>Merida pieces on a board drawn from the PSRAM frame buffer. Only the sidebar is redrawn during analysis,
+             so the chessboard never flickers.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Battery display</h3>
+          <p>A horizontal battery in the corner shows the percentage and a bolt while charging. It turns red at 20 percent
+             or less and is refreshed every five seconds.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="screens" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Look and feel</p>
+          <h2>The screen</h2>
+        </div>
+        <p>320 × 240 pixels, enlarged here. The texts are in German for now.</p>
+      </div>
+      <div class="pp-shots">
+        <figure style="width:360px"><img src="../assets/m5chess/screen.png" alt="Screen of M5Chess: start position, evaluation, queen, Move and Connect keys" loading="lazy"><figcaption>The start screen: board, adaptive mode, battery, queen and keys</figcaption></figure>
+      </div>
+      <h3 style="margin:30px 0 12px">The six moods of the queen</h3>
+      <img class="pp-wide" src="../assets/m5chess/queen-moods.png" alt="The six states of the queen: radiant, silvery, plain, in a storm, in the rain, with lightning and fire" loading="lazy">
+      <p class="pp-note">Left to right: you are well ahead, a little ahead, balanced, a little behind, clearly behind, lost. The queen has no colour bar and no animation. During a search she keeps the last finished state.</p>
+    </section>
+
+    <section id="boards" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Hardware</p>
+          <h2>Supported boards</h2>
+        </div>
+        <p>Honest status of each board family on the Core2.</p>
+      </div>
+      <table class="doc-table">
+        <thead><tr><th>Board</th><th>Status</th></tr></thead>
+        <tbody>
+          <tr><td>Chessnut</td><td>Found by its name, whatever the model suffix. A Chessnut GO has been connected and real moves played. Other models have not been tested one by one.</td></tr>
+          <tr><td>Millennium via ChessLink</td><td>Bluetooth protocol implemented. A real board test on the Core2 is still to do.</td></tr>
+          <tr><td>Certabo</td><td>Bluetooth (Nordic UART), learning of the 34 pieces and single-colour LEDs implemented. A real board test is still to do.</td></tr>
+          <tr><td>Tabutronic Spectrum</td><td>Bluetooth (Nordic UART), learning of the pieces and RGB LEDs implemented. A real board and colour test is still to do.</td></tr>
+        </tbody>
+      </table>
+      <p class="pp-note">Certabo and Spectrum need a compatible Bluetooth-to-UART bridge with the Nordic UART service, such as the <a href="../echessgw/">eChessGw</a> gateway. Plugging their USB cable straight into the Core2 is not supported.
+         Boards that only report which squares are occupied are not a replacement for a board that recognises the pieces.</p>
+      <p class="pp-note">M5Chess is an independent project. It is not affiliated with, endorsed by or sponsored by the makers of the supported boards. All product names are trademarks of their respective owners.</p>
+    </section>
+
+    <section id="play" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">How to play</p>
+          <h2>A game in seven steps</h2>
+        </div>
+      </div>
+      <ol class="pp-list">
+        <li>Switch on the Core2. It waits and does not search for a board by itself.</li>
+        <li>Switch on your board and close other board apps that may be connected to it.</li>
+        <li>Tap <strong>Verbinden</strong> (Connect) and choose your board from the list.</li>
+        <li>Set up the full starting position. By default you play White.</li>
+        <li>To let the computer play White, tap <strong>Move</strong> now: you take Black and the view turns.</li>
+        <li>Play your moves on the board. The reply shows first on the screen and is marked on the board.</li>
+        <li>Carry out the reply completely on the board, then the game goes on. Setting up the starting position again begins a new game.</li>
+      </ol>
+      <p class="pp-note">The screen does not move pieces by touch, games are not stored, and there is no automatic reconnection: after a lost connection, tap Connect again. The playing strength of the engine on this chip has not been measured.</p>
+    </section>
+
+    <section id="build" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Make your own</p>
+          <h2>Build it yourself</h2>
+        </div>
+        <p>All sources and the exact library versions are in the repository.</p>
+      </div>
+      <ul class="pp-list">
+        <li>You need an <strong>M5Stack Core2 with the original ESP32, 16 MB flash and PSRAM</strong>. This is not a firmware for the CoreS3 or any ESP32-S3.</li>
+        <li>A USB <em>data</em> cable, Git and Python 3.11.</li>
+        <li>An electronic chessboard from the table above.</li>
+      </ul>
+      <pre class="pp-code"><code>git clone --recurse-submodules https://github.com/parlue/M5Chess.git
+cd M5Chess
+python -m pip install -r requirements.txt
+python -m platformio run -d esp32_core2
+python -m platformio run -d esp32_core2 -t upload --upload-port COM17</code></pre>
+      <p class="pp-note">Replace <code>COM17</code> with the port of your Core2. The first build downloads the toolchain and needs the Internet; playing does not. The build uses PlatformIO 6.2.0, <code>espressif32@6.8.1</code> and ESP-IDF 5.3. The full guide, the Certabo and Spectrum learning gesture and the troubleshooting tips are in the
+         <a href="https://github.com/parlue/M5Chess/blob/main/docs/ENGLISH.md" target="_blank" rel="noreferrer">English documentation ↗</a>.</p>
+    </section>
+
+    <section id="more" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Good to know</p>
+          <h2>Details</h2>
+        </div>
+      </div>
+      <ul class="pp-list">
+        <li>Author: Dirk D. Sommerfeld. The firmware package is published under the GPL-3.0; the original MIT licence of the engine code stays in the sources.</li>
+        <li>Merida pieces: Armando Hernandez Marroquin, GPL-2.0 or later. Libraries: M5Unified, M5GFX and esp-nimble-cpp, pinned to the tested versions.</li>
+        <li>Seven test programs check the game model, side changes, restart, the queen thresholds and the Certabo and Spectrum protocol and LEDs. They are protocol tests and no replacement for a test with a real board.</li>
+        <li>Questions, bugs, wishes: the Discord server <a href="https://discord.gg/AdZukFtBf" target="_blank" rel="noreferrer">electricchess ↗</a>.</li>
+        <li>Also from this site: <a href="../beatchessbots/">Beat Chessbots</a>, the Android app with the same queen, and <a href="../echessgw/">eChessGw</a>, the Bluetooth gateway for e-boards.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> parlue</span>
+    <span><a href="../">← back to all projects</a></span>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
