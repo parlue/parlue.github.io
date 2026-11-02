@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Beat Chessbots: an Android chess app for one thing, playing against a chess engine. An adaptive game, 215 bots with pictures from 43 strength levels and 5 styles, Stockfish analysis, and support for electronic chessboards.">
+  <title>Beat Chessbots – play chess against 215 bots</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../echesstactics/project.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">parlue<span>.</span></a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#mood">Queen</a>
+      <a href="#screens">Screenshots</a>
+      <a href="#boards">Boards</a>
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">☾</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="pp-hero">
+      <div>
+        <p class="eyebrow">Android app · e-board friendly</p>
+        <h1 class="pp-title">Beat <span class="pp-red">Chessbots</span></h1>
+        <p class="lead">
+          A chess app that does one thing: you play against a chess engine that thinks for itself. On the screen of your phone or on an electronic chessboard, and always against a
+          real opponent, never a puzzle.
+        </p>
+        <p class="lead">
+          Play the <strong>adaptive game</strong> in which the computer adjusts to you, or choose one of
+          <strong>215 bots</strong> with a face and a name: 43 strength levels from 700 to 2800, each with five
+          playing styles. Beat a bot with White <em>and</em> with Black to earn its green check.
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#screens">See the screenshots</a>
+          <a class="button secondary" href="https://discord.gg/AdZukFtBf" target="_blank" rel="noreferrer">Discord ↗</a>
+        </div>
+        <p class="pp-note">
+          Status: early version 0.1, in development. Want to follow it or have a question?
+          Come to the Discord server <strong>electricchess</strong>.
+        </p>
+      </div>
+      <div class="pp-hero-media">
+        <img src="../assets/beatchessbots/feature.png" alt="Beat Chessbots: a robot head hit by a boxing glove and the burning queen">
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">What it does</p>
+          <h2>Features</h2>
+        </div>
+        <p>The engine runs on your phone, so everything works offline.</p>
+      </div>
+      <div class="pp-grid">
+        <article class="pp-card">
+          <h3>Beat the Bot</h3>
+          <p>Pick a strength group, then one of the 43 levels from 700 to 2800, then one of its five opponents. Every bot has its own picture and name.
+             The five styles are Water (fearful), Air (careful), Normal, Fire (eager to attack) and Lightning (aggressive).
+             A green check shows that you beat a bot with White <em>and</em> with Black.</p>
+        </article>
+        <article class="pp-card">
+          <h3>The rematch</h3>
+          <p>You beat a bot with one colour only? Right after the mate, the robot appears on the screen and demands a rematch with
+             the other colour. Accept it with one tap, or cancel.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Adaptive game</h3>
+          <p>A real game against the computer that adapts to you: it keeps the game close, helps with sensible moves when it is clearly ahead
+             and takes every tactic it sees. The queen in the bar below the board shows how the game stands.</p>
+        </article>
+        <article class="pp-card">
+          <h3>The queen shows the mood</h3>
+          <p>A bar below the board shows who is ahead. The queen slides along it and changes with the position, from radiant to
+             caught in a storm and finally struck by lightning and fire. On boards with colour LEDs the LEDs follow the same colours.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Analysis with arrows</h3>
+          <p>Live Stockfish analysis with one to five variations. The score is always shown from the point of view of the side at the
+             bottom of the board. Arrows mark the best move, other candidates and losing moves. Taking a move back or using the analysis
+             during a bot game is possible, but that game then does not count for the green check.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Free analysis on your board</h3>
+          <p>With a connected e-board, move the pieces however you like: the screen follows the board and a new analysis starts a moment
+             after the last move.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Games and positions</h3>
+          <p>Every game can be shared as a PGN file or opened in the PGN analysis. Enter or share any position as FEN and set it up on your board.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Piece sets</h3>
+          <p>Four piece sets: Standard, Merida, MPChess and Bryan’s Italian, which is the default. Choose one in the menu; it stays active on every board of the app.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Nine languages</h3>
+          <p>German, English, Spanish, Italian, French, Polish, Hindi, Turkish and Arabic. The moves are written with English piece letters in every language except German.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="mood" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">The queen</p>
+          <h2>Six moods</h2>
+        </div>
+        <p>From radiant when you are clearly ahead to lightning and fire when the game is lost.</p>
+      </div>
+      <img class="pp-wide" src="../assets/beatchessbots/queen-moods.png" alt="The six states of the queen: radiant, silvery, plain, in a storm, in the rain, with lightning and fire" loading="lazy">
+      <p class="pp-note">Left to right: you are well ahead, a little ahead, balanced, a little behind, clearly behind, lost. The score comes from the engine and is always seen from the player’s side.</p>
+    </section>
+
+    <section id="screens" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Look and feel</p>
+          <h2>Screenshots</h2>
+        </div>
+        <p>Dark sheets, big pictures, built around the board.</p>
+      </div>
+      <div class="pp-shots">
+        <figure><img src="../assets/beatchessbots/bot-1-strength.jpg" alt="Against the bot: five strength groups" loading="lazy"><figcaption>Beat the Bot: choose your strength</figcaption></figure>
+        <figure><img src="../assets/beatchessbots/bot-2-select.jpg" alt="The twelve Masters levels with a picture each" loading="lazy"><figcaption>Every level has its own robot</figcaption></figure>
+        <figure><img src="../assets/beatchessbots/bot-3-variants.jpg" alt="The five variants of one level: Water, Air, Normal, Fire, Lightning" loading="lazy"><figcaption>Five styles for each level</figcaption></figure>
+        <figure><img src="../assets/beatchessbots/bot-4-start.jpg" alt="One bot with picture, style and colour choice" loading="lazy"><figcaption>One bot: style and your colour</figcaption></figure>
+        <figure><img src="../assets/beatchessbots/bot-5-game.jpg" alt="A game against a bot with the queen on the mood bar" loading="lazy"><figcaption>A game with the queen on the mood bar</figcaption></figure>
+        <figure><img src="../assets/beatchessbots/menu.jpg" alt="The menu: free analysis, help, FEN tools, e-board functions, piece set" loading="lazy"><figcaption>The menu</figcaption></figure>
+        <figure><img src="../assets/beatchessbots/connect-board.jpg" alt="Connect board sheet with the supported e-boards" loading="lazy"><figcaption>Connect your e-board</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="boards" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Hardware</p>
+          <h2>Supported boards</h2>
+        </div>
+        <p>Set up the start position on your e-board, and then play your moves on the real pieces. The robot’s answer is shown on the screen and on the board’s LEDs.</p>
+      </div>
+      <div class="tags pp-tags">
+        <span>Millennium T2 / ChessLink</span><span>Millennium eONE</span><span>Chessnut</span><span>Certabo (Bluetooth)</span><span>Certabo (USB, beta)</span><span>Tabutronic Bauerino (beta)</span><span>iChessOne</span><span>Manya Cynus</span>
+      </div>
+      <p class="pp-note">Beat Chessbots is an independent app. It is not affiliated with, endorsed by or sponsored by the makers of the supported boards. All product names are trademarks of their respective owners.</p>
+    </section>
+
+    <section id="more" class="section">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Good to know</p>
+          <h2>Details</h2>
+        </div>
+      </div>
+      <ul class="pp-list">
+        <li>No ads and no account. The engines run on your device.</li>
+        <li>Android 9 or newer. Portrait and landscape.</li>
+        <li>Questions, bugs, wishes: the Discord server <a href="https://discord.gg/AdZukFtBf" target="_blank" rel="noreferrer">electricchess ↗</a>.</li>
+        <li>Engines: the games are played by the open-source engine <a href="../virgin/">Virgin</a> (MIT licence); the analysis uses Stockfish (GPLv3).</li>
+        <li>Piece sets: Merida (GPLv2+, Armando Hernandez Marroquin), MPChess (GPLv3+, Maxime Chupin) and Bryan’s Italian (a gift of Bryan Withby).</li>
+        <li>Also from this site: <a href="../echesstactics/">eChessTactics</a>, puzzles and training for the screen and for e-boards.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> parlue</span>
+    <span><a href="../">← back to all projects</a></span>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

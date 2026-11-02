@@ -67,3 +67,7 @@
 .pp-video-title { font-weight: 700; line-height: 1.3; padding: 4px 4px 0; }
 .pp-video-desc { color: var(--muted); font-size: .88rem; line-height: 1.5; padding: 0 4px; }
 .pp-video-date { color: var(--muted); font-size: .8rem; padding: 0 4px; }
+
+/* BeatVirgin page */
+.pp-red { color: #e22828; }
+.pp-wide { width: 100%; max-width: 980px; border-radius: 18px; border: 1px solid var(--line); box-shadow: var(--shadow); display: block; }
