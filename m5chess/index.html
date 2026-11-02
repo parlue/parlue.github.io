@@ -43,8 +43,8 @@
           <a class="button secondary" href="#build">How to build it</a>
         </div>
         <p class="pp-note">
-          Status: a working prototype. It has been played with a Chessnut GO. The other boards are implemented, but a test
-          with the real board on the Core2 is still pending; see the table below.
+          Status: a working prototype, tested with real boards: Chessnut, Millennium (ChessLink), Certabo and
+          Tabutronic Spectrum; see the table below.
         </p>
       </div>
       <div class="pp-hero-media">
@@ -131,15 +131,15 @@
           <p class="eyebrow">Hardware</p>
           <h2>Supported boards</h2>
         </div>
-        <p>Honest status of each board family on the Core2.</p>
+        <p>All four board families have been tested on the Core2 with real boards.</p>
       </div>
       <table class="doc-table">
         <thead><tr><th>Board</th><th>Status</th></tr></thead>
         <tbody>
-          <tr><td>Chessnut</td><td>Found by its name, whatever the model suffix. A Chessnut GO has been connected and real moves played. Other models have not been tested one by one.</td></tr>
-          <tr><td>Millennium via ChessLink</td><td>Bluetooth protocol implemented. A real board test on the Core2 is still to do.</td></tr>
-          <tr><td>Certabo</td><td>Bluetooth (Nordic UART), learning of the 34 pieces and single-colour LEDs implemented. A real board test is still to do.</td></tr>
-          <tr><td>Tabutronic Spectrum</td><td>Bluetooth (Nordic UART), learning of the pieces and RGB LEDs implemented. A real board and colour test is still to do.</td></tr>
+          <tr><td>Chessnut</td><td>Tested. Found by its name, whatever the model suffix. Real moves have been played on a Chessnut GO; other models have not been tried one by one.</td></tr>
+          <tr><td>Millennium via ChessLink</td><td>Tested. Bluetooth protocol.</td></tr>
+          <tr><td>Certabo</td><td>Tested. Bluetooth (Nordic UART), learning of the 34 pieces and single-colour LEDs.</td></tr>
+          <tr><td>Tabutronic Spectrum</td><td>Tested. Bluetooth (Nordic UART), learning of the pieces and RGB LEDs.</td></tr>
         </tbody>
       </table>
       <p class="pp-note">Certabo and Spectrum need a compatible Bluetooth-to-UART bridge with the Nordic UART service, such as the <a href="../echessgw/">eChessGw</a> gateway. Plugging their USB cable straight into the Core2 is not supported.
