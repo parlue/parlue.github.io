@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="M5Chess: a stand-alone chess computer on the M5Stack Core2. The Virgin engine runs on the device and plays on your Bluetooth e-board (it cannot be played on the screen), with a mood queen and board LEDs; no phone or PC needed.">
+  <meta name="description" content="M5Chess: a stand-alone chess computer on the M5Stack Core2. The Virgin engine runs on the device and plays on your Bluetooth e-board (it cannot be played on the screen), with adaptive, full-strength and 17 Elo bots, a mood queen and board LEDs; no phone or PC needed.">
   <title>M5Chess – a chess computer on the M5Stack Core2</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -30,7 +30,7 @@
         <h1 class="pp-title">M5<span class="pp-blue">Chess</span></h1>
         <p class="lead">
           A chess computer built on the <strong>M5Stack Core2</strong>. The engine runs on the little device itself,
-          in the adaptive mode, so you need <strong>no phone, no PC and no Internet</strong> to play. M5Chess is made
+          starting in the adaptive mode, with full strength and 17 Elo bots a tap away, so you need <strong>no phone, no PC and no Internet</strong> to play. M5Chess is made
           for <strong>electronic chessboards only</strong>: you cannot play on the screen. Your moves come
           from the e-board over Bluetooth; the computer’s answer appears on the screen and
           lights up the squares on your board.
@@ -64,8 +64,8 @@
       <div class="pp-grid">
         <article class="pp-card">
           <h3>The engine is on board</h3>
-          <p>The Virgin engine runs in the adaptive mode directly on the Core2’s ESP32: a 1 MiB transposition table in PSRAM,
-             a search of up to 20 plies and a budget of 2.5 seconds per move. No network files, no phone, no computer.</p>
+          <p>The Virgin engine runs directly on the Core2’s ESP32: a 1 MiB transposition table in PSRAM,
+             a search of up to 20 plies and a budget of 2.5 seconds per move in every mode. No network files, no phone, no computer.</p>
         </article>
         <article class="pp-card">
           <h3>Play on a real board</h3>
@@ -81,6 +81,16 @@
           <h3>The Move key</h3>
           <p>Tap <strong>Move</strong> on your turn and the computer takes your side: it plays White, you play Black, and the view turns.
              While the engine is thinking, the key ends the search early.</p>
+        </article>
+        <article class="pp-card">
+          <h3>Three keys under the display</h3>
+          <p><strong>A / Neu</strong> starts a new game as White. <strong>B / Mod</strong> switches between Adaptive and full strength.
+             <strong>C / Bot</strong> opens the Elo picker. The labels in the header can be tapped too.</p>
+        </article>
+        <article class="pp-card">
+          <h3>17 Elo bots</h3>
+          <p>All targets from 900 to 2500 in steps of 100 are shown at once as tiles. Every bot plays the Fire style (stage 4 of 5).
+             Changing mode or bot keeps the game and the connection; power cycling returns to Adaptive.</p>
         </article>
         <article class="pp-card">
           <h3>The queen shows the mood</h3>
@@ -120,6 +130,7 @@
       </div>
       <div class="pp-shots">
         <figure style="width:360px"><img src="../assets/m5chess/screen.png" alt="Screen of M5Chess: start position, evaluation, queen, Move and Connect keys" loading="lazy"><figcaption>The start screen: board, adaptive mode, battery, queen and keys</figcaption></figure>
+        <figure style="width:360px"><img src="../assets/m5chess/bot-tiles.png" alt="The Elo picker of M5Chess: 17 tiles from 900 to 2500" loading="lazy"><figcaption>The Elo picker (key C): 900 to 2500, all with Fire</figcaption></figure>
       </div>
       <h3 style="margin:30px 0 12px">The six moods of the queen</h3>
       <img class="pp-wide" src="../assets/m5chess/queen-moods.png" alt="The six states of the queen: radiant, silvery, plain, in a storm, in the rain, with lightning and fire" loading="lazy">
@@ -143,7 +154,7 @@
           <tr><td>Tabutronic Spectrum</td><td>Tested. Bluetooth (Nordic UART), learning of the pieces and RGB LEDs.</td></tr>
         </tbody>
       </table>
-      <p class="pp-note">Certabo and Spectrum need a compatible Bluetooth-to-UART bridge with the Nordic UART service, such as the <a href="../echessgw/">eChessGw</a> gateway. Plugging their USB cable straight into the Core2 is not supported.
+      <p class="pp-note">Certabo and Spectrum connect through the Bluetooth LE interface that Certabo and Tabutronic offer for their boards (Nordic UART service). Plugging their USB cable straight into the Core2 is not supported.
          Boards that only report which squares are occupied are not a replacement for a board that recognises the pieces.</p>
       <p class="pp-note">M5Chess is an independent project. It is not affiliated with, endorsed by or sponsored by the makers of the supported boards. All product names are trademarks of their respective owners.</p>
     </section>
@@ -152,7 +163,7 @@
       <div class="section-heading">
         <div>
           <p class="eyebrow">How to play</p>
-          <h2>A game in seven steps</h2>
+          <h2>A game in eight steps</h2>
         </div>
       </div>
       <ol class="pp-list">
@@ -161,10 +172,11 @@
         <li>Tap <strong>Verbinden</strong> (Connect) and choose your board from the list.</li>
         <li>Set up the full starting position. By default you play White.</li>
         <li>To let the computer play White, tap <strong>Move</strong> now: you take Black and the view turns.</li>
+        <li>Optional: key <strong>B</strong> switches between Adaptive and full strength, key <strong>C</strong> picks an Elo bot (900 to 2500).</li>
         <li>Play your moves on the board. The reply shows first on the screen and is marked on the board.</li>
-        <li>Carry out the reply completely on the board, then the game goes on. Setting up the starting position again begins a new game.</li>
+        <li>Carry out the reply completely on the board, then the game goes on. Setting up the starting position again, or key A, begins a new game.</li>
       </ol>
-      <p class="pp-note">The screen only shows the game: pieces cannot be moved on it, so an e-board is required. Games are not stored, and there is no automatic reconnection: after a lost connection, tap Connect again. The playing strength of the engine on this chip has not been measured.</p>
+      <p class="pp-note">The screen only shows the game: pieces cannot be moved on it, so an e-board is required. Games are not stored, and there is no automatic reconnection: after a lost connection, tap Connect again. The Elo numbers are targets of the engine’s strength limit, not ratings measured on the Core2; the playing strength on this chip has not been measured.</p>
     </section>
 
     <section id="build" class="section">
@@ -199,9 +211,9 @@ python -m platformio run -d esp32_core2 -t upload --upload-port COM17</code></pr
       <ul class="pp-list">
         <li>Author: Dirk D. Sommerfeld. The firmware package is published under the GPL-3.0; the original MIT licence of the engine code stays in the sources.</li>
         <li>Merida pieces: Armando Hernandez Marroquin, GPL-2.0 or later. Libraries: M5Unified, M5GFX and esp-nimble-cpp, pinned to the tested versions.</li>
-        <li>Seven test programs check the game model, side changes, restart, the queen thresholds and the Certabo and Spectrum protocol and LEDs. They are protocol tests and no replacement for a test with a real board.</li>
+        <li>Seven test programs check the game model, side changes, restart, the queen thresholds, the full starting-position frame and the Certabo and Spectrum protocol and LEDs. They are protocol tests and no replacement for a test with a real board.</li>
         <li>Questions, bugs, wishes: the Discord server <a href="https://discord.gg/AdZukFtBf" target="_blank" rel="noreferrer">electricchess ↗</a>.</li>
-        <li>Also from this site: <a href="../beatchessbots/">Beat Chessbots</a>, the Android app with the same queen, and <a href="../echessgw/">eChessGw</a>, the Bluetooth gateway for e-boards.</li>
+        <li>Also from this site: <a href="../beatchessbots/">Beat Chessbots</a>, the Android app with the same queen.</li>
       </ul>
     </section>
   </main>
