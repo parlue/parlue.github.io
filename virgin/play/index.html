@@ -29,14 +29,16 @@
   <style>
     /* The game card has its own dark blue look (like the M5Chess display) and does not change with the site theme. */
     .m5 { --n0: #081a3f; --n1: #0c2a63; --n2: #15407f; --ln: #214a8f; --tx: #e8f0ff; --mu: #8fb0e0; --bl: #1f7ae0; --bl2: #3d8fee;
-      max-width: 940px; margin: 8px 0 40px; border-radius: 22px; border: 1px solid var(--ln); color: var(--tx);
+      max-width: 940px; margin: 12px 0 40px; border-radius: 22px; border: 1px solid var(--ln); color: var(--tx);
       background: linear-gradient(160deg, var(--n1), var(--n0)); box-shadow: 0 24px 70px rgba(0, 10, 40, .45); overflow: hidden; }
-    .m5-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 22px; border-bottom: 1px solid var(--ln); background: rgba(0, 0, 0, .18); }
+    .m5-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 10px 22px; border-bottom: 1px solid var(--ln); background: rgba(0, 0, 0, .18); }
     .m5-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; letter-spacing: .01em; }
     .m5-brand img { width: 34px; height: 34px; border-radius: 8px; }
     .m5-pill { padding: 5px 14px; border-radius: 999px; background: rgba(30, 120, 220, .35); border: 1px solid var(--ln); color: #7dffb0; font-size: .78rem; font-weight: 700; letter-spacing: .08em; }
     .m5-hint { margin-left: auto; color: var(--mu); font-size: .85rem; }
-    .m5-body { display: grid; grid-template-columns: minmax(0, 560px) minmax(230px, 1fr); gap: 26px; padding: 22px; align-items: start; }
+    .m5 { --bs: min(560px, max(300px, calc(100vh - 250px))); }
+    @supports (height: 100svh) { .m5 { --bs: min(560px, max(300px, calc(100svh - 250px))); } }
+    .m5-body { display: grid; grid-template-columns: var(--bs) minmax(230px, 1fr); gap: 26px; padding: 18px 22px 22px; align-items: start; }
     .board { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); aspect-ratio: 1 / 1; width: 100%; border-radius: 8px; overflow: hidden; border: 2px solid #0a1d45; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
     .sq { position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: clamp(26px, 7.4vw, 50px); line-height: 1; }
     .sq.l { background: #d3e6fb; } .sq.d { background: #4a90e0; }
@@ -100,14 +102,8 @@
   </header>
 
   <main id="top">
-    <section class="section" style="padding-bottom:0">
-      <div class="section-heading">
-        <div>
-          <p class="eyebrow">Play in your browser</p>
-          <h1 class="pp-title" style="font-size:clamp(2rem,5vw,3.2rem)">Play against Virginia</h1>
-        </div>
-        <p>Virginia is the adaptive opponent of the <a href="../">Virgin</a> engine. She keeps the game close and winnable for you. The engine runs on your device, nothing is sent anywhere.</p>
-      </div>
+    <section style="padding:16px 0 0">
+      <h1 class="pp-title" style="font-size:clamp(1.7rem,3.8vw,2.4rem);margin:0">Play against Virginia</h1>
     </section>
 
     <section class="m5" aria-label="Chess game against Virginia">
@@ -150,6 +146,7 @@
     </section>
 
     <p class="pp-note" style="margin-top:-12px">
+      Virginia is the adaptive opponent of the <a href="../">Virgin</a> engine. She keeps the game close and winnable for you; the engine runs on your device and nothing is sent anywhere.
       When a pawn reaches the last rank you choose the new piece. Draws follow the usual rules (stalemate, three-fold repetition, fifty moves, too little material).
       The queen shows how the game stands from your point of view, from radiant to lightning and fire.
       More bots, five playing styles, analysis and electronic boards: <a href="../../beatchessbots/">Beat Chessbots</a>.
