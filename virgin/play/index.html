@@ -69,9 +69,12 @@
     .seg { display: flex; flex: 1 1 100%; border: 1px solid var(--ln); border-radius: 14px; overflow: hidden; }
     .seg button { flex: 1; border: 0; background: transparent; color: var(--mu); font: inherit; font-weight: 700; padding: 11px 14px; cursor: pointer; }
     .seg button.on { background: var(--bl); color: #fff; }
-    .moves { margin: 0 22px 22px; border: 1px solid var(--ln); background: rgba(0, 0, 0, .22); border-radius: 14px; padding: 12px 16px; max-height: 150px; overflow-y: auto; font-size: .92rem; line-height: 1.9; }
-    .moves:empty::before { content: "The moves appear here."; color: var(--mu); }
-    .moves .n { color: var(--mu); margin-right: 4px; } .moves .m { display: inline-block; min-width: 62px; margin-right: 6px; font-weight: 600; }
+    .moves { margin: 0 22px 22px; border: 1px solid var(--ln); background: rgba(0, 0, 0, .22); border-radius: 14px; padding: 10px 14px; max-height: 170px; overflow-y: auto; font-size: .92rem; line-height: 1.6;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(176px, 1fr)); gap: 2px 14px; align-content: start; }
+    .moves:empty::before { content: "The moves appear here."; color: var(--mu); grid-column: 1 / -1; }
+    .mv { display: grid; grid-template-columns: 2.6em 1fr 1fr; align-items: baseline; white-space: nowrap; padding: 2px 8px 2px 0; border-radius: 8px; }
+    .mv .n { color: var(--mu); text-align: right; padding-right: 10px; font-variant-numeric: tabular-nums; }
+    .mv .m { font-weight: 600; } .mv .m.cur { color: #ffd60a; }
     .mock-flag { display: none; padding: 9px 12px; border-radius: 12px; background: rgba(255, 170, 0, .18); font-size: .85rem; }
     .mock-flag.on { display: block; }
     @media (max-width: 760px) { .m5-body { grid-template-columns: 1fr; gap: 18px; padding: 14px; } .moves { margin: 0 14px 14px; } .m5-hint { display: none; } .queen { height: 130px; } }
@@ -285,7 +288,8 @@
       }
       $board.innerHTML = html;
       var mv = game.history(), out = "";
-      for (var i = 0; i < mv.length; i += 2) out += '<span class="n">' + (i / 2 + 1) + '.</span><span class="m">' + mv[i] + '</span><span class="m">' + (mv[i + 1] || "") + "</span> ";
+      for (var i = 0; i < mv.length; i += 2)
+        out += '<div class="mv"><span class="n">' + (i / 2 + 1) + '.</span><span class="m' + (i === mv.length - 1 ? " cur" : "") + '">' + mv[i] + '</span><span class="m' + (i + 1 === mv.length - 1 ? " cur" : "") + '">' + (mv[i + 1] || "") + "</span></div>";
       $moves.innerHTML = out; $moves.scrollTop = $moves.scrollHeight;
       $("undo").disabled = busy || mv.length === 0;
       $("you").textContent = humanWhite ? "White" : "Black";
