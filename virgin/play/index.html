@@ -70,10 +70,10 @@
     .seg button { flex: 1; border: 0; background: transparent; color: var(--mu); font: inherit; font-weight: 700; padding: 11px 14px; cursor: pointer; }
     .seg button.on { background: var(--bl); color: #fff; }
     .moves { margin: 0 22px 22px; border: 1px solid var(--ln); background: rgba(0, 0, 0, .22); border-radius: 14px; padding: 10px 14px; max-height: 170px; overflow-y: auto; font-size: .92rem; line-height: 1.6;
-      display: grid; grid-template-columns: repeat(auto-fill, 10.4em); justify-content: start; gap: 0 6px; align-content: start; }
-    .moves:empty::before { content: "The moves appear here."; color: var(--mu); grid-column: 1 / -1; }
-    .mv { display: grid; grid-template-columns: 2.2em 4em 4em; align-items: baseline; white-space: nowrap; padding: 1px 0; }
-    .mv .n { color: var(--mu); text-align: right; padding-right: 6px; font-variant-numeric: tabular-nums; }
+      display: flex; flex-wrap: wrap; gap: 0 18px; align-content: flex-start; }
+    .moves:empty::before { content: "The moves appear here."; color: var(--mu); }
+    .mv { display: flex; align-items: baseline; gap: 7px; white-space: nowrap; padding: 1px 0; }
+    .mv .n { color: var(--mu); font-variant-numeric: tabular-nums; }
     .mv .m { font-weight: 600; } .mv .m.cur { color: #ffd60a; }
     .mock-flag { display: none; padding: 9px 12px; border-radius: 12px; background: rgba(255, 170, 0, .18); font-size: .85rem; }
     .mock-flag.on { display: block; }
