@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="Play chess against Virgin in your browser. The adaptive mode keeps the game close and winnable. The engine runs on your device, nothing is sent anywhere.">
+  <title>Play against Virgin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../../echesstactics/project.css">
+  <style>
+    .play { display: grid; grid-template-columns: minmax(0, 560px) minmax(260px, 1fr); gap: 34px; align-items: start; margin: 8px 0 40px; }
+    .board-wrap { width: 100%; max-width: 560px; }
+    .board { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+    .sq { position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: clamp(26px, 8.2vw, 52px); line-height: 1; }
+    .sq.l { background: #e8dcc4; } .sq.d { background: #a98b66; }
+    :root[data-theme="dark"] .sq.l { background: #b9ad96; } :root[data-theme="dark"] .sq.d { background: #7d6548; }
+    .sq.last::before { content: ""; position: absolute; inset: 0; background: rgba(255, 214, 10, .38); }
+    .sq.sel::before { content: ""; position: absolute; inset: 0; background: rgba(109, 74, 255, .45); }
+    .sq.chk::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(220, 38, 38, .75), rgba(220, 38, 38, 0) 75%); }
+    .sq.tgt::after { content: ""; position: absolute; width: 28%; height: 28%; border-radius: 50%; background: rgba(20, 20, 20, .32); }
+    .sq.tgt.cap::after { width: 86%; height: 86%; background: transparent; border: 4px solid rgba(20, 20, 20, .32); }
+    .pc { position: relative; z-index: 1; pointer-events: none; }
+    .pc.w { color: #fff; text-shadow: 0 0 2px #000, 0 0 2px #000, 0 1px 3px rgba(0,0,0,.6); }
+    .pc.b { color: #151515; text-shadow: 0 0 1px rgba(255,255,255,.55); }
+    .co { position: absolute; z-index: 2; font-size: .62rem; font-weight: 700; opacity: .7; pointer-events: none; font-family: Inter, system-ui, sans-serif; }
+    .co.f { right: 4px; bottom: 2px; } .co.r { left: 4px; top: 2px; }
+    .sq.l .co { color: #8a6f4d; } .sq.d .co { color: #f2e9d6; }
+    .panel { display: flex; flex-direction: column; gap: 18px; }
+    .status { font-size: 1.15rem; font-weight: 700; min-height: 1.6em; }
+    .engine-line { color: var(--muted); font-size: .9rem; min-height: 1.4em; }
+    .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .controls .button { cursor: pointer; font: inherit; }
+    .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--surface-solid); }
+    .seg button { border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 600; padding: 10px 18px; cursor: pointer; }
+    .seg button.on { background: var(--accent); color: #fff; }
+    .moves { border: 1px solid var(--line); background: var(--surface-solid); border-radius: 16px; padding: 14px 18px; max-height: 260px; overflow-y: auto; font-size: .95rem; line-height: 1.9; }
+    .moves:empty::before { content: "The moves appear here."; color: var(--muted); }
+    .moves .n { color: var(--muted); margin-right: 4px; } .moves .m { display: inline-block; min-width: 64px; margin-right: 6px; font-weight: 600; }
+    .mock-flag { display: none; padding: 10px 14px; border-radius: 12px; background: rgba(255, 170, 0, .16); color: var(--text); font-size: .9rem; }
+    .mock-flag.on { display: block; }
+    @media (max-width: 860px) { .play { grid-template-columns: 1fr; gap: 22px; } .board-wrap { max-width: none; } }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../../">parlue<span>.</span></a>
+    <nav>
+      <a href="../">Virgin</a>
+      <a href="../../beatchessbots/">Beat Chessbots</a>
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">☾</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="section" style="padding-bottom:0">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Play in your browser</p>
+          <h1 class="pp-title" style="font-size:clamp(2rem,5vw,3.2rem)">Play against Virgin</h1>
+        </div>
+        <p>The adaptive game: Virgin keeps the game close and winnable for you. The engine runs on your device, nothing is sent anywhere.</p>
+      </div>
+    </section>
+
+    <section class="play" aria-label="Chess game">
+      <div class="board-wrap"><div id="board" class="board" role="grid" aria-label="Chessboard"></div></div>
+
+      <div class="panel">
+        <div class="mock-flag" id="mockFlag">Test mode: the opponent plays random moves. The real engine is not connected.</div>
+        <div id="status" class="status">Loading …</div>
+        <div id="engineLine" class="engine-line"></div>
+        <div class="controls">
+          <div class="seg" role="group" aria-label="Your colour">
+            <button id="cW" class="on" type="button">White</button>
+            <button id="cB" type="button">Black</button>
+          </div>
+          <button id="newGame" class="button primary" type="button">New game</button>
+          <button id="undo" class="button secondary" type="button">Take back</button>
+        </div>
+        <div id="moves" class="moves" aria-label="Moves"></div>
+        <p class="pp-note" style="margin-top:0">
+          Promotions become a queen. Draws are declared by the usual rules (stalemate, three-fold repetition, fifty moves, too little material).
+          More bots, five playing styles, analysis and electronic boards: <a href="../../beatchessbots/">Beat Chessbots</a>.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> parlue</span>
+    <span><a href="../">← back to Virgin</a></span>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+  <script src="../../script.js"></script>
+  <script>
+  (function () {
+    "use strict";
+
+    /* ---------- Engine adapter ----------------------------------------------------------------
+       The ONLY place that talks to the engine. The real WebAssembly engine lives in ./engine/ and runs in a Web Worker.
+       Expected worker protocol (to be matched to the real worker when the files are in place):
+         page -> worker   {cmd:"start"}                          worker -> page  {type:"ready"}
+                          {cmd:"newGame"}                                        {type:"ok"}
+                          {cmd:"bestMove", moves:["e2e4",...], nodes:N}          {type:"bestmove", move:"e7e5", ms:830, info:[...]}
+                                                                                 {type:"error", message:"..."}
+       "?mock=1" uses a built-in opponent that plays random legal moves, only to test layout and flow.
+       ENGINE_NODES = search limit per move. PLACEHOLDER: has to be measured against the 1500 ms of the Android app.            */
+    var ENGINE_NODES = 100000;
+    var WORKER_URL = "engine/engine-worker.js";
+    var MOCK = /[?&]mock=1\b/.test(location.search);
+
+    var Engine = {
+      worker: null, waiting: null,
+      start: function () {
+        var self = this;
+        if (MOCK) return Promise.resolve();
+        return new Promise(function (resolve, reject) {
+          var timer = setTimeout(function () { reject(new Error("The engine did not answer.")); }, 20000);
+          try { self.worker = new Worker(WORKER_URL); } catch (e) { clearTimeout(timer); reject(new Error("The engine could not be started.")); return; }
+          self.worker.onerror = function () { clearTimeout(timer); var w = self.waiting; self.waiting = null; var err = new Error("The engine files were not found."); if (w) w.reject(err); reject(err); };
+          self.worker.onmessage = function (ev) {
+            var d = ev.data || {};
+            if (d.type === "ready") { clearTimeout(timer); resolve(); }
+            else if (self.waiting && d.type === "bestmove") { var w = self.waiting; self.waiting = null; w.resolve(d); }
+            else if (self.waiting && d.type === "error") { var w2 = self.waiting; self.waiting = null; w2.reject(new Error(d.message || "Engine error")); }
+          };
+          self.worker.postMessage({ cmd: "start" });
+        });
+      },
+      newGame: function () { if (!MOCK && this.worker) this.worker.postMessage({ cmd: "newGame" }); },
+      bestMove: function (movesUci, legalFallback) {
+        var self = this;
+        if (MOCK) {
+          return new Promise(function (resolve) {
+            setTimeout(function () { var m = legalFallback[Math.floor(Math.random() * legalFallback.length)]; resolve({ move: m, ms: 600 }); }, 600);
+          });
+        }
+        return new Promise(function (resolve, reject) {
+          self.waiting = { resolve: resolve, reject: reject };
+          self.worker.postMessage({ cmd: "bestMove", moves: movesUci, nodes: ENGINE_NODES });
+        });
+      },
+      stop: function () { this.waiting = null; }
+    };
+
+    /* ---------- Game ------------------------------------------------------------------------- */
+    var GLYPH = { k: "♚", q: "♛", r: "♜", b: "♝", n: "♞", p: "♟" };
+    var game = new Chess();
+    var humanWhite = true, busy = false, engineReady = false, selected = null, targets = [], gen = 0;
+
+    var $board = document.getElementById("board"), $status = document.getElementById("status"), $eng = document.getElementById("engineLine"), $moves = document.getElementById("moves");
+    document.getElementById("mockFlag").classList.toggle("on", MOCK);
+
+    function uciList() { return game.history({ verbose: true }).map(function (m) { return m.from + m.to + (m.promotion || ""); }); }
+    function legalUci() { return game.moves({ verbose: true }).map(function (m) { return m.from + m.to + (m.promotion ? "q" : ""); }); }
+    function humanTurn() { return (game.turn() === "w") === humanWhite; }
+    function sqName(file, rank) { return "abcdefgh".charAt(file) + (rank + 1); }
+
+    function render() {
+      var hist = game.history({ verbose: true }), last = hist.length ? hist[hist.length - 1] : null;
+      var checkSq = null;
+      if (game.in_check()) { var b = game.board(); for (var r = 0; r < 8; r++) for (var f = 0; f < 8; f++) { var p = b[r][f]; if (p && p.type === "k" && p.color === game.turn()) checkSq = sqName(f, 7 - r); } }
+      var html = "";
+      for (var row = 0; row < 8; row++) for (var col = 0; col < 8; col++) {
+        var file = humanWhite ? col : 7 - col, rank = humanWhite ? 7 - row : row, name = sqName(file, rank);
+        var pc = game.get(name), cls = "sq " + (((file + rank) % 2 === 0) ? "d" : "l");
+        if (last && (name === last.from || name === last.to)) cls += " last";
+        if (name === selected) cls += " sel";
+        if (name === checkSq) cls += " chk";
+        if (targets.indexOf(name) >= 0) cls += pc ? " tgt cap" : " tgt";
+        html += '<div class="' + cls + '" data-sq="' + name + '" role="gridcell" aria-label="' + name + (pc ? " " + pc.color + pc.type : "") + '">';
+        if (pc) html += '<span class="pc ' + pc.color + '">' + GLYPH[pc.type] + "</span>";
+        if (col === 0) html += '<span class="co r">' + (rank + 1) + "</span>";
+        if (row === 7) html += '<span class="co f">' + "abcdefgh".charAt(file) + "</span>";
+        html += "</div>";
+      }
+      $board.innerHTML = html;
+      var mv = game.history(), out = "";
+      for (var i = 0; i < mv.length; i += 2) out += '<span class="n">' + (i / 2 + 1) + '.</span><span class="m">' + mv[i] + '</span><span class="m">' + (mv[i + 1] || "") + "</span> ";
+      $moves.innerHTML = out; $moves.scrollTop = $moves.scrollHeight;
+      document.getElementById("undo").disabled = busy || mv.length === 0;
+    }
+
+    function setStatus(t) { $status.textContent = t; }
+    function endText() {
+      if (game.in_checkmate()) return game.turn() === "w" ? "Checkmate. Black wins." : "Checkmate. White wins.";
+      if (game.in_stalemate()) return "Stalemate. Draw.";
+      if (game.in_threefold_repetition()) return "Draw by three-fold repetition.";
+      if (game.insufficient_material()) return "Draw: too little material.";
+      if (game.in_draw()) return "Draw by the fifty-move rule.";
+      return null;
+    }
+    function refreshStatus() {
+      var e = endText();
+      if (e) { setStatus(e); return true; }
+      if (!engineReady) return false;
+      setStatus(humanTurn() ? (game.in_check() ? "Your move. You are in check." : "Your move.") : "Virgin is thinking …");
+      return false;
+    }
+
+    function engineTurn() {
+      if (!engineReady || game.game_over() || humanTurn()) { busy = false; render(); return; }
+      busy = true; render(); setStatus("Virgin is thinking …");
+      var my = gen;
+      Engine.bestMove(uciList(), legalUci()).then(function (r) {
+        if (my !== gen) return;
+        var u = String(r.move || ""), from = u.slice(0, 2), to = u.slice(2, 4), promo = u.length > 4 ? u.charAt(4) : undefined;
+        var made = game.move({ from: from, to: to, promotion: promo });
+        if (!made) { busy = false; render(); setStatus("The engine sent an illegal move (" + u + ")."); return; }
+        $eng.textContent = "Virgin · " + made.san + (r.ms ? " · " + (r.ms / 1000).toFixed(1) + " s" : "");
+        busy = false; selected = null; targets = []; render(); refreshStatus();
+      }).catch(function (err) {
+        if (my !== gen) return;
+        busy = false; render(); setStatus(err.message || "Engine error");
+      });
+    }
+
+    $board.addEventListener("click", function (ev) {
+      var el = ev.target.closest(".sq"); if (!el || busy || !engineReady || game.game_over() || !humanTurn()) return;
+      var name = el.getAttribute("data-sq"), pc = game.get(name);
+      if (selected && targets.indexOf(name) >= 0) {
+        game.move({ from: selected, to: name, promotion: "q" });
+        selected = null; targets = []; render();
+        if (!refreshStatus()) engineTurn();
+        return;
+      }
+      if (pc && pc.color === game.turn()) {
+        selected = name; targets = game.moves({ square: name, verbose: true }).map(function (m) { return m.to; });
+      } else { selected = null; targets = []; }
+      render();
+    });
+
+    function newGame() {
+      gen++; Engine.stop(); Engine.newGame();
+      game = new Chess(); selected = null; targets = []; busy = false; $eng.textContent = "";
+      render(); refreshStatus(); engineTurn();
+    }
+    function setColour(white) {
+      humanWhite = white;
+      document.getElementById("cW").classList.toggle("on", white); document.getElementById("cB").classList.toggle("on", !white);
+      newGame();
+    }
+    document.getElementById("cW").addEventListener("click", function () { setColour(true); });
+    document.getElementById("cB").addEventListener("click", function () { setColour(false); });
+    document.getElementById("newGame").addEventListener("click", newGame);
+    document.getElementById("undo").addEventListener("click", function () {
+      if (busy) return; gen++; Engine.stop();
+      game.undo(); if (!humanTurn() && game.history().length) game.undo();
+      selected = null; targets = []; render();
+      if (!refreshStatus()) engineTurn();   // as Black with nothing left to take back, the engine opens again
+    });
+
+    render(); setStatus("Starting the engine …");
+    Engine.start().then(function () {
+      engineReady = true; $eng.textContent = MOCK ? "" : "Virgin · adaptive"; render(); refreshStatus(); engineTurn();
+    }).catch(function (err) {
+      setStatus("The engine is not available yet."); $eng.textContent = err.message || "";
+    });
+  })();
+  </script>
+</body>
+</html>
