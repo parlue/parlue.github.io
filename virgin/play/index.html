@@ -15,7 +15,8 @@
     /* The engine uses threaded WebAssembly, which needs cross-origin isolation. GitHub Pages cannot send the two headers,
        so a small service worker (coi-sw.js, scope: this folder only) adds them and the page reloads once. */
     (function () {
-      if (/[?&]mock=1\b/.test(location.search) || window.crossOriginIsolated || !("serviceWorker" in navigator)) return;
+      if (window.crossOriginIsolated) { try { sessionStorage.removeItem("coiTries"); } catch (e) {} return; }   // all good: reset the counter
+      if (/[?&]mock=1/.test(location.search) || !("serviceWorker" in navigator)) return;
       var tries = 0; try { tries = parseInt(sessionStorage.getItem("coiTries") || "0", 10); } catch (e) {}
       if (tries >= 2) return;                       // never loop
       function again() { try { sessionStorage.setItem("coiTries", String(tries + 1)); } catch (e) {} location.reload(); }
