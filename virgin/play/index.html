@@ -8,10 +8,24 @@
   <title>Play against Virginia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" crossorigin="anonymous">
   <link rel="stylesheet" href="../../styles.css">
   <link rel="stylesheet" href="../../echesstactics/project.css">
   <script>try { if (!localStorage.getItem("theme")) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
+  <script>
+    /* The engine uses threaded WebAssembly, which needs cross-origin isolation. GitHub Pages cannot send the two headers,
+       so a small service worker (coi-sw.js, scope: this folder only) adds them and the page reloads once. */
+    (function () {
+      if (/[?&]mock=1\b/.test(location.search) || window.crossOriginIsolated || !("serviceWorker" in navigator)) return;
+      var tries = 0; try { tries = parseInt(sessionStorage.getItem("coiTries") || "0", 10); } catch (e) {}
+      if (tries >= 2) return;                       // never loop
+      function again() { try { sessionStorage.setItem("coiTries", String(tries + 1)); } catch (e) {} location.reload(); }
+      navigator.serviceWorker.register("coi-sw.js").then(function (reg) {
+        if (reg.active && !navigator.serviceWorker.controller) again();
+        else reg.addEventListener("updatefound", function () { var w = reg.installing; if (w) w.addEventListener("statechange", function () { if (w.state === "activated") again(); }); });
+      }).catch(function () {});
+    })();
+  </script>
   <style>
     /* The game card has its own dark blue look (like the M5Chess display) and does not change with the site theme. */
     .m5 { --n0: #081a3f; --n1: #0c2a63; --n2: #15407f; --ln: #214a8f; --tx: #e8f0ff; --mu: #8fb0e0; --bl: #1f7ae0; --bl2: #3d8fee;
@@ -31,9 +45,7 @@
     .sq.chk::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(230, 30, 30, .85), rgba(230, 30, 30, 0) 75%); }
     .sq.tgt::after { content: ""; position: absolute; width: 28%; height: 28%; border-radius: 50%; background: rgba(8, 26, 63, .42); }
     .sq.tgt.cap::after { width: 88%; height: 88%; background: transparent; border: 4px solid rgba(8, 26, 63, .42); }
-    .pc { position: relative; z-index: 1; pointer-events: none; }
-    .pc.w { color: #fff; text-shadow: 0 0 2px #000, 0 0 2px #000, 0 1px 3px rgba(0, 0, 0, .6); }
-    .pc.b { color: #0b0b12; text-shadow: 0 0 1px rgba(255, 255, 255, .6); }
+    .pc { position: relative; z-index: 1; pointer-events: none; width: 92%; height: 92%; object-fit: contain; filter: drop-shadow(0 2px 2px rgba(0, 20, 60, .35)); }
     .co { position: absolute; z-index: 2; font-size: .62rem; font-weight: 700; opacity: .8; pointer-events: none; }
     .co.f { right: 4px; bottom: 2px; } .co.r { left: 4px; top: 2px; }
     .sq.l .co { color: #3b78c4; } .sq.d .co { color: #e2eefc; }
@@ -129,6 +141,7 @@
       Promotions become a queen. Draws follow the usual rules (stalemate, three-fold repetition, fifty moves, too little material).
       The queen shows how the game stands from your point of view, from radiant to lightning and fire.
       More bots, five playing styles, analysis and electronic boards: <a href="../../beatchessbots/">Beat Chessbots</a>.
+      Pieces: Bryan’s Italian, a gift of Bryan Withby. Board logic: <a href="https://github.com/jhlywa/chess.js" target="_blank" rel="noreferrer">chess.js</a> (BSD). Engine: <a href="../">Virgin</a> 0.8.0 (MIT).
     </p>
   </main>
 
@@ -137,46 +150,53 @@
     <span><a href="../">← back to Virgin</a></span>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
+  <script src="chess.min.js"></script>
   <script src="../../script.js"></script>
   <script>
   (function () {
     "use strict";
 
     /* ---------- Engine adapter ----------------------------------------------------------------
-       The ONLY place that talks to the engine. The real WebAssembly engine lives in ./engine/ and runs in a Web Worker.
-       Expected worker protocol (to be matched to the real worker when the files are in place):
-         page -> worker   {cmd:"start"}                                     worker -> page  {type:"ready"}
-                          {cmd:"newGame"}
-                          {cmd:"bestMove", moves:["e2e4",...], nodes:N}      {type:"info", line:"info depth 7 score cp 34 nodes 12000 pv e7e5 ..."}   (any number, while searching)
-                                                                             {type:"bestmove", move:"e7e5", ms:830, info:["info string adaptive ...", ...]}
-                                                                             {type:"error", message:"..."}
-       "?mock=1" uses a built-in opponent that plays random legal moves, only to test layout and flow.
-       ENGINE_NODES = search limit per move. PLACEHOLDER: has to be measured against the 1500 ms of the Android app.            */
-    var ENGINE_NODES = 100000;
+       The ONLY place that talks to the engine. Virgin 0.8.0 (threaded WebAssembly) runs in ./engine/engine-worker.js and speaks plain UCI strings;
+       the worker posts {type:"ready"} when the runtime is loaded, then the UCI handshake is ours.
+       "?mock=1" uses a built-in opponent that plays random legal moves, only to test layout and flow without the engine.
+       MOVETIME_MS = think time per move, the same as the adaptive game of the Android app (tal_params "denkzeit_ms").            */
+    var MOVETIME_MS = 1500;
     var WORKER_URL = "engine/engine-worker.js";
     var MOCK = /[?&]mock=1\b/.test(location.search);
 
     var Engine = {
-      worker: null, waiting: null, onInfo: null,
+      worker: null, waiting: null, onInfo: null, discard: 0, lines: null, t0: 0, up: false,
+      send: function (c) { this.worker.postMessage(c); },
       start: function () {
         var self = this;
         if (MOCK) return Promise.resolve();
         return new Promise(function (resolve, reject) {
-          var timer = setTimeout(function () { reject(new Error("The engine did not answer.")); }, 20000);
-          try { self.worker = new Worker(WORKER_URL); } catch (e) { clearTimeout(timer); reject(new Error("The engine could not be started.")); return; }
-          self.worker.onerror = function () { clearTimeout(timer); var w = self.waiting; self.waiting = null; var err = new Error("The engine files were not found."); if (w) w.reject(err); reject(err); };
+          var timer = setTimeout(function () { reject(new Error("The engine did not answer.")); }, 30000);
+          function fail(msg) { clearTimeout(timer); var w = self.waiting; self.waiting = null; var e = new Error(msg); if (w) w.reject(e); reject(e); }
+          if (!window.crossOriginIsolated) { fail("The browser could not switch on the shared memory the engine needs. Reload the page; if that does not help, use a current Chrome, Edge, Firefox or Safari."); return; }
+          try { self.worker = new Worker(WORKER_URL); } catch (e) { fail("The engine could not be started."); return; }
+          self.worker.onerror = function () { fail("The engine files were not found."); };
           self.worker.onmessage = function (ev) {
-            var d = ev.data || {};
-            if (d.type === "ready") { clearTimeout(timer); resolve(); }
-            else if (d.type === "info") { if (self.onInfo) self.onInfo(String(d.line || "")); }
-            else if (self.waiting && d.type === "bestmove") { var w = self.waiting; self.waiting = null; w.resolve(d); }
-            else if (self.waiting && d.type === "error") { var w2 = self.waiting; self.waiting = null; w2.reject(new Error(d.message || "Engine error")); }
+            var d = ev.data;
+            if (typeof d === "string") { self.line(d, resolve, timer); return; }
+            if (!d) return;
+            if (d.type === "ready") self.send("uci");
+            else if (d.type === "error") fail(d.message || "Engine error");
           };
-          self.worker.postMessage({ cmd: "start" });
         });
       },
-      newGame: function () { if (!MOCK && this.worker) this.worker.postMessage({ cmd: "newGame" }); },
+      line: function (s, resolve, timer) {
+        if (s === "uciok") { this.send("setoption name Adaptive value true"); this.send("isready"); }
+        else if (s === "readyok") { if (!this.up) { this.up = true; clearTimeout(timer); resolve(); } }
+        else if (s.indexOf("info ") === 0) { if (this.lines) this.lines.push(s); if (this.onInfo) this.onInfo(s); }
+        else if (s.indexOf("bestmove ") === 0) {
+          if (this.discard > 0) { this.discard--; return; }       // the answer of a search that was stopped
+          var w = this.waiting; if (!w) return; this.waiting = null;
+          w.resolve({ move: s.split(" ")[1], ms: Math.round(performance.now() - this.t0), info: this.lines || [] });
+        }
+      },
+      newGame: function () { if (!MOCK && this.up) { this.send("ucinewgame"); this.send("isready"); } },
       bestMove: function (movesUci, legalFallback, mockEval) {
         var self = this;
         if (MOCK) {
@@ -188,15 +208,16 @@
           });
         }
         return new Promise(function (resolve, reject) {
-          self.waiting = { resolve: resolve, reject: reject };
-          self.worker.postMessage({ cmd: "bestMove", moves: movesUci, nodes: ENGINE_NODES });
+          self.waiting = { resolve: resolve, reject: reject }; self.lines = []; self.t0 = performance.now();
+          self.send("position startpos" + (movesUci.length ? " moves " + movesUci.join(" ") : ""));
+          self.send("go movetime " + MOVETIME_MS);
         });
       },
-      stop: function () { this.waiting = null; }
+      stop: function () { if (!MOCK && this.waiting && this.worker) { this.send("stop"); this.discard++; } this.waiting = null; }
     };
+    Engine.onInfo = null;
 
     /* ---------- Game ------------------------------------------------------------------------- */
-    var GLYPH = { k: "♚", q: "♛", r: "♜", b: "♝", n: "♞", p: "♟" };
     var QUEEN_NAME = ["radiant", "silvery", "balanced", "in a storm", "in the rain", "lightning and fire"];
     var game = new Chess();
     var humanWhite = true, busy = false, engineReady = false, selected = null, targets = [], gen = 0;
@@ -257,7 +278,7 @@
         if (name === checkSq) cls += " chk";
         if (targets.indexOf(name) >= 0) cls += pc ? " tgt cap" : " tgt";
         html += '<div class="' + cls + '" data-sq="' + name + '" role="gridcell" aria-label="' + name + (pc ? " " + pc.color + pc.type : "") + '">';
-        if (pc) html += '<span class="pc ' + pc.color + '">' + GLYPH[pc.type] + "</span>";
+        if (pc) html += '<img class="pc" src="../../assets/virgin/pieces/bryan/' + pc.color + pc.type.toUpperCase() + '.webp" alt="" draggable="false">';
         if (col === 0) html += '<span class="co r">' + (rank + 1) + "</span>";
         if (row === 7) html += '<span class="co f">' + "abcdefgh".charAt(file) + "</span>";
         html += "</div>";
@@ -348,7 +369,9 @@
 
     render(); setStatus("Starting the engine …", "think");
     Engine.start().then(function () {
-      engineReady = true; $eng.textContent = MOCK ? "" : "Adaptive game"; render(); refreshStatus(); engineTurn();
+      engineReady = true; $eng.textContent = MOCK ? "" : "Adaptive game"; render();
+      if (/[?&]autoplay=1/.test(location.search) && humanWhite && !game.history().length) game.move({ from: "e2", to: "e4" });   // test aid: plays 1.e4 for you
+      if (!refreshStatus()) engineTurn();
     }).catch(function (err) {
       setStatus("The engine is not available yet.", "err"); $eng.textContent = err.message || "";
     });
