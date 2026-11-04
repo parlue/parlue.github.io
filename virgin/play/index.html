@@ -4,45 +4,65 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
-  <meta name="description" content="Play chess against Virgin in your browser. The adaptive mode keeps the game close and winnable. The engine runs on your device, nothing is sent anywhere.">
-  <title>Play against Virgin</title>
+  <meta name="description" content="Play chess against Virginia in your browser. The adaptive game keeps the game close and winnable. The engine runs on your device, nothing is sent anywhere.">
+  <title>Play against Virginia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../styles.css">
   <link rel="stylesheet" href="../../echesstactics/project.css">
+  <script>try { if (!localStorage.getItem("theme")) document.documentElement.dataset.theme = "dark"; } catch (e) {}</script>
   <style>
-    .play { display: grid; grid-template-columns: minmax(0, 560px) minmax(260px, 1fr); gap: 34px; align-items: start; margin: 8px 0 40px; }
-    .board-wrap { width: 100%; max-width: 560px; }
-    .board { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); aspect-ratio: 1 / 1; border-radius: 14px; overflow: hidden; border: 1px solid var(--line); box-shadow: var(--shadow); user-select: none; -webkit-user-select: none; touch-action: manipulation; }
-    .sq { position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: clamp(26px, 8.2vw, 52px); line-height: 1; }
-    .sq.l { background: #e8dcc4; } .sq.d { background: #a98b66; }
-    :root[data-theme="dark"] .sq.l { background: #b9ad96; } :root[data-theme="dark"] .sq.d { background: #7d6548; }
-    .sq.last::before { content: ""; position: absolute; inset: 0; background: rgba(255, 214, 10, .38); }
-    .sq.sel::before { content: ""; position: absolute; inset: 0; background: rgba(109, 74, 255, .45); }
-    .sq.chk::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(220, 38, 38, .75), rgba(220, 38, 38, 0) 75%); }
-    .sq.tgt::after { content: ""; position: absolute; width: 28%; height: 28%; border-radius: 50%; background: rgba(20, 20, 20, .32); }
-    .sq.tgt.cap::after { width: 86%; height: 86%; background: transparent; border: 4px solid rgba(20, 20, 20, .32); }
+    /* The game card has its own dark blue look (like the M5Chess display) and does not change with the site theme. */
+    .m5 { --n0: #081a3f; --n1: #0c2a63; --n2: #15407f; --ln: #214a8f; --tx: #e8f0ff; --mu: #8fb0e0; --bl: #1f7ae0; --bl2: #3d8fee;
+      max-width: 940px; margin: 8px 0 40px; border-radius: 22px; border: 1px solid var(--ln); color: var(--tx);
+      background: linear-gradient(160deg, var(--n1), var(--n0)); box-shadow: 0 24px 70px rgba(0, 10, 40, .45); overflow: hidden; }
+    .m5-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; padding: 14px 22px; border-bottom: 1px solid var(--ln); background: rgba(0, 0, 0, .18); }
+    .m5-brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 1.25rem; letter-spacing: .01em; }
+    .m5-brand img { width: 34px; height: 34px; border-radius: 8px; }
+    .m5-pill { padding: 5px 14px; border-radius: 999px; background: rgba(30, 120, 220, .35); border: 1px solid var(--ln); color: #7dffb0; font-size: .78rem; font-weight: 700; letter-spacing: .08em; }
+    .m5-hint { margin-left: auto; color: var(--mu); font-size: .85rem; }
+    .m5-body { display: grid; grid-template-columns: minmax(0, 560px) minmax(230px, 1fr); gap: 26px; padding: 22px; align-items: start; }
+    .board { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(8, 1fr); aspect-ratio: 1 / 1; width: 100%; border-radius: 8px; overflow: hidden; border: 2px solid #0a1d45; user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+    .sq { position: relative; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: clamp(26px, 7.4vw, 50px); line-height: 1; }
+    .sq.l { background: #d3e6fb; } .sq.d { background: #4a90e0; }
+    .sq.last::before { content: ""; position: absolute; inset: 0; background: rgba(255, 214, 10, .42); }
+    .sq.sel::before { content: ""; position: absolute; inset: 0; background: rgba(255, 255, 255, .55); }
+    .sq.chk::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle, rgba(230, 30, 30, .85), rgba(230, 30, 30, 0) 75%); }
+    .sq.tgt::after { content: ""; position: absolute; width: 28%; height: 28%; border-radius: 50%; background: rgba(8, 26, 63, .42); }
+    .sq.tgt.cap::after { width: 88%; height: 88%; background: transparent; border: 4px solid rgba(8, 26, 63, .42); }
     .pc { position: relative; z-index: 1; pointer-events: none; }
-    .pc.w { color: #fff; text-shadow: 0 0 2px #000, 0 0 2px #000, 0 1px 3px rgba(0,0,0,.6); }
-    .pc.b { color: #151515; text-shadow: 0 0 1px rgba(255,255,255,.55); }
-    .co { position: absolute; z-index: 2; font-size: .62rem; font-weight: 700; opacity: .7; pointer-events: none; font-family: Inter, system-ui, sans-serif; }
+    .pc.w { color: #fff; text-shadow: 0 0 2px #000, 0 0 2px #000, 0 1px 3px rgba(0, 0, 0, .6); }
+    .pc.b { color: #0b0b12; text-shadow: 0 0 1px rgba(255, 255, 255, .6); }
+    .co { position: absolute; z-index: 2; font-size: .62rem; font-weight: 700; opacity: .8; pointer-events: none; }
     .co.f { right: 4px; bottom: 2px; } .co.r { left: 4px; top: 2px; }
-    .sq.l .co { color: #8a6f4d; } .sq.d .co { color: #f2e9d6; }
-    .panel { display: flex; flex-direction: column; gap: 18px; }
-    .status { font-size: 1.15rem; font-weight: 700; min-height: 1.6em; }
-    .engine-line { color: var(--muted); font-size: .9rem; min-height: 1.4em; }
-    .controls { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-    .controls .button { cursor: pointer; font: inherit; }
-    .seg { display: inline-flex; border: 1px solid var(--line); border-radius: 999px; overflow: hidden; background: var(--surface-solid); }
-    .seg button { border: 0; background: transparent; color: var(--muted); font: inherit; font-weight: 600; padding: 10px 18px; cursor: pointer; }
-    .seg button.on { background: var(--accent); color: #fff; }
-    .moves { border: 1px solid var(--line); background: var(--surface-solid); border-radius: 16px; padding: 14px 18px; max-height: 260px; overflow-y: auto; font-size: .95rem; line-height: 1.9; }
-    .moves:empty::before { content: "The moves appear here."; color: var(--muted); }
-    .moves .n { color: var(--muted); margin-right: 4px; } .moves .m { display: inline-block; min-width: 64px; margin-right: 6px; font-weight: 600; }
-    .mock-flag { display: none; padding: 10px 14px; border-radius: 12px; background: rgba(255, 170, 0, .16); color: var(--text); font-size: .9rem; }
+    .sq.l .co { color: #3b78c4; } .sq.d .co { color: #e2eefc; }
+    .m5-side { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+    .m5-stat { display: flex; align-items: center; gap: 10px; font-size: 1.1rem; font-weight: 700; min-height: 1.6em; }
+    .dot { flex: none; width: 12px; height: 12px; border-radius: 50%; background: #f59e0b; }
+    .dot.ok { background: #34d399; } .dot.end { background: #60a5fa; } .dot.err { background: #f87171; } .dot.think { background: #f59e0b; }
+    .m5-sub { color: var(--mu); font-size: .9rem; min-height: 1.3em; margin-top: -8px; }
+    .m5-you { display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+    .m5-you .lbl { color: var(--mu); font-size: .95rem; } .m5-you strong { display: block; font-size: 1.35rem; margin-top: 2px; }
+    .queen { height: 168px; width: auto; border-radius: 14px; background: #0b1020; border: 1px solid var(--ln); }
+    .calc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .calc div { background: rgba(0, 0, 0, .22); border: 1px solid var(--ln); border-radius: 12px; padding: 8px 10px; min-width: 0; }
+    .calc span { display: block; color: var(--mu); font-size: .68rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .calc b { display: block; font-size: 1.05rem; margin-top: 2px; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pv { color: var(--mu); font-size: .85rem; min-height: 1.3em; margin-top: -6px; overflow-wrap: anywhere; font-variant-numeric: tabular-nums; }
+    .keys { display: flex; flex-wrap: wrap; gap: 10px; }
+    .key { flex: 1 1 auto; border: 1px solid #2f6fc4; background: var(--bl); color: #fff; font: inherit; font-weight: 700; padding: 12px 18px; border-radius: 14px; cursor: pointer; }
+    .key:hover { background: var(--bl2); } .key:disabled { opacity: .45; cursor: default; }
+    .key.alt { background: rgba(31, 122, 224, .22); }
+    .seg { display: flex; flex: 1 1 100%; border: 1px solid var(--ln); border-radius: 14px; overflow: hidden; }
+    .seg button { flex: 1; border: 0; background: transparent; color: var(--mu); font: inherit; font-weight: 700; padding: 11px 14px; cursor: pointer; }
+    .seg button.on { background: var(--bl); color: #fff; }
+    .moves { margin: 0 22px 22px; border: 1px solid var(--ln); background: rgba(0, 0, 0, .22); border-radius: 14px; padding: 12px 16px; max-height: 150px; overflow-y: auto; font-size: .92rem; line-height: 1.9; }
+    .moves:empty::before { content: "The moves appear here."; color: var(--mu); }
+    .moves .n { color: var(--mu); margin-right: 4px; } .moves .m { display: inline-block; min-width: 62px; margin-right: 6px; font-weight: 600; }
+    .mock-flag { display: none; padding: 9px 12px; border-radius: 12px; background: rgba(255, 170, 0, .18); font-size: .85rem; }
     .mock-flag.on { display: block; }
-    @media (max-width: 860px) { .play { grid-template-columns: 1fr; gap: 22px; } .board-wrap { max-width: none; } }
+    @media (max-width: 760px) { .m5-body { grid-template-columns: 1fr; gap: 18px; padding: 14px; } .moves { margin: 0 14px 14px; } .m5-hint { display: none; } .queen { height: 130px; } }
   </style>
 </head>
 <body>
@@ -60,38 +80,60 @@
       <div class="section-heading">
         <div>
           <p class="eyebrow">Play in your browser</p>
-          <h1 class="pp-title" style="font-size:clamp(2rem,5vw,3.2rem)">Play against Virgin</h1>
+          <h1 class="pp-title" style="font-size:clamp(2rem,5vw,3.2rem)">Play against Virginia</h1>
         </div>
-        <p>The adaptive game: Virgin keeps the game close and winnable for you. The engine runs on your device, nothing is sent anywhere.</p>
+        <p>Virginia is the adaptive opponent of the <a href="../">Virgin</a> engine. She keeps the game close and winnable for you. The engine runs on your device, nothing is sent anywhere.</p>
       </div>
     </section>
 
-    <section class="play" aria-label="Chess game">
-      <div class="board-wrap"><div id="board" class="board" role="grid" aria-label="Chessboard"></div></div>
+    <section class="m5" aria-label="Chess game against Virginia">
+      <div class="m5-top">
+        <span class="m5-brand"><img src="../../assets/virgin/virginia.webp" alt="" width="34" height="34">Virginia</span>
+        <span class="m5-pill">ADAPTIVE</span>
+        <span class="m5-hint">Runs in your browser</span>
+      </div>
+      <div class="m5-body">
+        <div><div id="board" class="board" role="grid" aria-label="Chessboard"></div></div>
 
-      <div class="panel">
-        <div class="mock-flag" id="mockFlag">Test mode: the opponent plays random moves. The real engine is not connected.</div>
-        <div id="status" class="status">Loading …</div>
-        <div id="engineLine" class="engine-line"></div>
-        <div class="controls">
-          <div class="seg" role="group" aria-label="Your colour">
-            <button id="cW" class="on" type="button">White</button>
-            <button id="cB" type="button">Black</button>
+        <aside class="m5-side">
+          <div class="mock-flag" id="mockFlag">Test mode: the opponent plays random moves. The real engine is not connected.</div>
+          <div class="m5-stat"><span id="dot" class="dot"></span><span id="status">Loading …</span></div>
+          <div id="engineLine" class="m5-sub"></div>
+
+          <div class="m5-you">
+            <div><span class="lbl">You:</span><strong id="you">White</strong></div>
+            <img id="queen" class="queen" src="../../assets/virgin/queen/queen_2.webp" alt="Queen mood: balanced" width="152" height="224">
           </div>
-          <button id="newGame" class="button primary" type="button">New game</button>
-          <button id="undo" class="button secondary" type="button">Take back</button>
-        </div>
-        <div id="moves" class="moves" aria-label="Moves"></div>
-        <p class="pp-note" style="margin-top:0">
-          Promotions become a queen. Draws are declared by the usual rules (stalemate, three-fold repetition, fifty moves, too little material).
-          More bots, five playing styles, analysis and electronic boards: <a href="../../beatchessbots/">Beat Chessbots</a>.
-        </p>
+
+          <div class="calc" aria-label="Current calculation">
+            <div><span>Depth</span><b id="cDepth">–</b></div>
+            <div><span>Eval</span><b id="cEval">–</b></div>
+            <div><span>Nodes</span><b id="cNodes">–</b></div>
+          </div>
+          <div id="cPv" class="pv"></div>
+
+          <div class="keys">
+            <div class="seg" role="group" aria-label="Your colour">
+              <button id="cW" class="on" type="button">White</button>
+              <button id="cB" type="button">Black</button>
+            </div>
+            <button id="newGame" class="key" type="button">New game</button>
+            <button id="undo" class="key alt" type="button">Take back</button>
+          </div>
+        </aside>
       </div>
+      <div id="moves" class="moves" aria-label="Moves"></div>
     </section>
+
+    <p class="pp-note" style="margin-top:-12px">
+      Promotions become a queen. Draws follow the usual rules (stalemate, three-fold repetition, fifty moves, too little material).
+      The queen shows how the game stands from your point of view, from radiant to lightning and fire.
+      More bots, five playing styles, analysis and electronic boards: <a href="../../beatchessbots/">Beat Chessbots</a>.
+    </p>
   </main>
 
   <footer>
-    <span>© <span id="year"></span> parlue</span>
+    <span>© 2026 Dirk D. Sommerfeld</span><span id="year" hidden></span>
     <span><a href="../">← back to Virgin</a></span>
   </footer>
 
@@ -104,10 +146,11 @@
     /* ---------- Engine adapter ----------------------------------------------------------------
        The ONLY place that talks to the engine. The real WebAssembly engine lives in ./engine/ and runs in a Web Worker.
        Expected worker protocol (to be matched to the real worker when the files are in place):
-         page -> worker   {cmd:"start"}                          worker -> page  {type:"ready"}
-                          {cmd:"newGame"}                                        {type:"ok"}
-                          {cmd:"bestMove", moves:["e2e4",...], nodes:N}          {type:"bestmove", move:"e7e5", ms:830, info:[...]}
-                                                                                 {type:"error", message:"..."}
+         page -> worker   {cmd:"start"}                                     worker -> page  {type:"ready"}
+                          {cmd:"newGame"}
+                          {cmd:"bestMove", moves:["e2e4",...], nodes:N}      {type:"info", line:"info depth 7 score cp 34 nodes 12000 pv e7e5 ..."}   (any number, while searching)
+                                                                             {type:"bestmove", move:"e7e5", ms:830, info:["info string adaptive ...", ...]}
+                                                                             {type:"error", message:"..."}
        "?mock=1" uses a built-in opponent that plays random legal moves, only to test layout and flow.
        ENGINE_NODES = search limit per move. PLACEHOLDER: has to be measured against the 1500 ms of the Android app.            */
     var ENGINE_NODES = 100000;
@@ -115,7 +158,7 @@
     var MOCK = /[?&]mock=1\b/.test(location.search);
 
     var Engine = {
-      worker: null, waiting: null,
+      worker: null, waiting: null, onInfo: null,
       start: function () {
         var self = this;
         if (MOCK) return Promise.resolve();
@@ -126,6 +169,7 @@
           self.worker.onmessage = function (ev) {
             var d = ev.data || {};
             if (d.type === "ready") { clearTimeout(timer); resolve(); }
+            else if (d.type === "info") { if (self.onInfo) self.onInfo(String(d.line || "")); }
             else if (self.waiting && d.type === "bestmove") { var w = self.waiting; self.waiting = null; w.resolve(d); }
             else if (self.waiting && d.type === "error") { var w2 = self.waiting; self.waiting = null; w2.reject(new Error(d.message || "Engine error")); }
           };
@@ -133,11 +177,14 @@
         });
       },
       newGame: function () { if (!MOCK && this.worker) this.worker.postMessage({ cmd: "newGame" }); },
-      bestMove: function (movesUci, legalFallback) {
+      bestMove: function (movesUci, legalFallback, mockEval) {
         var self = this;
         if (MOCK) {
           return new Promise(function (resolve) {
-            setTimeout(function () { var m = legalFallback[Math.floor(Math.random() * legalFallback.length)]; resolve({ move: m, ms: 600 }); }, 600);
+            var d = 0, t = setInterval(function () {
+              d++; if (self.onInfo) self.onInfo("info depth " + d + " score cp " + (-mockEval) + " nodes " + (d * d * 1900) + " pv " + legalFallback[0]);
+              if (d >= 6) { clearInterval(t); var m = legalFallback[Math.floor(Math.random() * legalFallback.length)]; resolve({ move: m, ms: 600 }); }
+            }, 100);
           });
         }
         return new Promise(function (resolve, reject) {
@@ -150,16 +197,52 @@
 
     /* ---------- Game ------------------------------------------------------------------------- */
     var GLYPH = { k: "♚", q: "♛", r: "♜", b: "♝", n: "♞", p: "♟" };
+    var QUEEN_NAME = ["radiant", "silvery", "balanced", "in a storm", "in the rain", "lightning and fire"];
     var game = new Chess();
     var humanWhite = true, busy = false, engineReady = false, selected = null, targets = [], gen = 0;
+    var playerEval = 0, evalAt = {};      // evaluation from the player's point of view (centipawns) after Virginia's last finished move
 
-    var $board = document.getElementById("board"), $status = document.getElementById("status"), $eng = document.getElementById("engineLine"), $moves = document.getElementById("moves");
-    document.getElementById("mockFlag").classList.toggle("on", MOCK);
+    function $(id) { return document.getElementById(id); }
+    var $board = $("board"), $status = $("status"), $dot = $("dot"), $eng = $("engineLine"), $moves = $("moves"), $queen = $("queen");
+    $("mockFlag").classList.toggle("on", MOCK);
 
     function uciList() { return game.history({ verbose: true }).map(function (m) { return m.from + m.to + (m.promotion || ""); }); }
     function legalUci() { return game.moves({ verbose: true }).map(function (m) { return m.from + m.to + (m.promotion ? "q" : ""); }); }
     function humanTurn() { return (game.turn() === "w") === humanWhite; }
     function sqName(file, rank) { return "abcdefgh".charAt(file) + (rank + 1); }
+
+    /* The queen: same thresholds as M5Chess and the app (player's view). No animation; during a search she keeps the last finished state. */
+    function stageOf(cp) { if (cp >= 250) return 0; if (cp >= 120) return 1; if (cp > -120) return 2; if (cp > -250) return 3; if (cp > -400) return 4; return 5; }
+    function setQueen() { var s = stageOf(playerEval); $queen.src = "../../assets/virgin/queen/queen_" + s + ".webp"; $queen.alt = "Queen mood: " + QUEEN_NAME[s]; }
+    function materialEval() {
+      var v = { p: 1, n: 3, b: 3, r: 5, q: 9, k: 0 }, s = 0, b = game.board();
+      for (var r = 0; r < 8; r++) for (var f = 0; f < 8; f++) { var p = b[r][f]; if (p) s += ((p.color === "w") === humanWhite ? 1 : -1) * v[p.type]; }
+      return s * 100;
+    }
+    // Player's evaluation from the engine's info lines: Virginia's own "adaptive ... after N" if present (already the player's view), else minus the engine score.
+    function parseEval(info) {
+      if (!Array.isArray(info)) return null;
+      var after = null, score = null, m;
+      for (var i = 0; i < info.length; i++) {
+        var l = String(info[i]);
+        if (l.indexOf("info string adaptive ") === 0) { m = / after (-?\d+)/.exec(l); if (m) after = parseInt(m[1], 10); }
+        else if (l.indexOf("info ") === 0 && l.indexOf("info string") !== 0) { m = / score (cp|mate) (-?\d+)/.exec(l); if (m) { var x = parseInt(m[2], 10); score = m[1] === "cp" ? x : (x > 0 ? 100000 : -100000); } }
+      }
+      return after !== null ? after : (score !== null ? -score : null);
+    }
+
+    /* Live calculation: depth, evaluation (player's view) and nodes of the running search, and the line Virginia is looking at. */
+    function fmtEval(cp) { if (Math.abs(cp) >= 90000) return (cp > 0 ? "+" : "−") + "mate"; return (cp >= 0 ? "+" : "−") + (Math.abs(cp) / 100).toFixed(2); }
+    function clearCalc() { $("cDepth").textContent = $("cEval").textContent = $("cNodes").textContent = "–"; $("cPv").textContent = ""; }
+    function showInfo(line) {
+      if (line.indexOf("info ") !== 0 || line.indexOf("info string") === 0) return;
+      var m;
+      if ((m = / depth (\d+)/.exec(line))) $("cDepth").textContent = m[1];
+      if ((m = / nodes (\d+)/.exec(line))) $("cNodes").textContent = Number(m[1]).toLocaleString("en-US");
+      if ((m = / score (cp|mate) (-?\d+)/.exec(line))) { var x = parseInt(m[2], 10); $("cEval").textContent = fmtEval(-(m[1] === "cp" ? x : (x > 0 ? 100000 : -100000))); }
+      if ((m = / pv (.+)$/.exec(line))) $("cPv").textContent = m[1].split(" ").slice(0, 6).join(" ");
+    }
+    Engine.onInfo = showInfo;
 
     function render() {
       var hist = game.history({ verbose: true }), last = hist.length ? hist[hist.length - 1] : null;
@@ -183,10 +266,11 @@
       var mv = game.history(), out = "";
       for (var i = 0; i < mv.length; i += 2) out += '<span class="n">' + (i / 2 + 1) + '.</span><span class="m">' + mv[i] + '</span><span class="m">' + (mv[i + 1] || "") + "</span> ";
       $moves.innerHTML = out; $moves.scrollTop = $moves.scrollHeight;
-      document.getElementById("undo").disabled = busy || mv.length === 0;
+      $("undo").disabled = busy || mv.length === 0;
+      $("you").textContent = humanWhite ? "White" : "Black";
     }
 
-    function setStatus(t) { $status.textContent = t; }
+    function setStatus(t, kind) { $status.textContent = t; $dot.className = "dot " + (kind || ""); }
     function endText() {
       if (game.in_checkmate()) return game.turn() === "w" ? "Checkmate. Black wins." : "Checkmate. White wins.";
       if (game.in_stalemate()) return "Stalemate. Draw.";
@@ -197,26 +281,30 @@
     }
     function refreshStatus() {
       var e = endText();
-      if (e) { setStatus(e); return true; }
+      if (e) { setStatus(e, "end"); return true; }
       if (!engineReady) return false;
-      setStatus(humanTurn() ? (game.in_check() ? "Your move. You are in check." : "Your move.") : "Virgin is thinking …");
+      if (humanTurn()) setStatus(game.in_check() ? "Your move. You are in check." : "Your move.", "ok");
+      else setStatus("Virginia is thinking …", "think");
       return false;
     }
 
     function engineTurn() {
       if (!engineReady || game.game_over() || humanTurn()) { busy = false; render(); return; }
-      busy = true; render(); setStatus("Virgin is thinking …");
+      busy = true; render(); setStatus("Virginia is thinking …", "think"); clearCalc();
       var my = gen;
-      Engine.bestMove(uciList(), legalUci()).then(function (r) {
+      Engine.bestMove(uciList(), legalUci(), playerEval).then(function (r) {
         if (my !== gen) return;
         var u = String(r.move || ""), from = u.slice(0, 2), to = u.slice(2, 4), promo = u.length > 4 ? u.charAt(4) : undefined;
         var made = game.move({ from: from, to: to, promotion: promo });
-        if (!made) { busy = false; render(); setStatus("The engine sent an illegal move (" + u + ")."); return; }
-        $eng.textContent = "Virgin · " + made.san + (r.ms ? " · " + (r.ms / 1000).toFixed(1) + " s" : "");
+        if (!made) { busy = false; render(); setStatus("The engine sent an illegal move (" + u + ").", "err"); return; }
+        var ev = parseEval(r.info); if (ev === null && MOCK) ev = materialEval();
+        if (ev !== null) playerEval = ev;
+        evalAt[game.history().length] = playerEval; setQueen();
+        $eng.textContent = "Virginia · " + made.san + (r.ms ? " · " + (r.ms / 1000).toFixed(1) + " s" : "");
         busy = false; selected = null; targets = []; render(); refreshStatus();
       }).catch(function (err) {
         if (my !== gen) return;
-        busy = false; render(); setStatus(err.message || "Engine error");
+        busy = false; render(); setStatus(err.message || "Engine error", "err");
       });
     }
 
@@ -237,29 +325,32 @@
 
     function newGame() {
       gen++; Engine.stop(); Engine.newGame();
-      game = new Chess(); selected = null; targets = []; busy = false; $eng.textContent = "";
+      game = new Chess(); selected = null; targets = []; busy = false; $eng.textContent = ""; playerEval = 0; evalAt = {}; setQueen(); clearCalc();
       render(); refreshStatus(); engineTurn();
     }
     function setColour(white) {
       humanWhite = white;
-      document.getElementById("cW").classList.toggle("on", white); document.getElementById("cB").classList.toggle("on", !white);
+      $("cW").classList.toggle("on", white); $("cB").classList.toggle("on", !white);
       newGame();
     }
-    document.getElementById("cW").addEventListener("click", function () { setColour(true); });
-    document.getElementById("cB").addEventListener("click", function () { setColour(false); });
-    document.getElementById("newGame").addEventListener("click", newGame);
-    document.getElementById("undo").addEventListener("click", function () {
+    $("cW").addEventListener("click", function () { setColour(true); });
+    $("cB").addEventListener("click", function () { setColour(false); });
+    $("newGame").addEventListener("click", newGame);
+    $("undo").addEventListener("click", function () {
       if (busy) return; gen++; Engine.stop();
       game.undo(); if (!humanTurn() && game.history().length) game.undo();
+      var n = game.history().length, best = -1;
+      Object.keys(evalAt).forEach(function (k) { var i = parseInt(k, 10); if (i > n) delete evalAt[k]; else if (i > best) best = i; });
+      playerEval = best >= 0 ? evalAt[best] : 0; setQueen();
       selected = null; targets = []; render();
-      if (!refreshStatus()) engineTurn();   // as Black with nothing left to take back, the engine opens again
+      if (!refreshStatus()) engineTurn();   // as Black with nothing left to take back, Virginia opens again
     });
 
-    render(); setStatus("Starting the engine …");
+    render(); setStatus("Starting the engine …", "think");
     Engine.start().then(function () {
-      engineReady = true; $eng.textContent = MOCK ? "" : "Virgin · adaptive"; render(); refreshStatus(); engineTurn();
+      engineReady = true; $eng.textContent = MOCK ? "" : "Adaptive game"; render(); refreshStatus(); engineTurn();
     }).catch(function (err) {
-      setStatus("The engine is not available yet."); $eng.textContent = err.message || "";
+      setStatus("The engine is not available yet.", "err"); $eng.textContent = err.message || "";
     });
   })();
   </script>
