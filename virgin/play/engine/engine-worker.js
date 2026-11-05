@@ -1,4 +1,4 @@
-/* Virgin 0.8.0. Classic dedicated Worker; UCI commands and output are strings. */
+/* Virgin 0.8.2. Classic dedicated Worker; UCI commands and output are strings. */
 "use strict";
 let engine, session = 0, output = 0, pollTimer, dead = false;
 const queued = [];
@@ -66,7 +66,7 @@ self.onmessage = ({ data }) => {
     output = engine._malloc(65537);
     if (!output) throw new Error("Cannot allocate engine output buffer");
     pollTimer = setInterval(poll, 10);
-    self.postMessage({ type: "ready", engine: "Virgin 0.8.0" });
+    self.postMessage({ type: "ready", engine: "Virgin 0.8.2" });
     for (const command of queued.splice(0)) send(command);
   } catch (failure) {
     error(failure && failure.message || failure);

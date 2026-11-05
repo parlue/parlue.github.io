@@ -150,7 +150,7 @@
       When a pawn reaches the last rank you choose the new piece. Draws follow the usual rules (stalemate, three-fold repetition, fifty moves, too little material).
       The queen shows how the game stands from your point of view, from radiant to lightning and fire.
       More bots, five playing styles, analysis and electronic boards: <a href="../../beatchessbots/">Beat Chessbots</a>.
-      Pieces: Bryan’s Italian, a gift of Bryan Withby. Board logic: <a href="https://github.com/jhlywa/chess.js" target="_blank" rel="noreferrer">chess.js</a> (BSD). Engine: <a href="../">Virgin</a> 0.8.0 (MIT).
+      Pieces: Bryan’s Italian, a gift of Bryan Withby. Board logic: <a href="https://github.com/jhlywa/chess.js" target="_blank" rel="noreferrer">chess.js</a> (BSD). Engine: <a href="../">Virgin</a> 0.8.2 (MIT).
     </p>
   </main>
 
@@ -166,7 +166,7 @@
     "use strict";
 
     /* ---------- Engine adapter ----------------------------------------------------------------
-       The ONLY place that talks to the engine. Virgin 0.8.0 (threaded WebAssembly) runs in ./engine/engine-worker.js and speaks plain UCI strings;
+       The ONLY place that talks to the engine. Virgin 0.8.2 (threaded WebAssembly) runs in ./engine/engine-worker.js and speaks plain UCI strings;
        the worker posts {type:"ready"} when the runtime is loaded, then the UCI handshake is ours.
        "?mock=1" uses a built-in opponent that plays random legal moves, only to test layout and flow without the engine.
        MOVETIME_MS = think time per move, the same as the adaptive game of the Android app (tal_params "denkzeit_ms").            */
