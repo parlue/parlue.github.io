@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Handbuch zu Beat Chessbots: Beat the Bot mit 215 Bots, Spiele gegen Chessbot, die Partie, die Uhr, E-Boards, das Menü und die Analyse.">
+  <title>Beat Chessbots – Handbuch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../echesstactics/project.css">
+  <style>
+    .doc img { display: block; max-width: min(100%, 360px); height: auto; border-radius: 14px; margin: 16px 0; border: 1px solid var(--line); }
+    .doc img[src$="queen-moods.png"] { max-width: 100%; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">parlue<span>.</span></a>
+    <nav>
+      <a href="./">Übersicht</a>
+      <a href="handbuch.html">Handbuch</a>
+      <a href="docs.html">English</a>
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">☾</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="doc-layout">
+      <nav class="doc-nav" aria-label="Abschnitte des Handbuchs">
+        <a href="#1-der-bildschirm">Der Bildschirm</a>
+        <a href="#2-beat-the-bot">Beat the Bot</a>
+        <a href="#3-spiele-gegen-chessbot">Spiele gegen Chessbot</a>
+        <a href="#4-die-partie">Die Partie</a>
+        <a href="#5-die-uhr">Die Uhr</a>
+        <a href="#6-e-board-verbinden">E-Board verbinden</a>
+        <a href="#7-das-menu">Das Menü</a>
+        <a href="#8-analyse">Analyse</a>
+        <a href="#9-partien-und-daten">Partien und Daten</a>
+      </nav>
+
+      <article class="doc">
+        <p class="eyebrow">Handbuch</p>
+        <h1>Beat Chessbots</h1>
+<p>Beat Chessbots ist eine Schach-App für Android. Du spielst gegen 215 Bots mit Gesicht, Namen und eigenem Stil oder gegen Chessbot, der sich deiner Stärke anpasst. Gespielt wird auf dem Bildschirm oder an einem echten E-Board. Alles läuft auf deinem Handy: kein Konto, keine Werbung, zum Spielen ist kein Internet nötig.</p>
+<p>Projektseite: <a href="https://parlue.github.io/beatchessbots/">https://parlue.github.io/beatchessbots/</a> · Fragen, Fehler, Wünsche: Discord-Server <em>electricchess</em> · <a href="https://discord.gg/AdZukFtBf">https://discord.gg/AdZukFtBf</a></p>
+<h2 id="1-der-bildschirm">1. Der Bildschirm</h2>
+<p><img alt="Eine Partie gegen einen Bot" src="../assets/beatchessbots/game.jpg" /></p>
+<p>Die Leiste oben, von links:</p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Bedeutung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boxhandschuh</td>
+<td>Beat the Bot: Spiele gegen die 215 Bots</td>
+</tr>
+<tr>
+<td>Königin mit Play-Knopf</td>
+<td>Spiele gegen Chessbot (Adaptiv oder Elo)</td>
+</tr>
+<tr>
+<td>Lupe</td>
+<td>Analyse</td>
+</tr>
+<tr>
+<td>Bluetooth</td>
+<td>E-Board verbinden</td>
+</tr>
+<tr>
+<td>Pfeile</td>
+<td>Brett drehen</td>
+</tr>
+<tr>
+<td>Drei Striche</td>
+<td>Menü</td>
+</tr>
+<tr>
+<td>Flagge</td>
+<td>Sprache</td>
+</tr>
+</tbody>
+</table>
+<p>Unter dem Brett siehst du die Königin auf einem Farbstreifen und rechts die drei Symbole der Partie (siehe <a href="#4-die-partie">Die Partie</a>). Darunter stehen die Züge.</p>
+<h2 id="2-beat-the-bot">2. Beat the Bot</h2>
+<p>Tippe auf den Boxhandschuh. Es gibt 215 Bots in fünf Stärkegruppen:</p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Gruppe</th>
+<th>Stärke</th>
+<th>Bots</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Anfänger</td>
+<td>700 – 1000</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Fortgeschrittene</td>
+<td>1050 – 1400</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Vereinsspieler</td>
+<td>1450 – 1800</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Turnierspieler</td>
+<td>1850 – 2200</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Meister</td>
+<td>2250 – 2800</td>
+<td>60</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="Die fünf Stärkegruppen" src="../assets/beatchessbots/bot-1-strength.jpg" /></p>
+<p>Wähle eine Gruppe und tippe auf ein Gesicht. Jedes Gesicht ist eine Spielstärke.</p>
+<p><img alt="Die zwölf Stufen der Meister" src="../assets/beatchessbots/bot-2-select.jpg" /></p>
+<p>Zu jeder Stärke gibt es fünf Gegner mit unterschiedlichem Stil: <strong>Fortress</strong>, <strong>Stone</strong>, <strong>Normal</strong>, <strong>Fire</strong> und <strong>Thunder</strong>. Die Zahl ist ein Richtwert für die Spielstärke; der Stil bestimmt, wie der Bot spielt, von vorsichtig bis angriffslustig.</p>
+<p><img alt="Die fünf Stile einer Stufe" src="../assets/beatchessbots/bot-3-variants.jpg" /></p>
+<p>Nach der Wahl des Stils öffnet sich das Startfenster. Wähle <strong>Weiß</strong> oder <strong>Schwarz</strong> und die Zeit, dann tippe auf <strong>Start</strong>.</p>
+<p><img alt="Das Startfenster" src="../assets/beatchessbots/bot-4-start.jpg" /></p>
+<p><strong>Der grüne Haken.</strong> Ein grüner Haken auf dem Gesicht heißt: Du hast diesen Gegner mit Weiß und mit Schwarz besiegt (Matt). Mit nur einer Farbe zeigt das Gesicht einen hohlen Haken mit einem weißen oder schwarzen Punkt; im Startfenster ist die noch fehlende Farbe schon vorgewählt. Remis, Aufgabe und Abbruch zählen nicht.</p>
+<p><strong>Keine Tipps.</strong> Gegen die Bots gibt es keine Tipps und keine Zugvorschläge. Du kannst einen Zug zurücknehmen (Pfeil neben den Partie-Symbolen) und die Analyse benutzen, aber eine Partie, in der du eines von beiden benutzt hast, zählt nicht für den grünen Haken.</p>
+<h2 id="3-spiele-gegen-chessbot">3. Spiele gegen Chessbot</h2>
+<p>Tippe auf die Königin mit dem Play-Knopf. Im Startfenster wählst du die Art der Partie:</p>
+<ul>
+<li><strong>Adaptiv.</strong> Chessbot passt sich dir an und spielt nahe am Ausgleich. Steht es ungefähr gleich, spielt er den Zug, der dem Ausgleich am nächsten kommt. Stehst du deutlich schlechter, hilft er mit einem schwächeren, aber vernünftigen Zug. Stehst du klar besser, hält er dich ungefähr dort, und du musst den Vorteil selbst verwerten. Bei hoffnungsloser Lage oder nahem Matt spielt er mit voller Stärke. Das Ziel ist, dich in ein Endspiel zu führen, das du mit Technik gewinnen kannst. In dieser Art gibt es keine Uhr und kein Zurücknehmen.</li>
+<li><strong>Elo.</strong> Chessbot spielt immer auf der festen Stufe, die du einstellst. Hier kannst du die Uhr benutzen und Züge zurücknehmen.</li>
+</ul>
+<p>Mit einem verbundenen Brett bietet das Startfenster auch <strong>Hilfe</strong> an: Hebst du eine deiner Figuren an und hältst sie etwa zweieinhalb Sekunden in der Luft, zeigt das Brett den besten Zug dieser Figur.</p>
+<h2 id="4-die-partie">4. Die Partie</h2>
+<p>Unter dem Brett zeigt die Königin, wie die Partie steht. Der Streifen läuft von Rot links (der Gegner ist vorn) über Blau in der Mitte (ausgeglichen) bis Grün rechts (du bist vorn). Die Königin hat sechs Stimmungen, von strahlend bis Sturm und Blitz.</p>
+<p><img alt="Die sechs Stimmungen der Königin" src="../assets/beatchessbots/queen-moods.png" /></p>
+<p>Auf Brettern mit Farb-LEDs (iChessOne, Spectrum) leuchtet der Zug des Gegners in der Farbe der Stimmung.</p>
+<p>Rechts in der Leiste unter dem Brett stehen drei Symbole:</p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Funktion</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>½:½</strong></td>
+<td><strong>Remis.</strong> Du bietest auf deinem Zug Remis an. Der Gegner nimmt an, wenn die Stellung ungefähr ausgeglichen ist (nicht mehr als etwa ein Bauer Vorteil für eine Seite) und kein Matt in Sicht ist.</td>
+</tr>
+<tr>
+<td>Weiße Fahne</td>
+<td><strong>Aufgeben.</strong> Nach einer Rückfrage ist die Partie verloren.</td>
+</tr>
+<tr>
+<td>Rotes X</td>
+<td><strong>Abbruch.</strong> Die Partie endet sofort; danach kannst du sie speichern.</td>
+</tr>
+</tbody>
+</table>
+<p>Endet die Partie von selbst (Matt, Patt, zu wenig Material, dreimalige Wiederholung, 50-Züge-Regel, Zeit), erscheint unter dem Brett eine Karte mit vier Möglichkeiten: <strong>In PGN-Analyse öffnen</strong>, <strong>Partie teilen</strong>, <strong>Neue Partie</strong> und <strong>Schließen</strong>.</p>
+<h2 id="5-die-uhr">5. Die Uhr</h2>
+<p>Im Startfenster wählst du eine von drei Einstellungen:</p>
+<ul>
+<li><strong>Keine Zeit</strong></li>
+<li><strong>Spielzeit</strong>: 5+2, 10+5, 15+5, 30+10, 60+30 oder die Turnierzeit 40/90+30</li>
+<li><strong>Zeit pro Zug</strong>: 1, 2, 5, 10, 30 oder 60 Sekunden pro Zug (nur im Elo-Spiel)</li>
+</ul>
+<p>Die Uhren stehen neben dem Brett: oben der Gegner, unten du. Gegen Chessbot gibt es Uhren nur im Elo-Spiel, nicht im adaptiven Spiel.</p>
+<h2 id="6-e-board-verbinden">6. E-Board verbinden</h2>
+<p>Tippe auf das Bluetooth-Symbol. Du kannst verbinden:</p>
+<p><img alt="Die Bretter" src="../assets/beatchessbots/connect-board.jpg" /></p>
+<ul>
+<li>Millennium T2 / ChessLink</li>
+<li>Millennium eONE</li>
+<li>Chessnut</li>
+<li>Certabo (Bluetooth)</li>
+<li>Certabo (USB)</li>
+<li>Tabutronic Bauerino</li>
+<li>iChessOne</li>
+<li>Manya Cynus</li>
+</ul>
+<p>Du ziehst auf den echten Figuren; der Zug des Gegners erscheint auf dem Bildschirm und auf den LEDs des Bretts. Bei Brettern mit Sensoren zeigen die LEDs beim Aufbau, welche Felder noch nicht stimmen. Certabo und Spectrum laufen auch per USB-Kabel am Handy (mit USB-OTG-Adapter).</p>
+<p>Bretter ohne Figurenerkennung (Millennium eONE, Tabutronic Sentio, Tabutronic Bauerino) melden nur, welche Felder besetzt sind. Die App kennt die Figuren aus der Partie und liest deinen Zug daraus.</p>
+<p>Nimmst du am Brett einen Zug zurück, stellst du zuerst den Zug des Bots zurück: Die App erkennt das, und die LEDs zeigen dann, welchen deiner Züge du zurückstellen musst.</p>
+<p><em>Beat Chessbots ist eine unabhängige App. Sie steht in keiner Verbindung zu den Herstellern der unterstützten Bretter und wird weder von ihnen empfohlen noch gesponsert. Alle Produktnamen sind Marken ihrer jeweiligen Inhaber.</em></p>
+<h2 id="7-das-menu">7. Das Menü</h2>
+<p><img alt="Das Menü" src="../assets/beatchessbots/menu.jpg" /></p>
+<ul>
+<li><strong>Freie Analyse</strong> (mit verbundenem Brett): Der Bildschirm zeigt immer die Stellung auf dem Brett, Stockfish analysiert sie live.</li>
+<li><strong>Hilfe</strong>: die Kurzanleitung in der App.</li>
+<li><strong>FEN-Werkzeuge</strong>: FEN erstellen, anzeigen und teilen.</li>
+<li><strong>E-Board-Funktionen</strong>: die auf deinem Brett gespeicherten Partien herunterladen (Chessnut, Supreme T2, eChessGW), Spielerseite am Chessnut Move, LED-Farbe für Spectrum und iChessOne und „Weiß steht unten" für das Bauerino. Ein Eintrag ist grau, solange das Brett, zu dem er gehört, nicht verbunden ist.</li>
+<li><strong>Figurensatz</strong>: Standard, Merida, MPChess oder Bryan's Italian.</li>
+<li><strong>Tee spendieren</strong>: eine freiwillige Spende für die Entwicklung. Dadurch wird nichts freigeschaltet.</li>
+<li><strong>Diagnoselog teilen</strong>: für die Fehlersuche; du schickst die Datei per Mail, Messenger oder Discord.</li>
+</ul>
+<h2 id="8-analyse">8. Analyse</h2>
+<p>Tippe auf die Lupe. Stockfish rechnet live und zeigt bis zu fünf Varianten, die Bewertung vorn in Fettschrift. Pfeile auf dem Brett zeigen die Züge: Dunkelgrün ist der beste Zug, Hellgrün sind weitere gute Züge, Rot ist ein Verlustzug.</p>
+<p>In einer Beat-the-Bot-Partie zählt ein Sieg nach der Benutzung der Analyse nicht mehr für den grünen Haken.</p>
+<h2 id="9-partien-und-daten">9. Partien und Daten</h2>
+<ul>
+<li>Alle beendeten Partien werden als PGN-Dateien im Ordner <strong>Downloads/eChessboards</strong> gespeichert. Du kannst sie über die Karte am Partieende teilen oder in einem beliebigen PGN-Programm öffnen.</li>
+<li>Die Engines laufen auf deinem Gerät. Die Bots werden von der Open-Source-Engine <a href="https://parlue.github.io/virgin/">Virgin</a> gespielt (MIT-Lizenz); die Analyse nutzt Stockfish (GPLv3).</li>
+<li>Sprachen: Deutsch und Englisch, dazu Spanisch, Italienisch, Französisch und Polnisch für Knöpfe und Meldungen. Die Kurzanleitung in der App gibt es auf Deutsch und Englisch.</li>
+<li>Datenschutzerklärung: <a href="https://parlue.github.io/beatchessbots-privacy/">https://parlue.github.io/beatchessbots-privacy/</a></li>
+</ul>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> parlue</span>
+    <span><a href="./">← Zurück zur Übersicht</a></span>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>

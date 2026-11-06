@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Beat Chessbots manual: Beat the Bot with 215 bots, play against Chessbot, the game, the clock, e-boards, the menu and the analysis.">
+  <title>Beat Chessbots – Manual</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <link rel="stylesheet" href="../echesstactics/project.css">
+  <style>
+    .doc img { display: block; max-width: min(100%, 360px); height: auto; border-radius: 14px; margin: 16px 0; border: 1px solid var(--line); }
+    .doc img[src$="queen-moods.png"] { max-width: 100%; }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="../">parlue<span>.</span></a>
+    <nav>
+      <a href="./">Overview</a>
+      <a href="docs.html">Manual</a>
+      <a href="handbuch.html">Deutsch</a>
+      <button id="themeToggle" class="icon-button" aria-label="Toggle dark mode">☾</button>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="doc-layout">
+      <nav class="doc-nav" aria-label="Manual sections">
+        <a href="#1-the-screen">The screen</a>
+        <a href="#2-beat-the-bot">Beat the Bot</a>
+        <a href="#3-play-against-chessbot">Play against Chessbot</a>
+        <a href="#4-the-game">The game</a>
+        <a href="#5-the-clock">The clock</a>
+        <a href="#6-connect-an-e-board">Connect an e-board</a>
+        <a href="#7-the-menu">The menu</a>
+        <a href="#8-analysis">Analysis</a>
+        <a href="#9-games-and-data">Games and data</a>
+      </nav>
+
+      <article class="doc">
+        <p class="eyebrow">Manual</p>
+        <h1>Beat Chessbots</h1>
+<p>Beat Chessbots is a chess app for Android. You play against 215 bots, each with a face, a name and a style, or against Chessbot, who adapts to your strength. You can play on the screen or on a real e-board. Everything runs on your phone: no account, no ads, no internet needed to play.</p>
+<p>Project page: <a href="https://parlue.github.io/beatchessbots/">https://parlue.github.io/beatchessbots/</a> · Questions, bugs, wishes: Discord server <em>electricchess</em> · <a href="https://discord.gg/AdZukFtBf">https://discord.gg/AdZukFtBf</a></p>
+<h2 id="1-the-screen">1. The screen</h2>
+<p><img alt="A game against a bot" src="../assets/beatchessbots/game.jpg" /></p>
+<p>The row at the top, from the left:</p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Boxing glove</td>
+<td>Beat the Bot: play against the 215 bots</td>
+</tr>
+<tr>
+<td>Queen with play button</td>
+<td>Play against Chessbot (Adaptive or Elo)</td>
+</tr>
+<tr>
+<td>Magnifier</td>
+<td>Analysis</td>
+</tr>
+<tr>
+<td>Bluetooth</td>
+<td>Connect an e-board</td>
+</tr>
+<tr>
+<td>Arrows</td>
+<td>Flip the board</td>
+</tr>
+<tr>
+<td>Three lines</td>
+<td>Menu</td>
+</tr>
+<tr>
+<td>Flag</td>
+<td>Language</td>
+</tr>
+</tbody>
+</table>
+<p>Below the board you see the queen on a colour strip, and on the right the three game symbols (see <a href="#4-the-game">The game</a>). Under that the moves of the game are listed.</p>
+<h2 id="2-beat-the-bot">2. Beat the Bot</h2>
+<p>Tap the boxing glove. There are 215 bots in five strength groups:</p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Group</th>
+<th>Strength</th>
+<th>Bots</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Beginners</td>
+<td>700 – 1000</td>
+<td>35</td>
+</tr>
+<tr>
+<td>Intermediate</td>
+<td>1050 – 1400</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Club players</td>
+<td>1450 – 1800</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Tournament players</td>
+<td>1850 – 2200</td>
+<td>40</td>
+</tr>
+<tr>
+<td>Masters</td>
+<td>2250 – 2800</td>
+<td>60</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="The five strength groups" src="../assets/beatchessbots/bot-1-strength.jpg" /></p>
+<p>Choose a group and tap a face. Every face is one strength level.</p>
+<p><img alt="The twelve Masters levels" src="../assets/beatchessbots/bot-2-select.jpg" /></p>
+<p>Every strength comes with five opponents of different style: <strong>Fortress</strong>, <strong>Stone</strong>, <strong>Normal</strong>, <strong>Fire</strong> and <strong>Thunder</strong>. The number is a guide to the playing strength; the style decides how the bot plays, from cautious to aggressive.</p>
+<p><img alt="The five styles of one level" src="../assets/beatchessbots/bot-3-variants.jpg" /></p>
+<p>After you have chosen a style, the start window opens. Choose <strong>White</strong> or <strong>Black</strong> and the time, then tap <strong>Start game</strong>.</p>
+<p><img alt="The start window" src="../assets/beatchessbots/bot-4-start.jpg" /></p>
+<p><strong>The green check.</strong> A green check on a face means that you have beaten this opponent with White and with Black (checkmate). With only one colour, the face shows a hollow check with a white or black dot; in the start window the missing colour is already selected. A draw, a resignation or an abort does not count.</p>
+<p><strong>No hints.</strong> Against the bots there are no hints and no move suggestions. You can take a move back (arrow next to the game symbols) and you can use the analysis, but a game in which you used one of them does not count for the green check.</p>
+<h2 id="3-play-against-chessbot">3. Play against Chessbot</h2>
+<p>Tap the queen with the play button. In the start window you choose the type of game:</p>
+<ul>
+<li><strong>Adaptive.</strong> Chessbot adapts to you and plays close to equality. If the position is about equal, he plays the move that comes closest to equality. If you are clearly worse, he helps with a weaker but sensible move. If you are clearly better, he keeps you about there, and you have to convert the advantage yourself. In a hopeless position, or when a mate is near, he plays at full strength. The aim is to lead you into an endgame that you can win with technique. There is no clock and no taking back in this type of game.</li>
+<li><strong>Elo.</strong> Chessbot always plays at the fixed level that you set. Here you can use the clock and take moves back.</li>
+</ul>
+<p>With a connected board the start window also offers <strong>Help</strong>: lift one of your pieces and hold it in the air for about two and a half seconds, and the board shows the best move of that piece.</p>
+<h2 id="4-the-game">4. The game</h2>
+<p>Below the board the queen shows how the game stands. The strip runs from red on the left (the opponent is ahead) through blue in the middle (balanced) to green on the right (you are ahead). The queen has six moods, from radiant to storm and lightning.</p>
+<p><img alt="The six moods of the queen" src="../assets/beatchessbots/queen-moods.png" /></p>
+<p>On boards with colour LEDs (iChessOne, Spectrum) the move of the opponent lights up in the colour of the mood.</p>
+<p>On the right of the bar below the board there are three symbols:</p>
+<table class="doc-table">
+<thead>
+<tr>
+<th>Symbol</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>½:½</strong></td>
+<td><strong>Draw.</strong> You offer a draw on your turn. The opponent accepts if the position is about balanced (not more than about one pawn of advantage for either side) and no mate is in sight.</td>
+</tr>
+<tr>
+<td>White flag</td>
+<td><strong>Resign.</strong> After a confirmation the game is lost.</td>
+</tr>
+<tr>
+<td>Red X</td>
+<td><strong>Abort.</strong> The game ends at once; afterwards you can save it.</td>
+</tr>
+</tbody>
+</table>
+<p>When the game ends by itself (mate, stalemate, insufficient material, threefold repetition, 50-move rule, time) a card appears below the board with four choices: <strong>Open in PGN analysis</strong>, <strong>Share game</strong>, <strong>New game</strong> and <strong>Close</strong>.</p>
+<h2 id="5-the-clock">5. The clock</h2>
+<p>In the start window you choose one of three settings:</p>
+<ul>
+<li><strong>No Time</strong></li>
+<li><strong>Playing time</strong>: 5+2, 10+5, 15+5, 30+10, 60+30, or the tournament time 40/90+30</li>
+<li><strong>Time to move</strong>: 1, 2, 5, 10, 30 or 60 seconds per move (Elo game only)</li>
+</ul>
+<p>The clocks sit next to the board: the opponent on top, you below. Against Chessbot there are clocks only in the Elo game, not in the adaptive game.</p>
+<h2 id="6-connect-an-e-board">6. Connect an e-board</h2>
+<p>Tap the Bluetooth symbol. You can connect:</p>
+<p><img alt="The boards" src="../assets/beatchessbots/connect-board.jpg" /></p>
+<ul>
+<li>Millennium T2 / ChessLink</li>
+<li>Millennium eONE</li>
+<li>Chessnut</li>
+<li>Certabo (Bluetooth)</li>
+<li>Certabo (USB)</li>
+<li>Tabutronic Bauerino</li>
+<li>iChessOne</li>
+<li>Manya Cynus</li>
+</ul>
+<p>You make your moves on the real pieces; the move of the opponent is shown on the screen and by the LEDs of the board. On boards with sensors the LEDs show during the set-up which squares are still wrong. Certabo and Spectrum also work over a USB cable on the phone (with a USB OTG adapter).</p>
+<p>Boards without piece recognition (Millennium eONE, Tabutronic Sentio, Tabutronic Bauerino) only report which squares are occupied. The app knows the pieces from the game and reads your move from that.</p>
+<p>If you take a move back on a board, first put back the move of the bot: the app recognises it, and the LEDs then show which of your moves you have to put back.</p>
+<p><em>Beat Chessbots is an independent app. It is not affiliated with, endorsed by or sponsored by the makers of the supported boards. All product names are trademarks of their respective owners.</em></p>
+<h2 id="7-the-menu">7. The menu</h2>
+<p><img alt="The menu" src="../assets/beatchessbots/menu.jpg" /></p>
+<ul>
+<li><strong>Free analysis</strong> (with a connected board): the screen always shows the position on the board, and Stockfish analyses it live.</li>
+<li><strong>Help</strong>: the quick guide inside the app.</li>
+<li><strong>FEN tools</strong>: create, show and share a FEN.</li>
+<li><strong>E-board functions</strong>: download the games stored on your board (Chessnut, Supreme T2, eChessGW), the player side on the Chessnut Move, the LED colour for Spectrum and iChessOne, and "White at the bottom" for the Bauerino. An entry is grey while the board it belongs to is not connected.</li>
+<li><strong>Piece set</strong>: Standard, Merida, MPChess or Bryan's Italian.</li>
+<li><strong>Buy me a tea</strong>: a voluntary tip for the development. Nothing is unlocked by it.</li>
+<li><strong>Share diagnostic log</strong>: for troubleshooting; you send the file by mail, messenger or Discord.</li>
+</ul>
+<h2 id="8-analysis">8. Analysis</h2>
+<p>Tap the magnifier. Stockfish calculates live and shows up to five lines, with the evaluation in bold at the front. Arrows on the board show the moves: dark green is the best move, light green are other good moves, red is a losing move.</p>
+<p>In a Beat the Bot game, a win after using the analysis no longer counts for the green check.</p>
+<h2 id="9-games-and-data">9. Games and data</h2>
+<ul>
+<li>All finished games are saved as PGN files in the folder <strong>Downloads/eChessboards</strong>. Share them from the card at the end of the game, or open them in any PGN program.</li>
+<li>The engines run on your device. The bots are played by the open-source engine <a href="https://parlue.github.io/virgin/">Virgin</a> (MIT licence); the analysis uses Stockfish (GPLv3).</li>
+<li>Languages: German and English, plus Spanish, Italian, French and Polish for the buttons and messages. The quick guide in the app exists in German and English.</li>
+<li>Privacy policy: <a href="https://parlue.github.io/beatchessbots-privacy/">https://parlue.github.io/beatchessbots-privacy/</a></li>
+</ul>
+      </article>
+    </div>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> parlue</span>
+    <span><a href="./">← Back to the overview</a></span>
+  </footer>
+
+  <script src="../script.js"></script>
+</body>
+</html>
