@@ -2,5 +2,3 @@ User-agent: *
 Allow: /
 
 Sitemap: https://parlue.github.io/sitemap.xml
-Sitemap: https://parlue.github.io/sitemap-pages.xml
-Sitemap: https://parlue.github.io/sitemap.txt
