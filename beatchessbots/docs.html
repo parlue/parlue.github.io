@@ -201,17 +201,19 @@
 <li><strong>Help</strong>: the quick guide inside the app.</li>
 <li><strong>FEN tools</strong>: create, show and share a FEN.</li>
 <li><strong>E-board PGN download</strong>: download the games stored on your board (Chessnut, Supreme T2, eChessGW).</li>
-<li><strong>Board menu</strong> (the Bluetooth symbol, while a board is connected): a small board shows what your board reports, a red frame marks a piece that is only on the board and a yellow frame a piece that is missing on the board (compared with the screen). Below are the functions of your board – set up the starting position and send the position (Chessnut Move, Manya Cynus), scan the board and "Black plays from below" (Manya Cynus), the player side (Chessnut Move), PGN download (Chessnut), the LED colour (Spectrum, iChessOne), "White at the bottom" (Bauerino) – and "End connection".</li>
+<li><strong>Board menu</strong> (the Bluetooth symbol, while a board is connected): a small board shows what your board reports, a red frame marks a piece that is only on the board and a yellow frame with a faint piece a piece that is missing on the board (compared with the screen), and a green check means that board and screen agree. Below are the functions of your board – set up the starting position and send the position (Chessnut Move, Manya Cynus), scan the board and "Black plays from below" (Manya Cynus), the player side (Chessnut Move), PGN download (Chessnut), the LED colour (Spectrum, iChessOne), "White at the bottom" (Bauerino) – and "End connection".</li>
 <li><strong>Piece set</strong>: Standard, Merida, MPChess or Bryan's Italian.</li>
 <li><strong>Buy me a tea</strong>: a voluntary tip for the development. Nothing is unlocked by it.</li>
 <li><strong>Share diagnostic log</strong>: for troubleshooting; you send the file by mail, messenger or Discord.</li>
 </ul>
+<figure style="margin:20px 0"><img src="../assets/beatchessbots/board-menu.png" alt="Board menu of Manya Cynus: mini board with red and yellow frames, the functions of the board and End the connection" loading="lazy" style="max-width:300px;border-radius:14px"><figcaption style="color:var(--muted);font-size:.85rem;margin-top:8px">The board menu: red frame = only on the board, yellow frame with a faint piece = missing on the board.</figcaption></figure>
 <h2 id="8-analysis">8. Analysis</h2>
 <p>Tap the magnifier. Stockfish calculates live and shows up to five lines, with the evaluation in bold at the front. Arrows on the board show the moves: dark green is the best move, light green are other good moves, red is a losing move.</p>
 <p>In a Beat the Bot game, a win after using the analysis no longer counts for the green check.</p>
 <h2 id="9-games-and-data">9. Games and data</h2>
 <ul>
-<li>All finished games are saved as PGN files in the folder <strong>Downloads/eChessboards</strong>. Share them from the card at the end of the game, or open them in any PGN program.</li>
+<li>All finished games (fixed bots, adaptive and full strength) are appended to one file, <strong>Downloads/BeatChessbots/games.pgn</strong>. Share a game from the card at the end of the game, or open the file in any PGN program.</li>
+<li>The <strong>share</strong> icon in the PGN viewer: if the open file holds several games, the app asks &ldquo;What should be shared?&rdquo; with <strong>Only this game</strong> (the shown game with comments and variations) or <strong>Whole file</strong> (with the number of games). A file with a single game is shared at once, and a game you have just played and opened with <strong>Open in PGN analysis</strong> is shared directly as that game.</li>
 <li>The engines run on your device. The bots are played by the open-source engine <a href="https://parlue.github.io/virgin/">Virgin</a> (MIT licence); the analysis uses Stockfish (GPLv3).</li>
 <li>Languages: German and English, plus Spanish, Italian, French and Polish for the buttons and messages. The quick guide in the app exists in German and English.</li>
 <li>Privacy policy: <a href="https://parlue.github.io/beatchessbots-privacy/">https://parlue.github.io/beatchessbots-privacy/</a></li>

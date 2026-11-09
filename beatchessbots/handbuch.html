@@ -201,17 +201,19 @@
 <li><strong>Hilfe</strong>: die Kurzanleitung in der App.</li>
 <li><strong>FEN-Werkzeuge</strong>: FEN erstellen, anzeigen und teilen.</li>
 <li><strong>E-Board PGN Download</strong>: die auf deinem Brett gespeicherten Partien herunterladen (Chessnut, Supreme T2, eChessGW).</li>
-<li><strong>Brett-Menü</strong> (das Bluetooth-Symbol, solange ein Brett verbunden ist): ein kleines Brett zeigt, was dein Brett meldet; ein roter Rahmen markiert eine Figur, die nur auf dem Brett steht, ein gelber Rahmen eine Figur, die auf dem Brett fehlt (verglichen mit dem Bildschirm). Darunter die Funktionen deines Bretts – Grundstellung aufbauen und Position senden (Chessnut Move, Manya Cynus), Board scannen und „Schwarz spielt von unten“ (Manya Cynus), Spielerseite (Chessnut Move), PGN Download (Chessnut), LED-Farbe (Spectrum, iChessOne), „Weiß steht unten“ (Bauerino) – und „Verbindung beenden“.</li>
+<li><strong>Brett-Menü</strong> (das Bluetooth-Symbol, solange ein Brett verbunden ist): ein kleines Brett zeigt, was dein Brett meldet; ein roter Rahmen markiert eine Figur, die nur auf dem Brett steht, ein gelber Rahmen mit blasser Figur eine Figur, die auf dem Brett fehlt (verglichen mit dem Bildschirm), und ein grüner Haken bedeutet, dass Brett und Bildschirm übereinstimmen. Darunter die Funktionen deines Bretts – Grundstellung aufbauen und Position senden (Chessnut Move, Manya Cynus), Board scannen und „Schwarz spielt von unten“ (Manya Cynus), Spielerseite (Chessnut Move), PGN Download (Chessnut), LED-Farbe (Spectrum, iChessOne), „Weiß steht unten“ (Bauerino) – und „Verbindung beenden“.</li>
 <li><strong>Figurensatz</strong>: Standard, Merida, MPChess oder Bryan's Italian.</li>
 <li><strong>Tee spendieren</strong>: eine freiwillige Spende für die Entwicklung. Dadurch wird nichts freigeschaltet.</li>
 <li><strong>Diagnoselog teilen</strong>: für die Fehlersuche; du schickst die Datei per Mail, Messenger oder Discord.</li>
 </ul>
+<figure style="margin:20px 0"><img src="../assets/beatchessbots/board-menu-de.png" alt="Brett-Menü der Manya Cynus: Mini-Brett mit roten und gelben Rahmen, die Funktionen des Bretts und Verbindung beenden" loading="lazy" style="max-width:300px;border-radius:14px"><figcaption style="color:var(--muted);font-size:.85rem;margin-top:8px">Das Brett-Menü: roter Rahmen = steht nur auf dem Brett, gelber Rahmen mit blasser Figur = fehlt auf dem Brett.</figcaption></figure>
 <h2 id="8-analyse">8. Analyse</h2>
 <p>Tippe auf die Lupe. Stockfish rechnet live und zeigt bis zu fünf Varianten, die Bewertung vorn in Fettschrift. Pfeile auf dem Brett zeigen die Züge: Dunkelgrün ist der beste Zug, Hellgrün sind weitere gute Züge, Rot ist ein Verlustzug.</p>
 <p>In einer Beat-the-Bot-Partie zählt ein Sieg nach der Benutzung der Analyse nicht mehr für den grünen Haken.</p>
 <h2 id="9-partien-und-daten">9. Partien und Daten</h2>
 <ul>
-<li>Alle beendeten Partien werden als PGN-Dateien im Ordner <strong>Downloads/eChessboards</strong> gespeichert. Du kannst sie über die Karte am Partieende teilen oder in einem beliebigen PGN-Programm öffnen.</li>
+<li>Alle beendeten Partien (feste Bots, Adaptiv und Volle Stärke) werden an eine Datei angehängt: <strong>Downloads/BeatChessbots/games.pgn</strong>. Du kannst eine Partie über die Karte am Partieende teilen oder die Datei in einem beliebigen PGN-Programm öffnen.</li>
+<li>Das <strong>Teilen</strong>-Symbol im PGN-Viewer: Enthält die geöffnete Datei mehrere Partien, fragt die App „Was soll geteilt werden?“ mit <strong>Nur diese Partie</strong> (die angezeigte Partie samt Kommentaren und Varianten) oder <strong>Ganze Datei</strong> (mit Anzahl der Partien). Eine Datei mit nur einer Partie wird sofort geteilt; eine gerade gespielte Partie, die du mit <strong>In PGN-Analyse öffnen</strong> geöffnet hast, wird direkt als diese Partie geteilt.</li>
 <li>Die Engines laufen auf deinem Gerät. Die Bots werden von der Open-Source-Engine <a href="https://parlue.github.io/virgin/">Virgin</a> gespielt (MIT-Lizenz); die Analyse nutzt Stockfish (GPLv3).</li>
 <li>Sprachen: Deutsch und Englisch, dazu Spanisch, Italienisch, Französisch und Polnisch für Knöpfe und Meldungen. Die Kurzanleitung in der App gibt es auf Deutsch und Englisch.</li>
 <li>Datenschutzerklärung: <a href="https://parlue.github.io/beatchessbots-privacy/">https://parlue.github.io/beatchessbots-privacy/</a></li>
