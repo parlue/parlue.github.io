@@ -3,10 +3,16 @@
  "playlistUrl": "https://www.youtube.com/playlist?list=PLDH3rU5dsNmA",
  "videos": [
   {
+   "id": "0eyX3HOGSqU",
+   "title": "Can you Beat Tal? #eChessTactics",
+   "published": "2026-11-07",
+   "description": "eChessTactics: chess trainer for your phone and your e-board. 700,000+ puzzles, endgames, 71 bots, a challenge against Tal, 100% offline.\nGoogle Play: eChessTactics (link in bio)\nplay.google.com/store/apps/details?id=com.echesstactics.app\n#chess #chesstactics #chesspuzzles #eboard #echessboard"
+  },
+  {
    "id": "vj8C8R3yRSU",
    "title": "eChessTactics new feature: \"beat the bot\"",
    "published": "2026-10-25",
-   "description": "71 chesstbots play's arround 700-2200 Elo with 5 different skills. The app is connected with a Millennium Supreme T2 board."
+   "description": "71 chesstbots play's arround 700-2200 Elo with 5 different skills. The app is connected with a Millennium Supreme T2 board.\neChessTactics: chess trainer for your phone and your e-board. 700,000+ puzzles, endgames, 71 bots, a challenge against Tal, 100% offline.\nGoogle Play: eChessTactics (link in bio)\nplay.google.com/store/apps/details?id=com.echesstactics.app\n#chess #chesstactics #chesspuzzles #eboard #echessboard"
   }
  ]
 }
