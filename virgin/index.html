@@ -126,6 +126,17 @@
           <p>The engine, the bot catalogue and the playing styles live in one binary, so an app only needs to start one
              process and send UCI commands.</p>
         </article>
+        <article class="pp-card">
+          <h3>New in 0.8.6 (beta): a stronger search</h3>
+          <p>Version 0.8.6 of 15 November 2026 changes only the search; the evaluation and all UCI options stay as in 0.8.5.
+             Futility pruning, late move pruning and late move reductions used to be off in every thin position;
+             now they are off only in pure pawn endgames (a rook endgame reaches depth 12 instead of 8 in 1 s). Losing captures and quiet moves are pruned by SEE,
+             a capture history orders captures better, and late move reductions are somewhat more aggressive.
+             In self-play against 0.8.5 (1 thread, equal time) the single steps gained +45 to +115 Elo at 100 to 300 ms per move;
+             at 400 ms the reduction change gained clearly less. There is no single overall figure against 0.8.5 and no
+             measurement against other engines. Tested: Windows, compact core, WebAssembly, Linux x86_64. Not tested on devices:
+             Android, Linux ARMv6/ARMv7, ESP32-S3.</p>
+        </article>
       </div>
     </section>
 
@@ -291,22 +302,42 @@ virgin --gen-data          # regenerate data\ (weights, styles, bot catalogue)</
     <section id="download" class="section">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Version 0.7.1</p>
+          <p class="eyebrow">Version 0.8.6 Beta · 15 November 2026</p>
           <h2>Downloads</h2>
         </div>
       </div>
-      <p>Ready-to-run programs, no installation. Virgin is a UCI engine: add the file to any UCI-capable chess program or board software as an engine.</p>
+      <p>Ready-to-run packages, no installation. Virgin is a UCI engine: add the file to any UCI-capable chess program or board software as an engine. Every package also contains the engine license and the release notes.</p>
+      <p class="pp-text">
+        <strong>What has been tested.</strong> Windows, the compact core, WebAssembly (in the Chrome browser) and Linux x86_64
+        (run under WSL) were executed and checked. Android, Linux ARMv6/ARMv7 and ESP32-S3 are built but have
+        <strong>not been tested on devices</strong>: the Android and ARM Linux files were only checked structurally, and the ESP32-S3
+        firmware was built but not flashed. Use them with that in mind.
+      </p>
       <table class="pp-table">
-        <thead><tr><th>Platform</th><th>File</th><th>Size</th></tr></thead>
+        <thead><tr><th>Platform</th><th>File</th><th>Size</th><th>Status</th><th>SHA-256</th><th>Date</th></tr></thead>
         <tbody>
-          <tr><td>Windows x64</td><td><a href="https://github.com/parlue/virgin/raw/main/builds/virgin-0.7.1.exe">virgin-0.7.1.exe</a></td><td>476 KB</td></tr>
-          <tr><td>Android, 64-bit ARM (arm64-v8a)</td><td><a href="https://github.com/parlue/virgin/raw/main/builds/virgin-arm64-v8a">virgin-arm64-v8a</a></td><td>851 KB</td></tr>
-          <tr><td>Android, 32-bit ARM (armeabi-v7a)</td><td><a href="https://github.com/parlue/virgin/raw/main/builds/virgin-armeabi-v7a">virgin-armeabi-v7a</a></td><td>578 KB</td></tr>
-          <tr><td>Android, x86_64</td><td><a href="https://github.com/parlue/virgin/raw/main/builds/virgin-x86_64">virgin-x86_64</a></td><td>888 KB</td></tr>
-          <tr><td>ESP32-S3</td><td><a href="https://github.com/parlue/virgin/tree/main/builds/esp32" target="_blank" rel="noreferrer">builds/esp32 ↗</a></td><td></td></tr>
+          <tr><td>Windows x64</td><td><a href="downloads/0.8.6/Virgin-0.8.6-Windows.zip">Virgin-0.8.6-Windows.zip</a><br>UCI exe, DLL, C header</td><td>367 KB</td><td>Run and checked</td><td><code>4053c074983a0f13594b58de2ba44428961d29e012219c919607507ca9b04171</code></td><td>2026-11-15</td></tr>
+          <tr><td>Linux (x86_64, ARMv6, ARMv7)</td><td><a href="downloads/0.8.6/Virgin-0.8.6-Linux.zip">Virgin-0.8.6-Linux.zip</a><br>Static UCI engines with data</td><td>1.35 MB</td><td>x86_64 run and checked (WSL); ARMv6 and ARMv7 built, not run on hardware</td><td><code>2f635cd59cacb8ec8e9ff2620e12f4147b916b4fe41185d99ff43c81adb5c0c6</code></td><td>2026-11-15</td></tr>
+          <tr><td>Web (WebAssembly)</td><td><a href="downloads/0.8.6/Virgin-0.8.6-Web.zip">Virgin-0.8.6-Web.zip</a><br>WASM, worker, demo page</td><td>237 KB</td><td>Run and checked (Chrome)</td><td><code>e7301a52b8a835488ce52f0fbfc3ad09f4faf30fe6f95a11a3fe9c37d0fcefff</code></td><td>2026-11-15</td></tr>
+          <tr><td>Android</td><td><a href="downloads/0.8.6/Virgin-0.8.6-Android.zip">Virgin-0.8.6-Android.zip</a><br>OEX app, AAR library, UCI binaries (arm64-v8a, armeabi-v7a, x86_64, x86)</td><td>6.9 MB</td><td>Built, not tested on devices</td><td><code>3bf9086cb4931c8ff3995f2b76ee004733dd0c2db6dd7ce2c359ebe8fe6022e0</code></td><td>2026-11-15</td></tr>
+          <tr><td>ESP32-S3</td><td><a href="downloads/0.8.6/Virgin-0.8.6-ESP32-S3.zip">Virgin-0.8.6-ESP32-S3.zip</a><br>Firmware for no PSRAM, QSPI PSRAM, OPI PSRAM</td><td>1.09 MB</td><td>Built, not flashed</td><td><code>5264bcb8e98fd4cea4659a37712278910fca2673818b23ef2a53874ac4adead2</code></td><td>2026-11-15</td></tr>
         </tbody>
       </table>
-      <p>All files are also in the <a href="https://github.com/parlue/virgin/tree/main/builds" target="_blank" rel="noreferrer">builds folder on GitHub ↗</a>.</p>
+      <p>
+        Checksums as files:
+        <a href="downloads/0.8.6/Virgin-0.8.6-Windows.zip.sha256">Windows</a>,
+        <a href="downloads/0.8.6/Virgin-0.8.6-Linux.zip.sha256">Linux</a>,
+        <a href="downloads/0.8.6/Virgin-0.8.6-Web.zip.sha256">Web</a>,
+        <a href="downloads/0.8.6/Virgin-0.8.6-Android.zip.sha256">Android</a>,
+        <a href="downloads/0.8.6/Virgin-0.8.6-ESP32-S3.zip.sha256">ESP32-S3</a>.
+        Check a download in PowerShell with <code>Get-FileHash Virgin-0.8.6-Windows.zip</code>.
+      </p>
+      <p>
+        <a href="downloads/0.8.6/RELEASE_0.8.6.md">Release notes 0.8.6</a> (German) ·
+        <a href="downloads/0.8.6/ENGINE-LICENSE.txt">Engine license (MIT)</a>.
+        This is a beta release; the evaluation and all UCI options are unchanged from 0.8.5.
+      </p>
+      <p>Older builds (0.7.1 and earlier) are in the <a href="https://github.com/parlue/virgin/tree/main/builds" target="_blank" rel="noreferrer">builds folder on GitHub ↗</a>.</p>
     </section>
 
     <section id="links" class="section">
@@ -318,7 +349,7 @@ virgin --gen-data          # regenerate data\ (weights, styles, bot catalogue)</
       </div>
       <ul class="pp-list">
         <li><a href="https://github.com/parlue/virgin" target="_blank" rel="noreferrer">Source on GitHub ↗</a> (MIT license). Build with CMake 3.20 or newer and a C++20 compiler; build scripts for Windows and Android are included.</li>
-        <li>Platforms: Windows x64, and Android as arm64-v8a, armeabi-v7a and x86_64.</li>
+        <li>Platforms: Windows x64, Linux (x86_64, ARMv6, ARMv7), Web (WebAssembly), Android (arm64-v8a, armeabi-v7a, x86_64, x86) and ESP32-S3. See the download section for what has been tested.</li>
         <li>Questions, bugs, wishes: the Discord server <a href="https://discord.gg/AdZukFtBf" target="_blank" rel="noreferrer">electricchess ↗</a>.</li>
         <li>The chess trainer <a href="../echesstactics/">eChessTactics</a> uses the same adaptive game for its opponent &ldquo;Tal&rdquo;.</li>
       </ul>
