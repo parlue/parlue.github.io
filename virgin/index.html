@@ -127,7 +127,14 @@
              process and send UCI commands.</p>
         </article>
         <article class="pp-card">
-          <h3>New in 0.8.6 (beta): a stronger search</h3>
+          <h3>New in 0.8.7: better judgement, more variety, more human timing</h3>
+          <p>Version 0.8.7 recognises pawn storms better and evaluates complex middlegame positions better in general.
+             Bots and adaptive play now answer with more human response times.
+             New is a small opening book of 10 half-moves per opening, which brings more variety to the games.
+             It is switched on by default and can be switched off with the UCI option <code>OwnBook</code>.</p>
+        </article>
+        <article class="pp-card">
+          <h3>In 0.8.6 (beta): a stronger search</h3>
           <p>Version 0.8.6 of 15 November 2026 changes only the search; the evaluation and all UCI options stay as in 0.8.5.
              Futility pruning, late move pruning and late move reductions used to be off in every thin position;
              now they are off only in pure pawn endgames (a rook endgame reaches depth 12 instead of 8 in 1 s). Losing captures and quiet moves are pruned by SEE,
@@ -156,7 +163,9 @@
       <div class="pp-grid" style="margin-top:22px">
         <article class="pp-card">
           <h3>Opening</h3>
-          <p>The first moves are the engine&rsquo;s best moves, so the game starts as a normal game.</p>
+          <p>The first moves come from the opening book (10 half-moves per opening), which brings more variety to the games.
+             Afterwards the game continues as a normal game. The book can be switched off with the UCI option <code>OwnBook</code>;
+             then the engine&rsquo;s best moves are played instead.</p>
         </article>
         <article class="pp-card">
           <h3>Roughly equal</h3>
@@ -270,6 +279,7 @@ setoption name ReloadWeights</code></pre>
           <tr><td>UCI_LimitStrength, UCI_Elo</td><td>Limit the playing strength (700 to 3000).</td></tr>
           <tr><td>Style, Boldness</td><td>The playing style and its fine control.</td></tr>
           <tr><td>Adaptive</td><td>Switches adaptive play on or off. While it is on, all other strength and style options are ignored.</td></tr>
+          <tr><td>Opening book</td><td>Since 0.8.7 the engine has a small opening book of 10 half-moves per opening. It is on by default and can be switched off with the UCI option <code>OwnBook</code> (default: on).</td></tr>
           <tr><td>WeightsFile, ReloadWeights</td><td>Load your own weights file.</td></tr>
           <tr><td>Misc.Contempt, Misc.MoveNoise</td><td>Draw attitude and randomness in the root move choice.</td></tr>
           <tr><td>Hash, Threads, Ponder</td><td>Hash size in MB, search threads, pondering.</td></tr>
@@ -302,7 +312,7 @@ virgin --gen-data          # regenerate data\ (weights, styles, bot catalogue)</
     <section id="download" class="section">
       <div class="section-heading">
         <div>
-          <p class="eyebrow">Version 0.8.6 Beta · 15 November 2026</p>
+          <p class="eyebrow">Version 0.8.7 Beta · 20 November 2026</p>
           <h2>Downloads</h2>
         </div>
       </div>
@@ -316,27 +326,36 @@ virgin --gen-data          # regenerate data\ (weights, styles, bot catalogue)</
       <table class="pp-table">
         <thead><tr><th>Platform</th><th>File</th><th>Size</th><th>Status</th><th>SHA-256</th><th>Date</th></tr></thead>
         <tbody>
-          <tr><td>Windows x64</td><td><a href="downloads/0.8.6/Virgin-0.8.6-Windows.zip">Virgin-0.8.6-Windows.zip</a><br>UCI exe, DLL, C header</td><td>367 KB</td><td>Run and checked</td><td><code>4053c074983a0f13594b58de2ba44428961d29e012219c919607507ca9b04171</code></td><td>2026-11-15</td></tr>
-          <tr><td>Linux (x86_64, ARMv6, ARMv7)</td><td><a href="downloads/0.8.6/Virgin-0.8.6-Linux.zip">Virgin-0.8.6-Linux.zip</a><br>Static UCI engines with data</td><td>1.35 MB</td><td>x86_64 run and checked (WSL); ARMv6 and ARMv7 built, not run on hardware</td><td><code>2f635cd59cacb8ec8e9ff2620e12f4147b916b4fe41185d99ff43c81adb5c0c6</code></td><td>2026-11-15</td></tr>
-          <tr><td>Web (WebAssembly)</td><td><a href="downloads/0.8.6/Virgin-0.8.6-Web.zip">Virgin-0.8.6-Web.zip</a><br>WASM, worker, demo page</td><td>237 KB</td><td>Run and checked (Chrome)</td><td><code>e7301a52b8a835488ce52f0fbfc3ad09f4faf30fe6f95a11a3fe9c37d0fcefff</code></td><td>2026-11-15</td></tr>
-          <tr><td>Android</td><td><a href="downloads/0.8.6/Virgin-0.8.6-Android.zip">Virgin-0.8.6-Android.zip</a><br>OEX app, AAR library, UCI binaries (arm64-v8a, armeabi-v7a, x86_64, x86)</td><td>6.9 MB</td><td>Built, not tested on devices</td><td><code>3bf9086cb4931c8ff3995f2b76ee004733dd0c2db6dd7ce2c359ebe8fe6022e0</code></td><td>2026-11-15</td></tr>
-          <tr><td>ESP32-S3</td><td><a href="downloads/0.8.6/Virgin-0.8.6-ESP32-S3.zip">Virgin-0.8.6-ESP32-S3.zip</a><br>Firmware for no PSRAM, QSPI PSRAM, OPI PSRAM</td><td>1.09 MB</td><td>Built, not flashed</td><td><code>5264bcb8e98fd4cea4659a37712278910fca2673818b23ef2a53874ac4adead2</code></td><td>2026-11-15</td></tr>
+          <tr><td>Windows x64</td><td><a href="downloads/0.8.7/Virgin-0.8.7-Windows.zip">Virgin-0.8.7-Windows.zip</a><br>UCI exe, compact exe, DLL, C header</td><td>606 KB</td><td>Run and checked</td><td><code>4401ee1f81a3b487d183eff6b64e6ad3f8607d619d9a9a4e895f379a43fadf36</code></td><td>2026-11-20</td></tr>
+          <tr><td>Linux (x86_64, ARMv6, ARMv7)</td><td><a href="downloads/0.8.7/Virgin-0.8.7-Linux.zip">Virgin-0.8.7-Linux.zip</a><br>Static UCI engines with data</td><td>1.37 MB</td><td>x86_64 run and checked (WSL); ARMv6 and ARMv7 built, not run on hardware</td><td><code>02d38ab1eabaaf46f31f88f982f95d32947a197faff7f394f662da59ba604e42</code></td><td>2026-11-20</td></tr>
+          <tr><td>Web (WebAssembly)</td><td><a href="downloads/0.8.7/Virgin-0.8.7-Web.zip">Virgin-0.8.7-Web.zip</a><br>WASM, worker, demo page, web source</td><td>372 KB</td><td>Run and checked (Chrome)</td><td><code>216a38b5489e948929c24e32de8179dc9c928f2d166802d2a3483b5f205b3f0e</code></td><td>2026-11-20</td></tr>
+          <tr><td>Android</td><td><a href="downloads/0.8.7/Virgin-0.8.7-Android.zip">Virgin-0.8.7-Android.zip</a><br>OEX app, AAR library, UCI binaries (arm64-v8a, armeabi-v7a, x86_64, x86)</td><td>6.96 MB</td><td>Built, not tested on devices</td><td><code>edc05773adfcf53456a7668657caea87a651bdffa9ecca62c18ee509d06a4949</code></td><td>2026-11-20</td></tr>
+          <tr><td>ESP32-S3</td><td><a href="downloads/0.8.7/Virgin-0.8.7-ESP32-S3.zip">Virgin-0.8.7-ESP32-S3.zip</a><br>Firmware for no PSRAM, QSPI PSRAM, OPI PSRAM</td><td>1.10 MB</td><td>Built, not flashed</td><td><code>28c859082f9d06a09b623d180673ff38c7fd74d50ef9324bb824e82d5cff2cdf</code></td><td>2026-11-20</td></tr>
         </tbody>
       </table>
       <p>
         Checksums as files:
-        <a href="downloads/0.8.6/Virgin-0.8.6-Windows.zip.sha256">Windows</a>,
-        <a href="downloads/0.8.6/Virgin-0.8.6-Linux.zip.sha256">Linux</a>,
-        <a href="downloads/0.8.6/Virgin-0.8.6-Web.zip.sha256">Web</a>,
-        <a href="downloads/0.8.6/Virgin-0.8.6-Android.zip.sha256">Android</a>,
-        <a href="downloads/0.8.6/Virgin-0.8.6-ESP32-S3.zip.sha256">ESP32-S3</a>.
-        Check a download in PowerShell with <code>Get-FileHash Virgin-0.8.6-Windows.zip</code>.
+        <a href="downloads/0.8.7/Virgin-0.8.7-Windows.zip.sha256">Windows</a>,
+        <a href="downloads/0.8.7/Virgin-0.8.7-Linux.zip.sha256">Linux</a>,
+        <a href="downloads/0.8.7/Virgin-0.8.7-Web.zip.sha256">Web</a>,
+        <a href="downloads/0.8.7/Virgin-0.8.7-Android.zip.sha256">Android</a>,
+        <a href="downloads/0.8.7/Virgin-0.8.7-ESP32-S3.zip.sha256">ESP32-S3</a>.
+        Check a download in PowerShell with <code>Get-FileHash Virgin-0.8.7-Windows.zip</code>.
       </p>
       <p>
-        <a href="downloads/0.8.6/RELEASE_0.8.6.md">Release notes 0.8.6</a> (German) ·
-        <a href="downloads/0.8.6/ENGINE-LICENSE.txt">Engine license (MIT)</a>.
-        This is a beta release; the evaluation and all UCI options are unchanged from 0.8.5.
+        <a href="downloads/0.8.7/RELEASE_0.8.7.md">Release notes 0.8.7</a> (German) ·
+        <a href="downloads/0.8.7/OPENING_BOOK.md">Opening book</a> (German) ·
+        <a href="downloads/0.8.7/ENGINE-LICENSE.txt">Engine license (MIT)</a>.
+        This is a beta release: global opening book (<code>OwnBook</code>, on by default) and random choice among equal safe moves in adaptive mode.
       </p>
+      <p>Previous version 0.8.6 (15 November 2026), still available:
+        <a href="downloads/0.8.6/Virgin-0.8.6-Windows.zip">Windows</a>,
+        <a href="downloads/0.8.6/Virgin-0.8.6-Linux.zip">Linux</a>,
+        <a href="downloads/0.8.6/Virgin-0.8.6-Web.zip">Web</a>,
+        <a href="downloads/0.8.6/Virgin-0.8.6-Android.zip">Android</a>,
+        <a href="downloads/0.8.6/Virgin-0.8.6-ESP32-S3.zip">ESP32-S3</a>
+        (checksums next to each file as <code>.sha256</code>;
+        <a href="downloads/0.8.6/RELEASE_0.8.6.md">release notes 0.8.6</a>).</p>
       <p>Older builds (0.7.1 and earlier) are in the <a href="https://github.com/parlue/virgin/tree/main/builds" target="_blank" rel="noreferrer">builds folder on GitHub ↗</a>.</p>
     </section>
 
